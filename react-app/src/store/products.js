@@ -1,5 +1,3 @@
-
-
 const LOAD_PRODUCTS = 'products/LOAD_PRODUCTS'
 
 
@@ -13,6 +11,7 @@ export const thunkGetProducts = () => async (dispatch) => {
 
     if(response.ok){
         const products = await response.json()
+        console.log('products', products)
         dispatch(loadProducts(products))
         return products
     }
@@ -33,7 +32,6 @@ const productReducer = (state = initialState, action) => {
         case LOAD_PRODUCTS:
         newState = { ...state }
         newState.allProducts = normalize(action.products)
-        console.log(newState)
         return newState
         default:
             return state
