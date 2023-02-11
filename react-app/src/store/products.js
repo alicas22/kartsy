@@ -17,17 +17,18 @@ export const thunkGetProducts = () => async (dispatch) => {
 
     if(response.ok){
         const products = await response.json()
-        console.log('products', products)
         dispatch(loadProducts(products))
         return products
     }
 }
 
-export const thunkGetSingleProduct = (id) => async (dispatch) => {
-    const response = await fetch(`/api/products/${id}`)
+export const thunkGetSingleProduct = (productId) => async (dispatch) => {
+    const response = await fetch(`/api/products/${productId}`)
+    
 
     if (response.ok) {
         const product = await response.json()
+        console.log("single product", product)
         dispatch(loadSingleProduct(product))
         return product
     }
