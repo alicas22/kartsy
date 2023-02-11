@@ -11,3 +11,5 @@ def all_products():
     product = [product.to_dict() for product in all_prod]
     print((product[0]))
     return jsonify(product)
+
+

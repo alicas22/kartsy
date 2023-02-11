@@ -10,9 +10,9 @@ class Product(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     owner_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    name = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(200), nullable=False)
     price = db.Column(db.Float, nullable=False)
-    description = db.Column(db.String(500), nullable=False)
+    description = db.Column(db.String(2000), nullable=False)
 
     owner = db.relationship('User', back_populates='products')
     reviews = db.relationship('Review', back_populates='product')
