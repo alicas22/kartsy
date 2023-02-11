@@ -21,7 +21,7 @@ class Product(db.Model):
 
     @validates('price')
     def validate_price(self, key, price):
-        if price <= 0:
+        if int(price) <= 0:
             raise ValueError('Price must be greater than 0')
         return price
 

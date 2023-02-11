@@ -1,5 +1,6 @@
 const LOAD_PRODUCTS = 'products/LOAD_PRODUCTS'
 const LOAD_SINGLE_PRODUCT = 'products/LOAD_SINGLE_PRODUCT'
+const CREATE_PRODUCT = 'products/CREATE_PRODUCT'
 
 
 const loadProducts = (products) => ({
@@ -10,6 +11,11 @@ const loadProducts = (products) => ({
 const loadSingleProduct = (product) => ({
     type: LOAD_SINGLE_PRODUCT,
     product
+})
+
+const createProduct = (newproduct) => ({
+    type: CREATE_PRODUCT,
+    newproduct
 })
 
 export const thunkGetProducts = () => async (dispatch) => {
@@ -24,13 +30,27 @@ export const thunkGetProducts = () => async (dispatch) => {
 
 export const thunkGetSingleProduct = (productId) => async (dispatch) => {
     const response = await fetch(`/api/products/${productId}`)
-    
 
     if (response.ok) {
         const product = await response.json()
         console.log("single product", product)
         dispatch(loadSingleProduct(product))
         return product
+    }
+
+}
+
+export const thunkCreateProduct = (payload) => async (dispatch) => {
+    const response = await fetch('/api/products/', {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+    })
+    console.log('response', response)
+    if (response.ok){
+        const newProduct = await response.json()
+        dispatch(createProduct(newProduct))
+        return newProduct
     }
 
 }
@@ -53,6 +73,11 @@ const productReducer = (state = initialState, action) => {
         case LOAD_SINGLE_PRODUCT:
             newState = { ...state }
             newState.singleProduct = action.product
+            return newState
+        case CREATE_PRODUCT:
+            newState = { ...state }
+            newState.allProducts = {...newState.allProducts, [action.newproduct.id]: action.newproduct}
+            newState.singleProduct = {...newState.singleProduct, ...action.newproduct}
             return newState
         default:
             return state
