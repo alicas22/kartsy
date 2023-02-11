@@ -13,15 +13,18 @@ const AllProducts = () => {
 
     const productsObj = useSelector((state) => state.products.allProducts)
 
+    if (!productsObj) return null
+
     const products = Object.values(productsObj)
     return (
         <div className='all-products'>
                 <ul>
                     {products.map(product => {
                         return (
-                            <div className='product-card'>
+                            <div className='product-card' key={product.id}>
                                 <div className='product-image'>
                                     {product.name}
+                                    {product.images}
                                 </div>
                             </div>
                         )
