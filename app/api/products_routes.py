@@ -56,3 +56,15 @@ def edit_product(id):
         return jsonify(prod)
     else:
         return 'Product Not Found'
+
+@product_routes.route('/<int:id>', methods=["DELETE"])
+def delete_product(id):
+    # current_product = Product.query.get(id)
+    # print("HERE",current_product)
+
+    # if current_product:
+    #     db.session.delete(current_product)
+    #     db.session.commit()
+    # else:
+    return 'WE NEED TO ADD A DELETE CASCADE BETWEEN TABLE PRODUCTS AND TABLE PRODUCT_IMAGES'
+    
