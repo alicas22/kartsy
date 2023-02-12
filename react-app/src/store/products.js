@@ -1,4 +1,6 @@
 const LOAD_PRODUCTS = 'products/LOAD_PRODUCTS'
+const LOAD_SINGLE_PRODUCT = 'products/LOAD_SINGLE_PRODUCT'
+const CREATE_PRODUCT = 'products/CREATE_PRODUCT'
 
 
 const loadProducts = (products) => ({
@@ -6,17 +8,52 @@ const loadProducts = (products) => ({
     products
 })
 
+const loadSingleProduct = (product) => ({
+    type: LOAD_SINGLE_PRODUCT,
+    product
+})
+
+const createProduct = (newproduct) => ({
+    type: CREATE_PRODUCT,
+    newproduct
+})
+
 export const thunkGetProducts = () => async (dispatch) => {
     const response = await fetch('/api/products')
 
     if(response.ok){
         const products = await response.json()
-        console.log('products', products)
         dispatch(loadProducts(products))
         return products
     }
 }
 
+export const thunkGetSingleProduct = (productId) => async (dispatch) => {
+    const response = await fetch(`/api/products/${productId}`)
+
+    if (response.ok) {
+        const product = await response.json()
+        console.log("single product", product)
+        dispatch(loadSingleProduct(product))
+        return product
+    }
+
+}
+
+export const thunkCreateProduct = (payload) => async (dispatch) => {
+    const response = await fetch('/api/products/', {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
+    })
+    console.log('response', response)
+    if (response.ok){
+        const newProduct = await response.json()
+        dispatch(createProduct(newProduct))
+        return newProduct
+    }
+
+}
 
 const normalize = (arr) => {
     const resObj = {}
@@ -30,9 +67,18 @@ const productReducer = (state = initialState, action) => {
     let newState
     switch(action.type){
         case LOAD_PRODUCTS:
-        newState = { ...state }
-        newState.allProducts = normalize(action.products)
-        return newState
+            newState = { ...state }
+            newState.allProducts = normalize(action.products)
+            return newState
+        case LOAD_SINGLE_PRODUCT:
+            newState = { ...state }
+            newState.singleProduct = action.product
+            return newState
+        case CREATE_PRODUCT:
+            newState = { ...state }
+            newState.allProducts = {...newState.allProducts, [action.newproduct.id]: action.newproduct}
+            newState.singleProduct = {...newState.singleProduct, ...action.newproduct}
+            return newState
         default:
             return state
     }
