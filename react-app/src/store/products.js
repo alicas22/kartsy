@@ -1,6 +1,7 @@
 const LOAD_PRODUCTS = 'products/LOAD_PRODUCTS'
 const LOAD_SINGLE_PRODUCT = 'products/LOAD_SINGLE_PRODUCT'
 const CREATE_PRODUCT = 'products/CREATE_PRODUCT'
+const EDIT_PRODUCT = 'products/EDIT_PRODUCT'
 
 
 const loadProducts = (products) => ({
@@ -17,6 +18,12 @@ const createProduct = (newproduct) => ({
     type: CREATE_PRODUCT,
     newproduct
 })
+
+const editProduct = ( updatedProduct) => ({
+    type: EDIT_PRODUCT,
+    updatedProduct
+})
+
 
 export const thunkGetProducts = () => async (dispatch) => {
     const response = await fetch('/api/products')
@@ -52,7 +59,20 @@ export const thunkCreateProduct = (payload) => async (dispatch) => {
         dispatch(createProduct(newProduct))
         return newProduct
     }
+}
 
+export const thunkEditProduct = (updatedProduct) => async (dispatch) => {
+    const response = await fetch(`/api/products/${updatedProduct.id}`, {
+        method: "PUT",
+        headers: { 'Content-Type': 'application/json'},
+        body: JSON.stringify(updatedProduct)
+    })
+    
+    if (response.ok){
+        const product = await response.json()
+        dispatch(editProduct(product))
+        return product
+    }
 }
 
 const normalize = (arr) => {
@@ -78,6 +98,12 @@ const productReducer = (state = initialState, action) => {
             newState = { ...state }
             newState.allProducts = {...newState.allProducts, [action.newproduct.id]: action.newproduct}
             newState.singleProduct = {...newState.singleProduct, ...action.newproduct}
+            return newState
+        case EDIT_PRODUCT:
+            newState = { ...state }
+            newState.allProducts = {...newState.allProducts, [action.updatedProduct.id]: action.updatedProduct}
+            newState.singleProduct = {...newState.singleProduct, ...action.updatedProduct}
+            
             return newState
         default:
             return state

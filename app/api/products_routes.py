@@ -34,3 +34,25 @@ def single_product(id):
     product = Product.query.get(id)
     prod = product.to_dict()
     return jsonify(prod)
+
+
+@product_routes.route('/<int:id>', methods=["PUT"])
+def edit_product(id):
+    current_product = Product.query.get(id)
+    res = request.get_json()
+
+    product = ProductForm()
+    product["csrf_token"].data = request.cookies["csrf_token"]
+
+    if current_product:
+        product.populate_obj(current_product)
+
+        current_product.name = res["name"]
+        current_product.price = res['price']
+        current_product.description = res['description']
+
+        db.session.commit()
+        prod = current_product.to_dict()
+        return jsonify(prod)
+    else:
+        return 'Product Not Found'
