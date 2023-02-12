@@ -4,6 +4,7 @@ import { useHistory, useParams } from "react-router-dom"
 import { thunkDeleteProduct, thunkGetSingleProduct } from "../../store/products"
 import OpenModalButton from "../OpenModalButton"
 import EditProduct from "../EditProduct"
+import AllReviewsComponent from "../AllReviews"
 
 
 const SingleProduct = () => {
@@ -43,6 +44,7 @@ const SingleProduct = () => {
                     </div>
                 </div>
             )}
+            <AllReviewsComponent productId={productId}/>
         </div>
     )
 }

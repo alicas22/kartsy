@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint, jsonify, request
-from ..models import db, Product
+from ..models import db, Product, Review
 from ..forms import ProductForm
 
 
@@ -67,4 +67,12 @@ def delete_product(id):
     #     db.session.commit()
     # else:
     return 'WE NEED TO ADD A DELETE CASCADE BETWEEN TABLE PRODUCTS AND TABLE PRODUCT_IMAGES'
+
+
+@product_routes.route('/<int:id>/reviews', methods=['GET'])
+def all_reviews(id):
+    foundProduct = Product.query.get(id)
+    all_rev = foundProduct.reviews
+    review = [rev.to_dict() for rev in all_rev]
+    return jsonify(review)
     
