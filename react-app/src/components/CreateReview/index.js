@@ -4,15 +4,17 @@ import { useDispatch, useSelector } from "react-redux"
 import { thunkCreateProduct } from "../../store/products"
 import { useModal } from "../../context/Modal"
 import { createReviewThunk } from "../../store/reviews"
+import { thunkGetSingleProduct } from "../../store/products"
+import { loadAllReviewsThunk } from "../../store/reviews"
 
-const CreateReview = () => {
+const CreateReview = ({ productId }) => {
     const dispatch = useDispatch()
     const history = useHistory()
     const { closeModal } = useModal();
     const [review, setReview] = useState('')
     const [star, setStar] = useState('')
     const [errors, setErrors] = useState([])
-    const [createdProduct, setCreatedProduct] = useState()
+    const [createdReview, setCreatedReview] = useState()
 
     const user = useSelector(state => state.session.user)
     //console.log('user', user)
@@ -29,12 +31,10 @@ const CreateReview = () => {
 
         if (!user) return null
 
-        return dispatch(createReviewThunk(payload))
-            // .then((product) => {
-            //     console.log('product', product)
-            //     setCreatedProduct(product)
-            //     console.log('created prod', createdProduct)
-            // })
+        await dispatch(createReviewThunk(productId, payload))
+            .then((review) => {
+                setCreatedReview(review)
+            })
             .then(closeModal)
             // .catch(
             //     async (res) => {
@@ -42,13 +42,17 @@ const CreateReview = () => {
             //         if (data && (data.errors)) setErrors(data.errors)
             //     });
 
+        history.push(`/products/${productId}`)
     }
 
-    // useEffect(() => {
-    //     if (createdProduct) {
-    //         history.push(`/products/${createdProduct.id}`)
-    //     }
-    // }, [createdProduct])
+    useEffect(() => {
+        // if (createdReview) {
+        //     history.push(`/products/${productId}`)
+        // }
+        dispatch(loadAllReviewsThunk(productId))
+        return () => dispatch(thunkGetSingleProduct(productId));
+        // dispatch(thunkGetSingleProduct(productId))
+    }, [productId])
 
     return (
         <div className="create-review-form">

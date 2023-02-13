@@ -40,7 +40,7 @@ const SingleProduct = () => {
                     />
                     <OpenModalButton
                         buttonText="Create Review"
-                        modalComponent={<CreateReview />}
+                        modalComponent={<CreateReview productId={productId} />}
                     />
                     <div>
                         <button onClick={deleteButton} className="delete-button">

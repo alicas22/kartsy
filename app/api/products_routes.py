@@ -97,15 +97,14 @@ def post_review(id):
     form = ReviewForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
-    print(current_user)
     if form.validate_on_submit():
         form = Review(
             product_id=foundProduct.id,
-            # user_id=res['owner_id'],
+            user_id=current_user.id,
             review=res['review'],
             star=res['star']
         )
-        print(form)
+
         db.session.add(form)
         db.session.commit()
         return form.to_dict()

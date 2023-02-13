@@ -23,7 +23,7 @@ class Review(db.Model):
 
     @validates('star')
     def validate_star(self, key, star):
-        if star < 1 or star > 5:
+        if int(star) < 1 or int(star) > 5:
             raise ValueError('Star must be between 1 and 5')
         return star
 
