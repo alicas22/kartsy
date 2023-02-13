@@ -72,7 +72,6 @@ def edit_product(id):
 @product_routes.route('/<int:id>', methods=["DELETE"])
 def delete_product(id):
     current_product = Product.query.get(id)
-    print("HERE",current_product)
 
     if current_product:
         db.session.delete(current_product)

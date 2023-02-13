@@ -30,3 +30,16 @@ def edit_review(id):
         return jsonify(res)
     else:
         return 'Review Not Found'
+
+
+@review_routes.route('/<int:id>', methods=['DELETE'])
+# @login_required
+def delete_review(id):
+    current_review = Review.query.get(id)
+
+    if current_review:
+        db.session.delete(current_review)
+        db.session.commit()
+        return current_review.to_dict()
+    else:
+        return 'error'
