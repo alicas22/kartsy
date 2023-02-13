@@ -8,8 +8,8 @@ const CLEAN_UP_REVIEWS = 'reviews/CLEANUP';
 export const loadAllReviewsAction = (reviews, productId) => {
     return {
         type: LOAD_ALL_REVIEWS,
-        reviews,
-        productId
+        productId,
+        reviews
     }
 };
 
@@ -44,6 +44,7 @@ export const cleanUpReviewsAction = () => {
 //thunks
 export const loadAllReviewsThunk = (productId) => async dispatch => {
     const response = await fetch(`/api/products/${productId}/reviews`);
+    console.log('response', response)
 
     if (response.ok) {
         const allReviews = await response.json();
@@ -103,7 +104,9 @@ const reviewsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_ALL_REVIEWS: {
             const newState = { ...state };
-            action.productId.Reviews.forEach(review => {
+            console.log('newstate', newState)
+            console.log('action', action)
+            action.productId.forEach((review) => {
                 newState[review.id] = review;
             });
             return newState;
