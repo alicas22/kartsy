@@ -17,6 +17,7 @@ def all_products():
     for product in products:
 
         prod_res.append({
+            'id': product['id'],
             'name': product['name'],
             'price': product['price'],
             'imagesUrl': product['imagesUrl']

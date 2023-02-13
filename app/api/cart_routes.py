@@ -8,6 +8,7 @@ cart_routes = Blueprint('cart', __name__)
 @cart_routes.route('/')
 def get_all_cart_items():
     all_cart_items = ShoppingCartItem.query.all()
+    print('cart itemm', all_cart_items)
     cart_items = [cart_item.to_dict() for cart_item in all_cart_items]
     print('cart items from cart_route', cart_items)
     return jsonify(cart_items)
@@ -24,9 +25,9 @@ def single_cart_item(id):
 def create_cart_item():
     # cart_item = Product.query.get(id)
     res = request.get_json()
-    print('res from cart routes', res)
+    # print('res from cart routes', res)
     # form = CartItemForm()
-    form["csrf_token"].data = request.cookies["csrf_token"]
+    # form["csrf_token"].data = request.cookies["csrf_token"]
 
     # if form.validate_on_submit():
     if res:

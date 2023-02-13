@@ -107,7 +107,7 @@ const productReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_PRODUCTS:
             newState = { ...state }
-            newState.allProducts = action.products
+            newState.allProducts = normalize(action.products)
             console.log('new state', newState)
             return newState
         case LOAD_SINGLE_PRODUCT:

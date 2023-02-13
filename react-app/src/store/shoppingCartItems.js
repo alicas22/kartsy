@@ -52,6 +52,7 @@ export const loadAllCartItemsThunk = () => async dispatch => {
     console.log("response from load all cart items thunk", response)
     if (response.ok) {
         const cart = await response.json();
+        console.log('cart', cart)
         dispatch(loadAllCartItemsAction(cart));
         return cart;
     }
@@ -74,7 +75,7 @@ export const createCartItemThunk = (payload) => async (dispatch) => {
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
     })
-    console.log("hi from create cart item thunk")
+    console.log("hi from create cart item thunk", response)
     if (response.ok){
         const newCartItem = await response.json()
         dispatch(createCartItemAction(newCartItem))
