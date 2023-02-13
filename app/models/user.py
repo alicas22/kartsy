@@ -17,9 +17,9 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
 
-    reviews = db.relationship('Review', back_populates='user')
-    products = db.relationship('Product', back_populates='owner')
-    shopping_cart_item = db.relationship('ShoppingCartItem', back_populates='user')
+    reviews = db.relationship('Review', cascade="all, delete-orphan", back_populates='user')
+    products = db.relationship('Product', cascade="all, delete-orphan", back_populates='owner')
+    shopping_cart_item = db.relationship('ShoppingCartItem', cascade="all, delete-orphan", back_populates='user')
 
     @validates('first_name')
     def validate_first_name(self, key, first_name):
@@ -63,4 +63,7 @@ class User(db.Model, UserMixin):
             'lastName': self.last_name,
             'username': self.username,
             'email': self.email,
+            # 'reviews': self.reviews,
+            # 'products': self.products,
+            # 'shoppingCartItem': self.shopping_cart_item
         }

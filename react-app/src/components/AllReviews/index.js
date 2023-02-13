@@ -16,14 +16,15 @@ const AllReviewsComponent = ({ productId }) => {
     }, [dispatch, productId]);
 
     if (!allReviews || !allReviewsObj) return null;
+    console.log(allReviews)
 
     return (
         <div className="all-reviews-container">
             {allReviews.map((singleReview) => (
                 <SingleReviewCard key={singleReview.id}
                 review={singleReview.review}
-                user={singleReview.User.firstName}
-                reviewOwnerId={singleReview.User.id}
+                // user={singleReview.user.first_name}
+                userId={singleReview.userId}
                 reviewId={singleReview.id}
                 productId={productId}
                 time={singleReview.createdAt}

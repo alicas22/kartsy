@@ -18,6 +18,7 @@ const AllProducts = () => {
     if (!productsObj) return null
 
     const products = Object.values(productsObj)
+
     return (
         <div className='all-products'>
         {user && (
@@ -34,7 +35,7 @@ const AllProducts = () => {
                             <div className='product-card' key={product.id}>
                                 <div className='product-image'>
                                     {product.name}
-                                    {product.images}
+                                    <img src={product.imagesUrl}></img>
                                 </div>
                             </div>
                         )
