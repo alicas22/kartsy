@@ -78,6 +78,9 @@ const CreateProduct = () => {
                         id="price"
                         type="number"
                         name="price"
+                        min="0"
+                        placeholder="0.00"
+                        step="0.01"
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                     />

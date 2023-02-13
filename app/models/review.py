@@ -29,8 +29,8 @@ class Review(db.Model):
 
     @validates('review')
     def validate_review(self, key, review):
-        if len(review) < 10:
-            raise ValueError('Review must be at least 10 characters long')
+        if len(review) < 3:
+            raise ValueError('Review must be at least 3 characters long')
         return review
 
     def to_dict(self):
@@ -42,4 +42,6 @@ class Review(db.Model):
             'star': self.star,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
+            # 'user': self.user,
+            # 'product': self.product
         }

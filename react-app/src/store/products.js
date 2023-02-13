@@ -32,7 +32,7 @@ const deleteAProduct = (undoProduct) => ({
 
 
 export const thunkGetProducts = () => async (dispatch) => {
-    const response = await fetch('/api/products')
+    const response = await fetch('/api/products/')
 
     if (response.ok) {
         const products = await response.json()
@@ -46,7 +46,6 @@ export const thunkGetSingleProduct = (productId) => async (dispatch) => {
 
     if (response.ok) {
         const product = await response.json()
-        console.log("single product", product)
         dispatch(loadSingleProduct(product))
         return product
     }
@@ -108,7 +107,8 @@ const productReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_PRODUCTS:
             newState = { ...state }
-            newState.allProducts = normalize(action.products)
+            newState.allProducts = action.products
+            console.log('new state', newState)
             return newState
         case LOAD_SINGLE_PRODUCT:
             newState = { ...state }

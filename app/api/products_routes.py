@@ -1,5 +1,5 @@
 from flask import Flask, Blueprint, jsonify, request
-from ..models import db, Product, Review
+from ..models import db, Product, Review, ProductImage
 from ..forms import ProductForm
 from ..forms.review_form import ReviewForm
 from flask_login import current_user, login_required
@@ -12,7 +12,17 @@ product_routes = Blueprint('product', __name__)
 def all_products():
     all_prod = Product.query.all()
     products = [product.to_dict() for product in all_prod]
-    return jsonify(products)
+
+    prod_res = []
+    for product in products:
+
+        prod_res.append({
+            'name': product['name'],
+            'price': product['price'],
+            'imagesUrl': product['imagesUrl']
+        })
+
+    return jsonify(prod_res)
 
 @product_routes.route('/', methods=['POST'])
 def create_product():
@@ -61,14 +71,14 @@ def edit_product(id):
 
 @product_routes.route('/<int:id>', methods=["DELETE"])
 def delete_product(id):
-    # current_product = Product.query.get(id)
-    # print("HERE",current_product)
+    current_product = Product.query.get(id)
+    print("HERE",current_product)
 
-    # if current_product:
-    #     db.session.delete(current_product)
-    #     db.session.commit()
-    # else:
-    return 'WE NEED TO ADD A DELETE CASCADE BETWEEN TABLE PRODUCTS AND TABLE PRODUCT_IMAGES'
+    if current_product:
+        db.session.delete(current_product)
+        db.session.commit()
+    else:
+        return 'error'
 
 
 @product_routes.route('/<int:id>/reviews', methods=['GET'])
@@ -77,7 +87,7 @@ def all_reviews(id):
     all_rev = foundProduct.reviews
     review = [rev.to_dict() for rev in all_rev]
     return jsonify(review)
-    
+
 
 @product_routes.route('/<int:id>/reviews', methods=['POST'])
 @login_required
@@ -99,4 +109,3 @@ def post_review(id):
         db.session.add(form)
         db.session.commit()
         return form.to_dict()
-    
