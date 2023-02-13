@@ -42,3 +42,18 @@ def create_cart_item():
         return item.to_dict()
     else:
         return "error: could not add to cart"
+
+
+@cart_routes.route('/<int:id>', methods=['PUT'])
+def update_cart_item(id):
+    cart_item = ShoppingCartItem.query.get(id)
+    res = request.get_json()
+
+    if cart_item:
+        cart_item.count_of_product = res['countOfProduct']
+
+        db.session.commit()
+        item = cart_item.to_dict()
+        return jsonify(item)
+    else:
+        return 'Cannot update count'
