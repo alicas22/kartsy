@@ -14,10 +14,10 @@ export const loadAllCartItemsAction = (cartItems) => {
     }
 };
 
-const loadSingleCartItemAction = (cartItem) => ({
-    type: LOAD_SINGLE_CART_ITEM,
-    cartItem
-})
+// const loadSingleCartItemAction = (cartItem) => ({
+//     type: LOAD_SINGLE_CART_ITEM,
+//     cartItem
+// })
 
 export const createCartItemAction = (newCartItem) => {
     return {
@@ -48,8 +48,8 @@ export const deleteCartItemAction = (badCartItemId) => {
 
 //thunks
 export const loadAllCartItemsThunk = () => async dispatch => {
-    const response = await fetch(`/api/cart`);
-
+    const response = await fetch(`/api/cart/`);
+    console.log("response from load all cart items thunk", response)
     if (response.ok) {
         const cart = await response.json();
         dispatch(loadAllCartItemsAction(cart));
@@ -57,24 +57,24 @@ export const loadAllCartItemsThunk = () => async dispatch => {
     }
 };
 
-export const getSingleCartItemThunk = (cartItemId) => async (dispatch) => {
-    const response = await fetch(`/api/cart/${cartItemId}`)
+// export const getSingleCartItemThunk = (cartItemId) => async (dispatch) => {
+//     const response = await fetch(`/api/cart/${cartItemId}`)
 
-    if (response.ok) {
-        const cartItem = await response.json()
-        dispatch(loadSingleCartItemAction(cartItem))
-        return cartItem
-    }
+//     if (response.ok) {
+//         const cartItem = await response.json()
+//         dispatch(loadSingleCartItemAction(cartItem))
+//         return cartItem
+//     }
 
-}
+// }
 
 export const createCartItemThunk = (payload) => async (dispatch) => {
-    const response = await fetch('/api/cart', {
+    const response = await fetch('/api/cart/', {
         method: "POST",
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
     })
-
+    console.log("hi from create cart item thunk")
     if (response.ok){
         const newCartItem = await response.json()
         dispatch(createCartItemAction(newCartItem))
@@ -88,7 +88,7 @@ export const updateCartItemThunk = (cartItem) => async dispatch => {
     const response = await fetch(`/api/cart/${cartItem.id}`, {
       method: "PUT",
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(review),
+      body: JSON.stringify(cartItem),
     });
 
     if (response.ok) {
@@ -136,7 +136,7 @@ const cartItemReducer = (state = initialState, action) => {
         case CREATE_CART_ITEM:{
             newState = { ...state }
             newState.allCartItems = {...newState.allCartItems, [action.newCartItem.id]: action.newCartItem}
-            newState.singleProduct = {...newState.singleProduct, ...action.newproduct}
+            newState.singleProduct = {...newState.singleProduct, ...action.newCartItem}
             return newState
         }
         case UPDATE_CART_ITEM: {
