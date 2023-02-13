@@ -5,6 +5,7 @@ import { thunkDeleteProduct, thunkGetSingleProduct } from "../../store/products"
 import OpenModalButton from "../OpenModalButton"
 import EditProduct from "../EditProduct"
 import AllReviewsComponent from "../AllReviews"
+import CreateReview from "../CreateReview"
 
 
 const SingleProduct = () => {
@@ -36,6 +37,10 @@ const SingleProduct = () => {
                     <OpenModalButton
                         buttonText="Edit Product"
                         modalComponent={<EditProduct />}
+                    />
+                    <OpenModalButton
+                        buttonText="Create Review"
+                        modalComponent={<CreateReview />}
                     />
                     <div>
                         <button onClick={deleteButton} className="delete-button">

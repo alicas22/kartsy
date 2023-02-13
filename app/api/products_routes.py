@@ -1,6 +1,8 @@
 from flask import Flask, Blueprint, jsonify, request
 from ..models import db, Product, Review
 from ..forms import ProductForm
+from ..forms.review_form import ReviewForm
+from flask_login import current_user, login_required
 
 
 
@@ -75,4 +77,26 @@ def all_reviews(id):
     all_rev = foundProduct.reviews
     review = [rev.to_dict() for rev in all_rev]
     return jsonify(review)
+    
+
+@product_routes.route('/<int:id>/reviews', methods=['POST'])
+@login_required
+def post_review(id):
+    foundProduct = Product.query.get(id)
+    res = request.get_json()
+    form = ReviewForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+
+    print(current_user)
+    if form.validate_on_submit():
+        form = Review(
+            product_id=foundProduct.id,
+            # user_id=res['owner_id'],
+            review=res['review'],
+            star=res['star']
+        )
+        print(form)
+        db.session.add(form)
+        db.session.commit()
+        return form.to_dict()
     
