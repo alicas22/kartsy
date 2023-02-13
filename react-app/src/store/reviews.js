@@ -112,6 +112,7 @@ const reviewsReducer = (state = initialState, action) => {
         };
         case UPDATE_REVIEW: {
             const newState = { ...state };
+            console.log('!!!!!!!!!!!!', action)
             newState[action.updatedReview.id] = action.updatedReview;
             return newState;
         };

@@ -16,7 +16,6 @@ const AllReviewsComponent = ({ productId }) => {
     }, [dispatch, productId]);
 
     if (!allReviews || !allReviewsObj) return null;
-    console.log(">>>>>>>>>>>>>>>>>", allReviews)
 
     return (
         <div className="all-reviews-container">

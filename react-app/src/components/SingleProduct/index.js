@@ -6,6 +6,7 @@ import OpenModalButton from "../OpenModalButton"
 import EditProduct from "../EditProduct"
 import AllReviewsComponent from "../AllReviews"
 import CreateReview from "../CreateReview"
+import EditReview from "../EditReview"
 
 
 const SingleProduct = () => {
@@ -41,6 +42,10 @@ const SingleProduct = () => {
                     <OpenModalButton
                         buttonText="Create Review"
                         modalComponent={<CreateReview productId={productId} />}
+                    />
+                    <OpenModalButton
+                        buttonText="Edit Review"
+                        modalComponent={<EditReview productId={productId}/>}
                     />
                     <div>
                         <button onClick={deleteButton} className="delete-button">
