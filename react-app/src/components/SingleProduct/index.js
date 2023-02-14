@@ -14,7 +14,7 @@ const SingleProduct = () => {
     const history = useHistory()
     const { productId } = useParams()
     const dispatch = useDispatch()
-    console.log(productId)
+
     useEffect(() => {
         dispatch(thunkGetSingleProduct(productId))
     }, [dispatch, productId])
@@ -22,9 +22,8 @@ const SingleProduct = () => {
     const product = useSelector((state) => state.products.singleProduct)
     const reviewsObj = useSelector((state) => state.reviews)
     const reviews = Object.values(reviewsObj)
-    console.log('this is reviews: ', reviews)
+
     const user = useSelector((state) => state.session.user)
-    console.log('this is owner id', product)
 
     const averageFunc = (arr) =>{
         let amount = 0;
@@ -57,6 +56,8 @@ const SingleProduct = () => {
             </div>
             <div className="all-reviews-box">
                 {user && (
+                    !reviews.find(review => review.userId === user.id)
+                ) && (
                     <OpenModalButton
                         buttonText="Create Review"
                         modalComponent={<CreateReview productId={productId} />}
