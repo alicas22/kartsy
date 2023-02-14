@@ -22,7 +22,7 @@ const AllReviewsComponent = ({ productId }) => {
             {allReviews.map((singleReview) => (
                 <SingleReviewCard key={singleReview.id}
                 review={singleReview.review}
-                // user={singleReview.user.firstName}
+                user={singleReview.firstName}
                 userId={singleReview.userId}
                 reviewId={singleReview.id}
                 productId={productId}

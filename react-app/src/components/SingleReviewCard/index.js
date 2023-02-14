@@ -7,11 +7,10 @@ import EditReview from "../EditReview";
 import OpenModalButton from "../OpenModalButton"
 import { useHistory } from "react-router-dom";
 
-const SingleReviewCard = ({review, userId, reviewId, productId, time}) => {
+const SingleReviewCard = ({review, userId, reviewId, productId, time, user}) => {
     const dispatch = useDispatch();
     const history = useHistory()
     const currentUser = useSelector(state => state.session.user);
-    const currentUserId = currentUser.id;
 
     const timeFormat = (time) => {
         if (time) {
@@ -31,9 +30,9 @@ const SingleReviewCard = ({review, userId, reviewId, productId, time}) => {
     return (
         <div className="single-review-card-container">
             <div className='single-review-header'>
-                {/* <div className="single-review-reviewOwner">{user}</div> */}
+                <div className="single-review-reviewOwner">{user}</div>
                 <div className="delete-review-button-container">
-                    {(currentUser && currentUserId == userId && (
+                    {(currentUser && currentUser.id == userId && (
                     <div>
                         <OpenModalButton
                         buttonText="Edit Review"

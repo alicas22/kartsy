@@ -42,6 +42,6 @@ class Review(db.Model):
             'star': self.star,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
-            # 'user': self.user,
+            'user': self.user.first_name,
             # 'product': self.product
         }

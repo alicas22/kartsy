@@ -17,6 +17,7 @@ def all_products():
     for product in products:
 
         prod_res.append({
+            'id': product['id'],
             'name': product['name'],
             'price': product['price'],
             'imagesUrl': product['imagesUrl']
@@ -84,8 +85,23 @@ def delete_product(id):
 def all_reviews(id):
     foundProduct = Product.query.get(id)
     all_rev = foundProduct.reviews
-    review = [rev.to_dict() for rev in all_rev]
-    return jsonify(review)
+    reviews = [rev.to_dict() for rev in all_rev]
+
+    review_res = []
+    for review in reviews:
+        print('review', type(review['user']))
+        review_res.append({
+            'id': review['id'],
+            'userId': review['userId'],
+            'productId': review['productId'],
+            'review': review['review'],
+            'star': review['star'],
+            'createdAt': review['createdAt'],
+            'updatedAt': review['updatedAt'],
+            'firstName': review['user'],
+        })
+
+    return jsonify(review_res)
 
 
 @product_routes.route('/<int:id>/reviews', methods=['POST'])

@@ -9,6 +9,7 @@ import './AllProducts.css';
 
 const AllProducts = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(() => {
         dispatch(thunkGetProducts())
@@ -20,8 +21,24 @@ const AllProducts = () => {
 
     const products = Object.values(productsObj)
 
+    const ProductClick = (e, id) => {
+        e.preventDefault()
+        history.push(`/products/${id}`)
+    }
+
     return (
         <div className='all-products-container'>
+            <div>
+            {user ? (
+                <div>
+                    <h1>Welcome back {user.firstName}</h1>
+                </div>
+            ) : (
+                <div>
+                    <h1>Welcome to Kartsy</h1>
+                </div>
+            )} 
+            </div>
             {user && (
                 <div className="create-product-modal">
                     <OpenModalButton
@@ -34,7 +51,7 @@ const AllProducts = () => {
                 <ul className='all-products'>
                     {products.map(product => {
                         return (
-                            <div className='product-card' key={product.id}>
+                            <div className='product-card' key={product.id} onClick={(e) => ProductClick(e, product.id)}>
                                 {/* <div className='product-image-container'> */}
                                     <img className='product-image' src={product.imagesUrl}></img>
                                 {/* </div> */}
