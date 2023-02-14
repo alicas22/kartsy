@@ -137,12 +137,12 @@ const cartItemReducer = (state = initialState, action) => {
         case CREATE_CART_ITEM:{
             newState = { ...state }
             newState.allCartItems = {...newState.allCartItems, [action.newCartItem.id]: action.newCartItem}
-            newState.singleProduct = {...newState.singleProduct, ...action.newCartItem}
+            newState.singleCartItem = {...newState.singleCartItem, ...action.newCartItem}
             return newState
         }
         case UPDATE_CART_ITEM: {
             const newState = { ...state };
-            newState.groups = { ...state.cartItems, [action.updatedCartItem.id]: action.updatedCartItem }
+            newState.allCartItems = { ...state.allCartItems, [action.updatedCartItem.id]: action.updatedCartItem }
             newState.singleCartItem = { ...newState.singleCartItem, ...action.updatedCartItem }
             return newState;
         }

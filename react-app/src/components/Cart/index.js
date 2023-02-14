@@ -19,29 +19,29 @@ const GetCart = () => {
     const cartObj = useSelector((state) => state.cart.allCartItems)
     const products = useSelector((state) => state.products.allProducts)
     const user = useSelector((state) => state.session.user)
-    console.log('cartobj', cartObj)
-    console.log('all prod', products)
+
 
     if (!cartObj) return null
     if (!products) return null
-    if (Object.values(number).length < 1) return null
+    //if (Object.values(number).length < 1) return null
     const cart = Object.values(cartObj)
-
+    console.log('cart', cartObj)
 
     if (!cart) return null
 
     const updateItem = async (cartItemId, e) => {
         setNumber({...number, [cartItemId]: e.target.value})
 
-        const itemCount = number[cartItemId]
-        if(!itemCount) return null
+        // const itemCount = number[cartItemId]
+        // if(!itemCount) return null
 
         const payload = {
-            countOfProduct:itemCount,
+            countOfProduct:e.target.value, //e.target.value will send the selected value instead of having to wait for number to update (delayed bc of async)
             productId:cartItemId
         }
         dispatch(updateCartItemThunk(payload))
     }
+
 
     return (
         <div>
@@ -59,7 +59,7 @@ const GetCart = () => {
                             <select
                                 className="dropdown-count"
                                 id="count"
-                                value={number[cartItem.id]}
+                                value={cartObj[cartItem.id].countOfProduct} //changed to store value so value will persist on refresh
                                 onChange={e => updateItem(cartItem.id, e)}
                             >
                                 {numbers.map((count) => (
