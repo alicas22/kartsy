@@ -3,8 +3,8 @@ const LOAD_SINGLE_CART_ITEM = 'cart/LOAD_SINGLE_CART_ITEM';
 const CREATE_CART_ITEM = 'cart/CREATE_CART_ITEM';
 const UPDATE_CART_ITEM = 'cart/UPDATE_CART_ITEM';
 const DELETE_CART_ITEM = 'cart/DELETE_CART_ITEM';
+const CLEAN_UP_CART = 'cart/CLEAN_UP_CART'
 
-// const CLEAN_UP_REVIEWS = 'reviews/CLEANUP';
 
 //action creators
 export const loadAllCartItemsAction = (cartItems) => {
@@ -14,10 +14,6 @@ export const loadAllCartItemsAction = (cartItems) => {
     }
 };
 
-const loadSingleCartItemAction = (cartItem) => ({
-    type: LOAD_SINGLE_CART_ITEM,
-    cartItem
-})
 
 export const createCartItemAction = (newCartItem) => {
     return {
@@ -40,16 +36,15 @@ export const deleteCartItemAction = (badCartItemId) => {
     }
 };
 
-// export const cleanUpReviewsAction = () => {
-//     return {
-//         type: CLEAN_UP_REVIEWS
-//     }
-// };
+export const cleanUpCartAction = () => {
+    return {
+        type: CLEAN_UP_CART
+    }
+};
 
 //thunks
 export const loadAllCartItemsThunk = () => async dispatch => {
-    const response = await fetch(`/api/cart`);
-
+    const response = await fetch(`/api/cart/`);
     if (response.ok) {
         const cart = await response.json();
         dispatch(loadAllCartItemsAction(cart));
@@ -57,24 +52,23 @@ export const loadAllCartItemsThunk = () => async dispatch => {
     }
 };
 
-export const getSingleCartItemThunk = (cartItemId) => async (dispatch) => {
-    const response = await fetch(`/api/cart/${cartItemId}`)
+// export const getSingleCartItemThunk = (cartItemId) => async (dispatch) => {
+//     const response = await fetch(`/api/cart/${cartItemId}`)
 
-    if (response.ok) {
-        const cartItem = await response.json()
-        dispatch(loadSingleCartItemAction(cartItem))
-        return cartItem
-    }
+//     if (response.ok) {
+//         const cartItem = await response.json()
+//         dispatch(loadSingleCartItemAction(cartItem))
+//         return cartItem
+//     }
 
-}
+// }
 
 export const createCartItemThunk = (payload) => async (dispatch) => {
-    const response = await fetch('/api/cart', {
+    const response = await fetch('/api/cart/', {
         method: "POST",
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
     })
-
     if (response.ok){
         const newCartItem = await response.json()
         dispatch(createCartItemAction(newCartItem))
@@ -85,10 +79,10 @@ export const createCartItemThunk = (payload) => async (dispatch) => {
 
 
 export const updateCartItemThunk = (cartItem) => async dispatch => {
-    const response = await fetch(`/api/cart/${cartItem.id}`, {
+    const response = await fetch(`/api/cart/`, {
       method: "PUT",
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify(review),
+      body: JSON.stringify(cartItem),
     });
 
     if (response.ok) {
@@ -99,8 +93,10 @@ export const updateCartItemThunk = (cartItem) => async dispatch => {
 };
 
 export const deleteCartItemThunk = (badCartItemId) => async dispatch => {
-    const response = await fetch(`/api/cart/${badCartItemId}`, {
-      method: "DELETE"
+    const response = await fetch(`/api/cart/`, {
+      method: "DELETE",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(badCartItemId),
     });
 
     if (response.ok) {
@@ -109,6 +105,20 @@ export const deleteCartItemThunk = (badCartItemId) => async dispatch => {
         return badCartItem;
     }
 };
+
+// export const deleteAllCartThunk = (badCartItemIdArr) => async dispatch => {
+//     const response = await fetch(`/api/cart/`, {
+//       method: "DELETE",
+//       headers: {'Content-Type': 'application/json'},
+//       body: JSON.stringify(badCartItemId),
+//     });
+
+//     if (response.ok) {
+//         const badCartItem = await response.json();
+//         dispatch(deleteCartItemAction(badCartItem));
+//         return badCartItem;
+//     }
+// };
 
 // normalize helper function
 const normalize = (arr) => {
@@ -136,19 +146,22 @@ const cartItemReducer = (state = initialState, action) => {
         case CREATE_CART_ITEM:{
             newState = { ...state }
             newState.allCartItems = {...newState.allCartItems, [action.newCartItem.id]: action.newCartItem}
-            newState.singleProduct = {...newState.singleProduct, ...action.newproduct}
+            newState.singleCartItem = {...newState.singleCartItem, ...action.newCartItem}
             return newState
         }
         case UPDATE_CART_ITEM: {
             const newState = { ...state };
-            newState.groups = { ...state.cartItems, [action.updatedCartItem.id]: action.updatedCartItem }
+            newState.allCartItems = { ...state.allCartItems, [action.updatedCartItem.id]: action.updatedCartItem }
             newState.singleCartItem = { ...newState.singleCartItem, ...action.updatedCartItem }
             return newState;
         }
-
         case DELETE_CART_ITEM: {
             const newState = { ...state, allCartItems: { ...state.allCartItems } };
             delete newState.allCartItems[action.badCartItemId];
+            return newState;
+        }
+        case CLEAN_UP_CART: {
+            const newState = { ...initialState };
             return newState;
         }
         default:

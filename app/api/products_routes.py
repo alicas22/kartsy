@@ -17,6 +17,7 @@ def all_products():
     for product in products:
 
         prod_res.append({
+            'id': product['id'],
             'name': product['name'],
             'price': product['price'],
             'imagesUrl': product['imagesUrl']
@@ -32,12 +33,17 @@ def create_product():
 
     if product.validate_on_submit():
         product = Product(
-            owner_id=res["owner_id"],
+            owner_id=res["ownerId"],
             name=res["name"],
             price=res["price"],
             description=res["description"]
         )
+        image = ProductImage(
+            url=res['imageUrl'],
+            product = product
+        )
         db.session.add(product)
+        db.session.add(image)
         db.session.commit()
         return product.to_dict()
 
@@ -72,7 +78,6 @@ def edit_product(id):
 @product_routes.route('/<int:id>', methods=["DELETE"])
 def delete_product(id):
     current_product = Product.query.get(id)
-    print("HERE",current_product)
 
     if current_product:
         db.session.delete(current_product)
@@ -97,7 +102,6 @@ def post_review(id):
     form = ReviewForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
-    print(current_user)
     if form.validate_on_submit():
         form = Review(
             product_id=foundProduct.id,
@@ -105,7 +109,6 @@ def post_review(id):
             review=res['review'],
             star=res['star']
         )
-        print(form)
         db.session.add(form)
         db.session.commit()
         return form.to_dict()

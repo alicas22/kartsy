@@ -58,7 +58,7 @@ export const thunkCreateProduct = (payload) => async (dispatch) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     })
-    console.log('response', response)
+
     if (response.ok) {
         const newProduct = await response.json()
         dispatch(createProduct(newProduct))
@@ -107,8 +107,7 @@ const productReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_PRODUCTS:
             newState = { ...state }
-            newState.allProducts = action.products
-            console.log('new state', newState)
+            newState.allProducts = normalize(action.products)
             return newState
         case LOAD_SINGLE_PRODUCT:
             newState = { ...state }
