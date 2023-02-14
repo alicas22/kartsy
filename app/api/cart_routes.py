@@ -25,10 +25,14 @@ def create_cart_item():
     res = request.get_json()
 
     # check if item already in cart:
-    item_in_cart = ShoppingCartItem.query.filter_by(product_id = res['productId'])
-
-    if item_in_cart:
-        return res
+    item_in_cart = ShoppingCartItem.query.filter_by(product_id = res['productId']).first()
+    if(item_in_cart):
+        item_id = item_in_cart.product_id
+        item_in_cart.count_of_product += 1
+        print('>>>>>>>>>>>>>>>>>>item in cart', (item_id))
+        db.session.commit()
+        item = cart_item.to_dict()
+        return jsonify(item)
     elif res:
         item = ShoppingCartItem(
             product_id=res["productId"],
