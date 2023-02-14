@@ -23,14 +23,14 @@ class Review(db.Model):
 
     @validates('star')
     def validate_star(self, key, star):
-        if star < 1 or star > 5:
+        if int(star) < 1 or int(star) > 5:
             raise ValueError('Star must be between 1 and 5')
         return star
 
     @validates('review')
     def validate_review(self, key, review):
-        if len(review) < 10:
-            raise ValueError('Review must be at least 10 characters long')
+        if len(review) < 3:
+            raise ValueError('Review must be at least 3 characters long')
         return review
 
     def to_dict(self):
@@ -42,4 +42,6 @@ class Review(db.Model):
             'star': self.star,
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
+            'user': self.user.first_name,
+            # 'product': self.product
         }

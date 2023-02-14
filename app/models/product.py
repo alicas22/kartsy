@@ -15,13 +15,13 @@ class Product(db.Model):
     description = db.Column(db.String(2000), nullable=False)
 
     owner = db.relationship('User', back_populates='products')
-    reviews = db.relationship('Review', back_populates='product')
-    images = db.relationship('ProductImage', back_populates='product')
-    shopping_cart_item = db.relationship("ShoppingCartItem", back_populates="product")
+    reviews = db.relationship('Review', cascade="all, delete-orphan", back_populates='product')
+    images = db.relationship('ProductImage', cascade="all, delete-orphan", back_populates='product')
+    shopping_cart_item = db.relationship("ShoppingCartItem", cascade="all, delete-orphan", back_populates="product")
 
     @validates('price')
     def validate_price(self, key, price):
-        if price <= 0:
+        if float(price) <= 0:
             raise ValueError('Price must be greater than 0')
         return price
 
@@ -38,4 +38,8 @@ class Product(db.Model):
             'name': self.name,
             'price': self.price,
             'description': self.description,
+            #'owner': self.owner,
+            #'reviews': self.reviews,
+            'imagesUrl': self.images[0].url,
+            #'shoppingCartItem': self.shopping_cart_item
         }
