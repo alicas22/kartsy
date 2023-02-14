@@ -54,19 +54,15 @@ export const loadAllReviewsThunk = (productId) => async dispatch => {
 };
 
 export const createReviewThunk = (productId, newReview) => async dispatch => {
-    const { review, star } = newReview;
     const response = await fetch(`/api/products/${productId}/reviews`, {
       method: "POST",
       headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        review,
-        star
-      }),
+      body: JSON.stringify(newReview),
     });
 
     if (response.ok) {
         const createdReview = await response.json();
-        dispatch(createReviewAction(productId, createdReview));
+        dispatch(createReviewAction(createdReview));
         return createdReview;
     }
 };
@@ -104,8 +100,6 @@ const reviewsReducer = (state = initialState, action) => {
     switch (action.type) {
         case LOAD_ALL_REVIEWS: {
             const newState = { ...state };
-            console.log('newstate', newState)
-            console.log('action', action)
             action.productId.forEach((review) => {
                 newState[review.id] = review;
             });
@@ -113,16 +107,18 @@ const reviewsReducer = (state = initialState, action) => {
         };
         case CREATE_REVIEW: {
             const newState = { ...state };
-            newState[action.newReview.id] = action.newReview;
+            newState[action.productId.id] = action.productId;
             return newState;
         };
         case UPDATE_REVIEW: {
             const newState = { ...state };
+            console.log('!!!!!!!!!!!!', action)
             newState[action.updatedReview.id] = action.updatedReview;
             return newState;
         };
         case DELETE_REVIEW: {
             const newState = { ...state };
+            console.log("this is the action: ", action)
             delete newState[action.badReviewId];
             return newState;
         };

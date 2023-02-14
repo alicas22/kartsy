@@ -1,69 +1,64 @@
 import { useEffect, useState } from "react"
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
-import { thunkCreateProduct } from "../../store/products"
+import { thunkEditProduct } from "../../store/products"
 import { useModal } from "../../context/Modal"
-import { createReviewThunk } from "../../store/reviews"
+import SingleProduct from "../SingleProduct"
 import { thunkGetSingleProduct } from "../../store/products"
-import { loadAllReviewsThunk } from "../../store/reviews"
+import { updateReviewThunk } from "../../store/reviews"
 
-const CreateReview = ({ productId }) => {
+
+const EditReview = ({ productId, reviewId }) => {
     const dispatch = useDispatch()
     const history = useHistory()
+
+    const editReview = useSelector((state) => state.reviews[reviewId])
+
     const { closeModal } = useModal();
-    const [review, setReview] = useState('')
-    const [star, setStar] = useState('')
+    const [review, setReview] = useState(editReview.review)
+    const [star, setStar] = useState(editReview.star)
     const [errors, setErrors] = useState([])
-    const [createdReview, setCreatedReview] = useState()
 
     const user = useSelector(state => state.session.user)
-    //console.log('user', user)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         setErrors([])
 
         const payload = {
-            owner_id: user.id,
+            ...editReview,
             review,
             star
         }
 
         if (!user) return null
 
-        await dispatch(createReviewThunk(productId, payload))
-            .then((review) => {
-                setCreatedReview(review)
-            })
+        await dispatch(updateReviewThunk(payload))
+            // .then((product) => {
+            //     console.log('product', product)
+            //     setCreatedProduct(product)
+            //     console.log('created prod', createdProduct)
+            // })
             .then(closeModal)
-            // .catch(
-            //     async (res) => {
-            //         const data = await res.json();
-            //         if (data && (data.errors)) setErrors(data.errors)
-            //     });
+        // .catch(
+        //     async (res) => {
+        //         const data = await res.json();
+        //         if (data && (data.errors)) setErrors(data.errors)
+        //     });
 
         history.push(`/products/${productId}`)
     }
 
-    useEffect(() => {
-        // if (createdReview) {
-        //     history.push(`/products/${productId}`)
-        // }
-        dispatch(loadAllReviewsThunk(productId))
-        return () => dispatch(thunkGetSingleProduct(productId));
-        // dispatch(thunkGetSingleProduct(productId))
-    }, [productId])
-
     return (
-        <div className="create-review-form">
-            <h1>Create Review</h1>
-            <form className='review-product-form' onSubmit={handleSubmit}>
+        <div className="edit-review-form">
+            <h1>Edit Review</h1>
+            <form className='edit-review-form' onSubmit={handleSubmit}>
                 <ul>
                     {errors.map((error, index) => <li className="errors-text" key={index}>{error}</li>)}
                 </ul>
                 <label>
                     <p>
-                    review
+                        Review
                     </p>
                     <input
                         id="review"
@@ -75,7 +70,7 @@ const CreateReview = ({ productId }) => {
                 </label>
                 <label>
                     <p>
-                    star
+                        Star
                     </p>
                     <input
                         id="star"
@@ -90,4 +85,4 @@ const CreateReview = ({ productId }) => {
         </div>
     )
 }
-export default CreateReview
+export default EditReview

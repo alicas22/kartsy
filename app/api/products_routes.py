@@ -90,8 +90,23 @@ def delete_product(id):
 def all_reviews(id):
     foundProduct = Product.query.get(id)
     all_rev = foundProduct.reviews
-    review = [rev.to_dict() for rev in all_rev]
-    return jsonify(review)
+    reviews = [rev.to_dict() for rev in all_rev]
+
+    review_res = []
+    for review in reviews:
+        print('review', type(review['user']))
+        review_res.append({
+            'id': review['id'],
+            'userId': review['userId'],
+            'productId': review['productId'],
+            'review': review['review'],
+            'star': review['star'],
+            'createdAt': review['createdAt'],
+            'updatedAt': review['updatedAt'],
+            'firstName': review['user'],
+        })
+
+    return jsonify(review_res)
 
 
 @product_routes.route('/<int:id>/reviews', methods=['POST'])
@@ -105,10 +120,11 @@ def post_review(id):
     if form.validate_on_submit():
         form = Review(
             product_id=foundProduct.id,
-            # user_id=res['owner_id'],
+            user_id=current_user.id,
             review=res['review'],
             star=res['star']
         )
+        
         db.session.add(form)
         db.session.commit()
         return form.to_dict()

@@ -4,10 +4,12 @@ import { useHistory } from 'react-router-dom'
 import { thunkGetProducts } from '../../store/products'
 import OpenModalButton from '../OpenModalButton'
 import CreateProduct from '../CreateProduct'
+import './AllProducts.css';
 
 
 const AllProducts = () => {
     const dispatch = useDispatch()
+    const history = useHistory()
 
     useEffect(() => {
         dispatch(thunkGetProducts())
@@ -19,23 +21,42 @@ const AllProducts = () => {
 
     const products = Object.values(productsObj)
 
+    const ProductClick = (e, id) => {
+        e.preventDefault()
+        history.push(`/products/${id}`)
+    }
+
     return (
-        <div className='all-products'>
-        {user && (
-            <div className="create-product-modal">
-                <OpenModalButton
-                    buttonText="Create Product"
-                    modalComponent={<CreateProduct />}
-                />
+        <div className='all-products-container'>
+            <div>
+            {user ? (
+                <div>
+                    <h1>Welcome back {user.firstName}</h1>
+                </div>
+            ) : (
+                <div>
+                    <h1>Welcome to Kartsy</h1>
+                </div>
+            )} 
             </div>
-        )}
-                <ul>
+            {user && (
+                <div className="create-product-modal">
+                    <OpenModalButton
+                        buttonText="Create Product"
+                        modalComponent={<CreateProduct />}
+                    />
+                </div>
+            )}
+            <div>
+                <ul className='all-products'>
                     {products.map(product => {
                         return (
-                            <div className='product-card' key={product.id}>
-                                <div className='product-image'>
-                                    {product.name}
-                                    <img src={product.imagesUrl}></img>
+                            <div className='product-card' key={product.id} onClick={(e) => ProductClick(e, product.id)}>
+                                {/* <div className='product-image-container'> */}
+                                    <img className='product-image' src={product.imagesUrl}></img>
+                                {/* </div> */}
+                                <div className='product-price-container'>
+                                    ${product.price}
                                 </div>
                             </div>
                         )
@@ -43,6 +64,7 @@ const AllProducts = () => {
                     }
                 </ul>
             </div>
+        </div>
     )
 }
 

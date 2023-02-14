@@ -1,10 +1,15 @@
 import { useDispatch, useSelector } from "react-redux";
-import { deleteReviewThunk, updateReviewThunk } from "../../store/reviews";
+import { deleteReviewThunk } from "../../store/reviews";
 // import { loadSingleSpotThunk } from "../../store/single"; update this line later
 import './SingleReviewCard.css';
 
-const SingleReviewCard = ({review, user, reviewOwnerId, reviewId, productId, time}) => {
+import EditReview from "../EditReview";
+import OpenModalButton from "../OpenModalButton"
+import { useHistory } from "react-router-dom";
+
+const SingleReviewCard = ({review, userId, reviewId, productId, time, user}) => {
     const dispatch = useDispatch();
+    const history = useHistory()
     const currentUser = useSelector(state => state.session.user);
 
     const timeFormat = (time) => {
@@ -14,16 +19,11 @@ const SingleReviewCard = ({review, user, reviewOwnerId, reviewId, productId, tim
         }
     };
 
-    const updateReviewHandler = async (e) => {
-        e.preventDefault();
-        await dispatch(updateReviewThunk(review));
-    };
-
-    const deleteReviewHandler = async (e) => {
-        e.preventDefault();
-        await dispatch(deleteReviewThunk(reviewId));
-        // dispatch(loadSingleSpotThunk(spotId))
-    };
+    const deleteReviewHandler = ( async (e) => {
+        e.preventDefault()
+        await dispatch(deleteReviewThunk(reviewId))
+        history.push(`/products/${productId}`)
+    })
 
     if (!review) return null;
 
@@ -32,12 +32,16 @@ const SingleReviewCard = ({review, user, reviewOwnerId, reviewId, productId, tim
             <div className='single-review-header'>
                 <div className="single-review-reviewOwner">{user}</div>
                 <div className="delete-review-button-container">
-                {(currentUser && currentUser.id === reviewOwnerId) && (
+                    {(currentUser && currentUser.id == userId && (
                     <div>
-                        <button className="edit-review-button" onClick={updateReviewHandler}>Edit this review</button>
+                        <OpenModalButton
+                        buttonText="Edit Review"
+                        modalComponent={<EditReview productId={productId} reviewId={reviewId}/>}
+                        />
                         <button className="delete-review-button" onClick={deleteReviewHandler}>Delete this review</button>
                     </div>
-                )}
+                    ))}
+
                 </div>
             </div>
             <div className="single-review-createdTime">{timeFormat(time)}</div>

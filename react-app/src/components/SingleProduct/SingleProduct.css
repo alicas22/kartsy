@@ -1,0 +1,19 @@
+.main-singleProduct-container{
+    display: flex;
+    flex-direction: row;
+}
+
+.single-image{
+    height: 100%;
+    width: 100%
+}
+
+.main-reviews-button-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.image-review-container{
+    display: flex;
+    flex-direction: column;
+}
