@@ -33,12 +33,17 @@ def create_product():
 
     if product.validate_on_submit():
         product = Product(
-            owner_id=res["owner_id"],
+            owner_id=res["ownerId"],
             name=res["name"],
             price=res["price"],
             description=res["description"]
         )
+        image = ProductImage(
+            url=res['imageUrl'],
+            product = product
+        )
         db.session.add(product)
+        db.session.add(image)
         db.session.commit()
         return product.to_dict()
 
@@ -119,7 +124,7 @@ def post_review(id):
             review=res['review'],
             star=res['star']
         )
-
+        
         db.session.add(form)
         db.session.commit()
         return form.to_dict()

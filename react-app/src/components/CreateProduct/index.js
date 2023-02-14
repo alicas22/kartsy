@@ -11,6 +11,7 @@ const CreateProduct = () => {
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
+    const [imageUrl, setImageUrl] = useState('')
     const [errors, setErrors] = useState([])
     const [createdProduct, setCreatedProduct] = useState()
 
@@ -22,19 +23,18 @@ const CreateProduct = () => {
         setErrors([])
 
         const payload = {
-            owner_id: user.id,
+            ownerId: user.id,
             name,
             price,
-            description
+            description,
+            imageUrl
         }
 
         if (!user) return null
 
         return dispatch(thunkCreateProduct(payload))
             .then((product) => {
-                console.log('product', product)
                 setCreatedProduct(product)
-                console.log('created prod', createdProduct)
             })
             .then(closeModal)
             .catch(
@@ -95,6 +95,18 @@ const CreateProduct = () => {
                         name="description"
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
+                    />
+                </label>
+                <label>
+                    <p>
+                    Image URL
+                    </p>
+                    <input
+                        id="imageUrl"
+                        type="url"
+                        name="imageUrl"
+                        value={imageUrl}
+                        onChange={(e) => setImageUrl(e.target.value)}
                     />
                 </label>
                 <button type="submit">Submit</button>

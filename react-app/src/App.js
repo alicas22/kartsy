@@ -7,7 +7,7 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import AllProducts from "./components/AllProducts";
 import SingleProduct from "./components/SingleProduct";
-
+import Cart from "./components/Cart"
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +32,9 @@ function App() {
           </Route>
           <Route path='/products/:productId'>
             <SingleProduct />
+          </Route>
+          <Route path='/cart'>
+            <Cart />
           </Route>
         </Switch>
       )}

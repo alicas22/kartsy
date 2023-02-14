@@ -6,8 +6,11 @@ import OpenModalButton from "../OpenModalButton"
 import EditProduct from "../EditProduct"
 import AllReviewsComponent from "../AllReviews"
 import CreateReview from "../CreateReview"
+
 import EditReview from "../EditReview"
 import './SingleProduct.css'
+
+import { createCartItemThunk } from "../../store/shoppingCartItems"
 
 
 const SingleProduct = () => {
@@ -25,6 +28,7 @@ const SingleProduct = () => {
 
     const user = useSelector((state) => state.session.user)
 
+
     const averageFunc = (arr) =>{
         let amount = 0;
 
@@ -35,14 +39,25 @@ const SingleProduct = () => {
         return avg.toFixed(2)
     }
 
-
     if (!product) return null
+    if (!user) return null
 
     const deleteButton = (async (e) => {
         e.preventDefault()
         await dispatch(thunkDeleteProduct(product))
         history.push('/products')
     })
+
+    const cart_item={
+        productId:product.id,
+        userId: user.id,
+        countOfProduct:1
+    }
+    const addToCart = async (e) =>{
+        e.preventDefault()
+        await dispatch(createCartItemThunk(cart_item))
+        history.push('/cart')
+    }
 
     return (
         <div className="main-singleProduct-container">
@@ -62,6 +77,7 @@ const SingleProduct = () => {
                         buttonText="Create Review"
                         modalComponent={<CreateReview productId={productId} />}
                     />
+
                 )}
                 <AllReviewsComponent productId={productId} />
             </div>
@@ -84,6 +100,18 @@ const SingleProduct = () => {
                     <div>{product.name}</div>
                     <div>${product.price}</div>
                     <div>{product.description}</div>
+
+                    <div>
+                        <button onClick={deleteButton} className="delete-button">
+                            Delete
+                        </button>
+                    </div>
+                    <div>
+                        <button onClick={addToCart} className="add-to-cart-button">
+                            Add to cart
+                        </button>
+                    </div>
+
                 </div>
             </div>
         </div>
