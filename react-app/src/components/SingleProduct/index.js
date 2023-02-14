@@ -13,7 +13,7 @@ const SingleProduct = () => {
     const history = useHistory()
     const { productId } = useParams()
     const dispatch = useDispatch()
-    console.log(productId)
+
     useEffect(() => {
         dispatch(thunkGetSingleProduct(productId))
     }, [dispatch, productId])
@@ -21,8 +21,8 @@ const SingleProduct = () => {
     const product = useSelector((state) => state.products.singleProduct)
     const user = useSelector((state) => state.session.user)
 
-
     if (!product) return null
+    if (!user) return null
 
     const deleteButton = ( async (e) => {
         e.preventDefault()

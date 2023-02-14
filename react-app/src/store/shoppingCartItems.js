@@ -3,6 +3,7 @@ const LOAD_SINGLE_CART_ITEM = 'cart/LOAD_SINGLE_CART_ITEM';
 const CREATE_CART_ITEM = 'cart/CREATE_CART_ITEM';
 const UPDATE_CART_ITEM = 'cart/UPDATE_CART_ITEM';
 const DELETE_CART_ITEM = 'cart/DELETE_CART_ITEM';
+const CLEAN_UP_CART = 'cart/CLEAN_UP_CART'
 
 // const CLEAN_UP_REVIEWS = 'reviews/CLEANUP';
 
@@ -40,11 +41,11 @@ export const deleteCartItemAction = (badCartItemId) => {
     }
 };
 
-// export const cleanUpReviewsAction = () => {
-//     return {
-//         type: CLEAN_UP_REVIEWS
-//     }
-// };
+export const cleanUpCartAction = () => {
+    return {
+        type: CLEAN_UP_CART
+    }
+};
 
 //thunks
 export const loadAllCartItemsThunk = () => async dispatch => {
@@ -146,10 +147,13 @@ const cartItemReducer = (state = initialState, action) => {
             newState.singleCartItem = { ...newState.singleCartItem, ...action.updatedCartItem }
             return newState;
         }
-
         case DELETE_CART_ITEM: {
             const newState = { ...state, allCartItems: { ...state.allCartItems } };
             delete newState.allCartItems[action.badCartItemId];
+            return newState;
+        }
+        case CLEAN_UP_CART: {
+            const newState = { ...initialState };
             return newState;
         }
         default:

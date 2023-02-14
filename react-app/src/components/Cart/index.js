@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
-import { loadAllCartItemsThunk, updateCartItemThunk } from "../../store/shoppingCartItems"
+import { cleanUpCartAction, loadAllCartItemsThunk, updateCartItemThunk } from "../../store/shoppingCartItems"
 import { thunkGetProducts } from "../../store/products"
 import { useModal } from "../../context/Modal"
 
@@ -12,8 +12,12 @@ const GetCart = () => {
     const [number, setNumber] = useState({1:1})
 
     useEffect(() => {
+        if (user == null){
+            dispatch(cleanUpCartAction)
+        }
         dispatch(loadAllCartItemsThunk())
             .then(dispatch(thunkGetProducts()))
+
     }, [dispatch])
 
     const cartObj = useSelector((state) => state.cart.allCartItems)
@@ -21,11 +25,11 @@ const GetCart = () => {
     const user = useSelector((state) => state.session.user)
 
 
+
     if (!cartObj) return null
     if (!products) return null
     //if (Object.values(number).length < 1) return null
     const cart = Object.values(cartObj)
-    console.log('cart', cartObj)
 
     if (!cart) return null
 
