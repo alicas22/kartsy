@@ -16,7 +16,7 @@ const CreateProduct = () => {
     const [createdProduct, setCreatedProduct] = useState()
 
     const user = useSelector(state => state.session.user)
-    //console.log('user', user)
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault()

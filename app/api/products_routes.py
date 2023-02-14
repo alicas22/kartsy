@@ -3,6 +3,7 @@ from ..models import db, Product, Review, ProductImage
 from ..forms import ProductForm
 from ..forms.review_form import ReviewForm
 from flask_login import current_user, login_required
+from ..models import Product
 
 
 
@@ -124,7 +125,7 @@ def post_review(id):
             review=res['review'],
             star=res['star']
         )
-        
+
         db.session.add(form)
         db.session.commit()
         return form.to_dict()
