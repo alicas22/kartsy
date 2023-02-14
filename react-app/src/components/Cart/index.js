@@ -9,7 +9,7 @@ const GetCart = () => {
     const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20]
 
     const dispatch = useDispatch()
-    const [number, setNumber] = useState(numbers[0])
+    const [number, setNumber] = useState({1:1})
 
     useEffect(() => {
         dispatch(loadAllCartItemsThunk())
@@ -24,17 +24,21 @@ const GetCart = () => {
 
     if (!cartObj) return null
     if (!products) return null
+    if (Object.values(number).length < 1) return null
     const cart = Object.values(cartObj)
 
 
     if (!cart) return null
 
-    const updateItem = async (e) => {
-        setNumber(e.target.value)
+    const updateItem = async (cartItemId, e) => {
+        setNumber({...number, [cartItemId]: e.target.value})
+
+        const itemCount = number[cartItemId]
+        if(!itemCount) return null
 
         const payload = {
-            countOfItem: number,
-            // cartItemId: cartItem.id
+            countOfProduct:itemCount,
+            productId:cartItemId
         }
         dispatch(updateCartItemThunk(payload))
     }
@@ -55,15 +59,15 @@ const GetCart = () => {
                             <select
                                 className="dropdown-count"
                                 id="count"
-                                value={number}
-                                onChange={updateItem}
+                                value={number[cartItem.id]}
+                                onChange={e => updateItem(cartItem.id, e)}
                             >
-                                {numbers.map(number => (
+                                {numbers.map((count) => (
                                     <option
-                                        key={number}
-                                        value={number}
+                                        key={count}
+                                        value={count}
                                     >
-                                        {number}
+                                        {count}
                                     </option>
                                 ))}
                             </select>

@@ -86,7 +86,7 @@ export const createCartItemThunk = (payload) => async (dispatch) => {
 
 
 export const updateCartItemThunk = (cartItem) => async dispatch => {
-    const response = await fetch(`/api/cart/${cartItem.id}`, {
+    const response = await fetch(`/api/cart/`, {
       method: "PUT",
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify(cartItem),
