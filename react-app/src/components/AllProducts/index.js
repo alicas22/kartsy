@@ -37,7 +37,7 @@ const AllProducts = () => {
                 <div>
                     <h1>Welcome to Kartsy</h1>
                 </div>
-            )} 
+            )}
             </div>
             {user && (
                 <div className="create-product-modal">
