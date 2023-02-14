@@ -34,9 +34,7 @@ const CreateProduct = () => {
 
         return dispatch(thunkCreateProduct(payload))
             .then((product) => {
-                console.log('product', product)
                 setCreatedProduct(product)
-                console.log('created prod', createdProduct)
             })
             .then(closeModal)
             .catch(

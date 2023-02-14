@@ -78,7 +78,6 @@ def edit_product(id):
 @product_routes.route('/<int:id>', methods=["DELETE"])
 def delete_product(id):
     current_product = Product.query.get(id)
-    print("HERE",current_product)
 
     if current_product:
         db.session.delete(current_product)
@@ -103,7 +102,6 @@ def post_review(id):
     form = ReviewForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
 
-    print(current_user)
     if form.validate_on_submit():
         form = Review(
             product_id=foundProduct.id,
@@ -111,7 +109,6 @@ def post_review(id):
             review=res['review'],
             star=res['star']
         )
-        print(form)
         db.session.add(form)
         db.session.commit()
         return form.to_dict()

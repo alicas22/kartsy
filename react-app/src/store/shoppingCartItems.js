@@ -5,7 +5,6 @@ const UPDATE_CART_ITEM = 'cart/UPDATE_CART_ITEM';
 const DELETE_CART_ITEM = 'cart/DELETE_CART_ITEM';
 const CLEAN_UP_CART = 'cart/CLEAN_UP_CART'
 
-// const CLEAN_UP_REVIEWS = 'reviews/CLEANUP';
 
 //action creators
 export const loadAllCartItemsAction = (cartItems) => {
@@ -15,10 +14,6 @@ export const loadAllCartItemsAction = (cartItems) => {
     }
 };
 
-// const loadSingleCartItemAction = (cartItem) => ({
-//     type: LOAD_SINGLE_CART_ITEM,
-//     cartItem
-// })
 
 export const createCartItemAction = (newCartItem) => {
     return {
@@ -50,10 +45,8 @@ export const cleanUpCartAction = () => {
 //thunks
 export const loadAllCartItemsThunk = () => async dispatch => {
     const response = await fetch(`/api/cart/`);
-    console.log("response from load all cart items thunk", response)
     if (response.ok) {
         const cart = await response.json();
-        console.log('cart', cart)
         dispatch(loadAllCartItemsAction(cart));
         return cart;
     }
@@ -76,7 +69,6 @@ export const createCartItemThunk = (payload) => async (dispatch) => {
         headers: { 'Content-Type': 'application/json'},
         body: JSON.stringify(payload)
     })
-    console.log("hi from create cart item thunk", response)
     if (response.ok){
         const newCartItem = await response.json()
         dispatch(createCartItemAction(newCartItem))
@@ -101,8 +93,10 @@ export const updateCartItemThunk = (cartItem) => async dispatch => {
 };
 
 export const deleteCartItemThunk = (badCartItemId) => async dispatch => {
-    const response = await fetch(`/api/cart/${badCartItemId}`, {
-      method: "DELETE"
+    const response = await fetch(`/api/cart/`, {
+      method: "DELETE",
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify(badCartItemId),
     });
 
     if (response.ok) {
@@ -111,6 +105,20 @@ export const deleteCartItemThunk = (badCartItemId) => async dispatch => {
         return badCartItem;
     }
 };
+
+// export const deleteAllCartThunk = (badCartItemIdArr) => async dispatch => {
+//     const response = await fetch(`/api/cart/`, {
+//       method: "DELETE",
+//       headers: {'Content-Type': 'application/json'},
+//       body: JSON.stringify(badCartItemId),
+//     });
+
+//     if (response.ok) {
+//         const badCartItem = await response.json();
+//         dispatch(deleteCartItemAction(badCartItem));
+//         return badCartItem;
+//     }
+// };
 
 // normalize helper function
 const normalize = (arr) => {

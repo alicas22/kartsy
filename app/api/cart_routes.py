@@ -8,9 +8,7 @@ cart_routes = Blueprint('cart', __name__)
 @cart_routes.route('/')
 def get_all_cart_items():
     all_cart_items = ShoppingCartItem.query.all()
-    print('cart itemm', all_cart_items)
     cart_items = [cart_item.to_dict() for cart_item in all_cart_items]
-    print('cart items from cart_route', cart_items)
     return jsonify(cart_items)
 
 
@@ -25,12 +23,13 @@ def single_cart_item(id):
 def create_cart_item():
     # cart_item = Product.query.get(id)
     res = request.get_json()
-    # print('res from cart routes', res)
-    # form = CartItemForm()
-    # form["csrf_token"].data = request.cookies["csrf_token"]
 
-    # if form.validate_on_submit():
-    if res:
+    # check if item already in cart:
+    item_in_cart = ShoppingCartItem.query.filter_by(product_id = res['productId'])
+
+    if item_in_cart:
+        return res
+    elif res:
         item = ShoppingCartItem(
             product_id=res["productId"],
             user_id=res["userId"],
@@ -47,8 +46,7 @@ def create_cart_item():
 @cart_routes.route('/', methods=['PUT'])
 def update_cart_item():
     res = request.get_json()
-    print('res from update cart', res)
-    cart_item = ShoppingCartItem.query.get(res['productId'])
+    cart_item = ShoppingCartItem.query.get(res['cartItemId'])
 
     if cart_item:
         cart_item.count_of_product = res['countOfProduct']
@@ -58,3 +56,17 @@ def update_cart_item():
         return jsonify(item)
     else:
         return 'Cannot update count'
+
+
+@cart_routes.route('/', methods=['DELETE'])
+def delete_cart_item():
+    res = request.get_json()
+    print('res from delete route', res)
+    cart_item = ShoppingCartItem.query.get(res['cartItemId'])
+
+    if cart_item:
+        db.session.delete(cart_item)
+        db.session.commit()
+        return res
+    else:
+        return 'Cannot delete item'
