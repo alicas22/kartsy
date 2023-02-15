@@ -17,9 +17,9 @@ function OpenModalButton({
   };
 
   return (
-    <div className='hover-button'>
-      <button className="buttonModal" onClick={onClick}>{buttonText}</button>
-    </div>
+    // <div className='hover-button'>
+      <button onClick={onClick}>{buttonText}</button>
+    // </div>
   );
 }
 

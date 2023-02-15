@@ -32,13 +32,17 @@ const AllProducts = () => {
                 {user ? (
                     <div className='welcomeback-background'>
                         <div className='welcome-back'>
-                            <h1>Welcome back {user.firstName}</h1>
+                            <h1>Welcome back,</h1>
+                            <h1 className='users-name'>{user.firstName}!</h1>
                         </div>
                     </div>
                 ) : (
-                    <div>
-                        <h1>Welcome to Kartsy</h1>
+                    <div className='welcomeback-background'>
+                        <div className='welcome-back'>
+                            <h1>Welcome to Kartsy</h1>
+                        </div>
                     </div>
+
                 )}
             </div>
             {user && (
@@ -52,21 +56,13 @@ const AllProducts = () => {
             )}
             <div className='mapped-products-container'>
                 <ul className='all-products'>
-                    {products.map((product, i) => {
+                    {products.map((product) => {
                         return (
-                            <div className='this-div'>
-                                    <div style={{ gridRowStart: 1, gridColumnStart: 2, gridRowEnd: 2, columnGap: '1rem', margin: '1rem 0 1rem', gridTemplateRows: 'auto' }} className='product-card' key={product.id} onClick={(e) => ProductClick(e, product.id)}>
-
-                                        <div className='inside-product-box'>
-                                            <div className='product-image-container'>
-                                            <img className='product-image' src={product.imagesUrl}></img>
-                                            </div>
-                                            <div className='product-price-container'>
-                                                ${product.price.toFixed(2)}
-
-                                            </div>
-                                        </div>
-                                    </div>
+                            <div className='product-card' key={product.id} onClick={(e) => ProductClick(e, product.id)}>
+                                <img className='product-image' src={product.imagesUrl}></img>
+                                <div className='product-price-container'>
+                                    ${product.price.toFixed(2)}
+                                </div>
                             </div>
                         )
                     })
