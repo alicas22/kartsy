@@ -46,12 +46,13 @@ const AllProducts = () => {
                 )}
             </div>
             {user && (
+                <div className='create-product-modal-container'>
                 <div className="create-product-modal">
                     <OpenModalButton
-                        style={{ backgroundColor: "black" }}
                         buttonText="Create Product"
                         modalComponent={<CreateProduct />}
                     />
+                </div>
                 </div>
             )}
             <div className='mapped-products-container'>
