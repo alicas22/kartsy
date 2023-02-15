@@ -38,6 +38,15 @@ const SingleProduct = () => {
         else if (!avg || typeof avg !== 'number') return "No ratings yet";
     }
 
+    const starFunc = (num) => {
+        if (num < 1 || num > 5) return 'No ratings yet';
+        else if (num >= 1 && num < 2) return '★☆☆☆☆';
+        else if (num >= 2 && num < 3) return '★★☆☆☆';
+        else if (num >= 3 && num < 4) return '★★★☆☆';
+        else if (num >= 4 && num < 5) return '★★★★☆';
+        else if (num === 5) return '★★★★★';
+    }
+
     if (!product) return null
     if (!user) return null
 
@@ -64,36 +73,31 @@ const SingleProduct = () => {
                 <div className="single-product-image-container">
                     <img className="single-product-image" src={product.imagesUrl}></img>
                 </div>
-                <div className="single-product-buttons-container">
-                    <div className="edit-delete-product-buttons-container">
-                        {user && user.id === product.ownerId &&(
-                            <div className="edit-delete-product-buttons">
-                                <OpenModalButton
-                                    buttonText="Edit Product"
-                                    modalComponent={<EditProduct />}
-                                    />
-                                <div>
-                                    <button onClick={deleteButton} className="delete-button">Delete Product</button>
-                                </div>
-                            </div>
-                        )}
-                        <div className="single-product-information-container">
-                            <h1 className="single-product-price">${product.price}</h1>
-                            <h3>{product.name}</h3>
-                            <div>
-                                <button onClick={addToCart} className="add-to-cart-button">Add to cart</button>
-                            </div>
-                            <div>{product.description}</div>
+                <div className="single-product-sidebar-container">
+                    {user && user.id === product.ownerId &&(
+                        <div className="edit-delete-product-buttons">
+                            <OpenModalButton
+                                buttonText="Edit Product"
+                                modalComponent={<EditProduct />}
+                                />
+                                <button onClick={deleteButton} className="delete-button">Delete Product</button>
                         </div>
+                    )}
+                    <div className="single-product-information-container">
+                        <h1 className="single-product-price">${product.price}</h1>
+                        <h3 className="single-product-name">{product.name}</h3>
+                        <div>
+                            <button onClick={addToCart} className="add-to-cart-button">Add to cart</button>
+                        </div>
+                        <div>{product.description}</div>
                     </div>
                 </div>
             </div>
             <div className="all-reviews-container">
-                <div className="review-avg-star-container">
+                <div className="all-reviews-header">
                     <h3>{reviews.length} reviews</h3>
-                    <h3>average rating: {averageFunc(reviews)}</h3>
-                </div>
-                <div className="create-review-button-container">
+                    <div>{starFunc(averageFunc(reviews))}</div>
+                    <div className="create-review-button-container">
                     {user && (
                         !reviews.find(review => review.userId === user.id)
                     ) && (
@@ -102,6 +106,7 @@ const SingleProduct = () => {
                             modalComponent={<CreateReview productId={productId} />}
                         />
                     )}
+                    </div>
                 </div>
                 <AllReviewsComponent productId={productId} />
             </div>
