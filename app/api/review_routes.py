@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, jsonify, request
+from flask import Flask, Blueprint, jsonify
 from flask_login import login_required
 from ..models import db, Review
 from ..forms.review_form import ReviewForm
@@ -16,6 +16,7 @@ def validation_errors_to_error_messages(validation_errors):
         for error in validation_errors[field]:
             errorMessages.append(f'{field} : {error}')
     return errorMessages
+
 
 
 
@@ -52,3 +53,4 @@ def delete_review(id):
         return current_review.to_dict()
     else:
         return {'error':'Could not delete review'}
+

@@ -16,7 +16,7 @@ const AllProducts = () => {
     }, [dispatch])
 
     const productsObj = useSelector((state) => state.products.allProducts)
-    const user = useSelector((state)=> state.session.user)
+    const user = useSelector((state) => state.session.user)
     if (!productsObj) return null
 
     const products = Object.values(productsObj)
@@ -28,35 +28,40 @@ const AllProducts = () => {
 
     return (
         <div className='all-products-container'>
-            <div>
-            {user ? (
-                <div>
-                    <h1>Welcome back {user.firstName}</h1>
-                </div>
-            ) : (
-                <div>
-                    <h1>Welcome to Kartsy</h1>
-                </div>
-            )}
+            <div className='welcome-back-container'>
+                {user ? (
+                    <div className='welcomeback-background'>
+                        <div className='welcome-back'>
+                            <h1>Welcome back,</h1>
+                            <h1 className='users-name'>{user.firstName}!</h1>
+                        </div>
+                    </div>
+                ) : (
+                    <div className='welcomeback-background'>
+                        <div className='welcome-back'>
+                            <h1>Welcome to Kartsy</h1>
+                        </div>
+                    </div>
+
+                )}
             </div>
             {user && (
                 <div className="create-product-modal">
                     <OpenModalButton
+                        style={{ backgroundColor: "black" }}
                         buttonText="Create Product"
                         modalComponent={<CreateProduct />}
                     />
                 </div>
             )}
-            <div>
+            <div className='mapped-products-container'>
                 <ul className='all-products'>
-                    {products.map(product => {
+                    {products.map((product) => {
                         return (
                             <div className='product-card' key={product.id} onClick={(e) => ProductClick(e, product.id)}>
-                                {/* <div className='product-image-container'> */}
-                                    <img className='product-image' src={product.imagesUrl}></img>
-                                {/* </div> */}
+                                <img className='product-image' src={product.imagesUrl}></img>
                                 <div className='product-price-container'>
-                                    ${product.price}
+                                    ${product.price.toFixed(2)}
                                 </div>
                             </div>
                         )
