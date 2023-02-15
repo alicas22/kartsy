@@ -16,7 +16,7 @@ const AllProducts = () => {
     }, [dispatch])
 
     const productsObj = useSelector((state) => state.products.allProducts)
-    const user = useSelector((state)=> state.session.user)
+    const user = useSelector((state) => state.session.user)
     if (!productsObj) return null
 
     const products = Object.values(productsObj)
@@ -28,36 +28,45 @@ const AllProducts = () => {
 
     return (
         <div className='all-products-container'>
-            <div>
-            {user ? (
-                <div>
-                    <h1>Welcome back {user.firstName}</h1>
-                </div>
-            ) : (
-                <div>
-                    <h1>Welcome to Kartsy</h1>
-                </div>
-            )}
+            <div className='welcome-back-container'>
+                {user ? (
+                    <div className='welcomeback-background'>
+                        <div className='welcome-back'>
+                            <h1>Welcome back {user.firstName}</h1>
+                        </div>
+                    </div>
+                ) : (
+                    <div>
+                        <h1>Welcome to Kartsy</h1>
+                    </div>
+                )}
             </div>
             {user && (
                 <div className="create-product-modal">
                     <OpenModalButton
+                        style={{ backgroundColor: "black" }}
                         buttonText="Create Product"
                         modalComponent={<CreateProduct />}
                     />
                 </div>
             )}
-            <div>
+            <div className='mapped-products-container'>
                 <ul className='all-products'>
-                    {products.map(product => {
+                    {products.map((product, i) => {
                         return (
-                            <div className='product-card' key={product.id} onClick={(e) => ProductClick(e, product.id)}>
-                                {/* <div className='product-image-container'> */}
-                                    <img className='product-image' src={product.imagesUrl}></img>
-                                {/* </div> */}
-                                <div className='product-price-container'>
-                                    ${product.price}
-                                </div>
+                            <div className='this-div'>
+                                    <div style={{ gridRowStart: 1, gridColumnStart: 2, gridRowEnd: 2, columnGap: '1rem', margin: '1rem 0 1rem', gridTemplateRows: 'auto' }} className='product-card' key={product.id} onClick={(e) => ProductClick(e, product.id)}>
+
+                                        <div className='inside-product-box'>
+                                            <div className='product-image-container'>
+                                            <img className='product-image' src={product.imagesUrl}></img>
+                                            </div>
+                                            <div className='product-price-container'>
+                                                ${product.price.toFixed(2)}
+
+                                            </div>
+                                        </div>
+                                    </div>
                             </div>
                         )
                     })
