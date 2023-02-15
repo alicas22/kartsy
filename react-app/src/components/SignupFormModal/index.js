@@ -30,16 +30,17 @@ function SignupFormModal() {
 	};
 
 	return (
-		<>
-			<h1>Sign Up</h1>
+		<div className="register-modal-container">
+			<h2>Create your account</h2>
+			<h4>Registration is easy.</h4>
 			<form onSubmit={handleSubmit}>
-				<ul>
+				<ul className="validation-errors">
 					{errors.map((error, idx) => (
 						<li key={idx}>{error}</li>
 					))}
 				</ul>
 				<label>
-					Email
+					Email<span style={{color:"red"}}>*</span>
 					<input
 						type="text"
 						value={email}
@@ -48,7 +49,7 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Username
+					Username<span style={{color:"red"}}>*</span>
 					<input
 						type="text"
 						value={username}
@@ -57,7 +58,7 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Password
+					Password<span style={{color:"red"}}>*</span>
 					<input
 						type="password"
 						value={password}
@@ -66,7 +67,7 @@ function SignupFormModal() {
 					/>
 				</label>
 				<label>
-					Confirm Password
+					Confirm Password<span style={{color:"red"}}>*</span>
 					<input
 						type="password"
 						value={confirmPassword}
@@ -74,9 +75,9 @@ function SignupFormModal() {
 						required
 					/>
 				</label>
-				<button type="submit">Sign Up</button>
+				<button className="register-modal-submit-button" type="submit">Register</button>
 			</form>
-		</>
+		</div>
 	);
 }
 

@@ -7,21 +7,50 @@ from ..forms.review_form import ReviewForm
 
 review_routes = Blueprint('review', __name__)
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
 
 
 
-# @review_routes.route('/<:reviewId>', methods=['PUT'])
-# @login_required
-# def edit_review(id):
-#     form = ReviewForm()
-#     updated_review = Item.query.get(id)
-#     form["csrf_token"].data = request.cookies["csrf_token"]
-#     res = request.get_json()
-#     if form.validate_on_submit():
-#         review = Review(
-#             updated_review.review= res["review"]
-#             updated_review.star=res["star"]
-#         )
-#         db.session.add(review)
-#         db.session.commit()
-#         return review.to_dict()
+
+@review_routes.route('/<int:id>', methods=['PUT'])
+@login_required
+def edit_review(id):
+    found_review = Review.query.get(id)
+    res = request.get_json()
+
+    form = ReviewForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+
+    if form.validate_on_submit():
+        form.populate_obj(found_review)
+
+        found_review.review = res["review"]
+        found_review.star = res["star"]
+
+        db.session.commit()
+        res = found_review.to_dict()
+        return jsonify(res)
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+@review_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_review(id):
+    current_review = Review.query.get(id)
+
+    if current_review:
+        db.session.delete(current_review)
+        db.session.commit()
+        return current_review.to_dict()
+    else:
+        return {'error':'Could not delete review'}
+

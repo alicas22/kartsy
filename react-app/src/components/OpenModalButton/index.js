@@ -11,15 +11,17 @@ function OpenModalButton({
   const { setModalContent, setOnModalClose } = useModal();
 
   const onClick = () => {
-    if (onModalClose) setOnModalClose(onModalClose);
+    // if (onModalClose) setOnModalClose(onModalClose);
+    // setModalContent(modalComponent);
+    // if (onButtonClick) onButtonClick();
+    if (typeof onButtonClick === 'function') onButtonClick();
+    if (typeof onModalClose === 'function') setOnModalClose(onModalClose);
     setModalContent(modalComponent);
-    if (onButtonClick) onButtonClick();
+
   };
 
   return (
-    // <div className='hover-button'>
-      <button onClick={onClick}>{buttonText}</button>
-    // </div>
+    <div onClick={onClick}>{buttonText}</div>
   );
 }
 
