@@ -26,6 +26,7 @@ const AllReviewsComponent = ({ productId }) => {
                 userId={singleReview.userId}
                 reviewId={singleReview.id}
                 productId={productId}
+                star={singleReview.star}
                 time={singleReview.createdAt}
                 />
             ))}

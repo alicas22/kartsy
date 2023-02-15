@@ -7,14 +7,14 @@ import EditReview from "../EditReview";
 import OpenModalButton from "../OpenModalButton"
 import { useHistory } from "react-router-dom";
 
-const SingleReviewCard = ({review, userId, reviewId, productId, time, user}) => {
+const SingleReviewCard = ({review, userId, star, reviewId, productId, time, user}) => {
     const dispatch = useDispatch();
     const history = useHistory()
     const currentUser = useSelector(state => state.session.user);
 
     const timeFormat = (time) => {
         if (time) {
-            time = time.slice(0, 10);
+            time = time.slice(0, 16);
             return time
         }
     };
@@ -30,7 +30,6 @@ const SingleReviewCard = ({review, userId, reviewId, productId, time, user}) => 
     return (
         <div className="single-review-card-container">
             <div className='single-review-header'>
-                <div className="single-review-reviewOwner">{user}</div>
                 <div className="delete-review-button-container">
                     {(currentUser && currentUser.id == userId && (
                     <div>
@@ -44,8 +43,10 @@ const SingleReviewCard = ({review, userId, reviewId, productId, time, user}) => 
 
                 </div>
             </div>
-            <div className="single-review-createdTime">{timeFormat(time)}</div>
+            <div className="single-review-star">star: {star}</div>
             <div className="single-review-content">{review}</div>
+            <div className="single-review-reviewOwner">{user}</div>
+            <div className="single-review-createdTime">{timeFormat(time)}</div>
         </div>
     )
 };
