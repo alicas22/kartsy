@@ -1,3 +1,126 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Bengali&display=swap');
+
+
+.nav-bar-header-container{
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 5rem 1rem 5rem;
+}
+.nav-bar-home-button{
+  font-family: 'Noto Serif Bengali', serif;
+  font-size: xx-large;
+}
+
+.nav-bar-search-form,
+.nav-bar-search-container{
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+  padding-left: 20px;
+  padding-right: 20px
+}
+
+.nav-bar-search-wrapper {
+  position: relative;
+  display: flex;
+  flex-grow: 1;
+}
+
+.nav-bar-search-text-field{
+  border-radius: 20px;
+  padding: 10px;
+  flex-grow: 1;
+  outline: none;
+  border: 2px solid black
+
+}
+
+.nav-bar-search-button {
+  position: absolute;
+  right: 1.98px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 45px;
+  border-top-right-radius:75px;
+  border-bottom-right-radius:75px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+}
+.nav-bar-search-button:hover {
+  background-color: rgb(237, 237, 237);
+}
+
+.nav-bar-search-button i {
+  font-size: 16px;
+}
+
+
+.button-container{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  cursor:pointer;
+}
+.demo-login{
+  cursor: pointer;
+  padding-right: 15px
+}
+
+.nav-bar-login-modal-button{
+  cursor:pointer
+}
+
+.nav-bar-cart-icon {
+  margin-left: .5rem;
+}
+
+.nav-bar-cart-icon i {
+  font-size: 1.5rem;
+  color: #444;
+  cursor: pointer;
+}
+.nav-bar-profile-button-container{
+  z-index: 1;
+}
+
+.nav-bar-dropdown-menu-signout{
+  cursor: pointer;
+}
+.nav-bar-profile-button{
+  cursor: pointer;
+  background:none;
+  border:none;
+  font-size: 22px;
+}
+
+.nav-bar-dropdown-menu{
+  text-align: left;
+  width:100%;
+  border:1px solid red;
+
+
+}
+
+.fa-arrow-right-from-bracket{
+  padding:8px
+}
+
+.fa-user{
+  color:grey;
+  background-color: lightgrey;
+  padding:8px;
+  border-radius: 50%;
+
+}
+
+.fa-angle-down{
+  padding:8px;
+  color:grey
+}
 .profile-dropdown {
   position: absolute;
 }

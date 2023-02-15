@@ -37,20 +37,28 @@ function ProfileButton({ user }) {
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
   const closeMenu = () => setShowMenu(false);
 
+
+
   return (
     <>
-      <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+      <button className="nav-bar-profile-button" onClick={openMenu}>
+        <i className="fa-solid fa-user"></i>
+        <i className="fas fa-angle-down"></i>
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
-          <>
-            <li>{user.username}</li>
-            <li>{user.email}</li>
-            <li>
-              <button onClick={handleLogout}>Log Out</button>
-            </li>
-          </>
+          <div className="nav-bar-dropdown-menu-container">
+            <div className='nav-bar-dropdown-menu'>
+              {/* <span><i className="fa-solid fa-user"></i></span>
+              <span style={{margin:"10px"}}>{user.username}</span> */}
+            <div>
+              <div onClick={handleLogout} className='nav-bar-dropdown-menu-signout'>
+                <i class="fa-solid fa-arrow-right-from-bracket fa-flip-horizontal"></i>
+                Sign Out
+              </div>
+            </div>
+            </div>
+          </div>
         ) : (
           <>
             <OpenModalButton

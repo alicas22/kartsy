@@ -27,7 +27,7 @@ class Product(db.Model):
 
     @validates('name')
     def validate_name(self, key, name):
-        if len(name) < 1:
+        if len(name) < 2:
             raise ValueError('Name must be at least 1 characters long')
         return name
 

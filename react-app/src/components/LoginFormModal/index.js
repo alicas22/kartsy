@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import SignupFormModal from '../SignupFormModal';
+import OpenModalButton from '../OpenModalButton';
 import "./LoginForm.css";
 
 function LoginFormModal() {
@@ -22,16 +24,29 @@ function LoginFormModal() {
   };
 
   return (
-    <>
-      <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
-        <ul>
+    <div className="login-modal-container">
+      <div className="login-modal-h2-register-container">
+        <h2>Sign in</h2>
+        <div className="login-modal-signup-modal-container">
+              <div className="login-modal-register-modal-button">
+                <span className="actual-modal-button">
+                <OpenModalButton
+                buttonText="Register"
+                modalComponent={<SignupFormModal />}
+                />
+                </span>
+              </div>
+        </div>
+      </div>
+      <form className='login-modal-form' onSubmit={handleSubmit}>
+        <ul className="validation-errors">
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
         </ul>
+
         <label>
-          Email
+          Email address
           <input
             type="text"
             value={email}
@@ -48,9 +63,9 @@ function LoginFormModal() {
             required
           />
         </label>
-        <button type="submit">Log In</button>
+        <button className="login-modal-submit-button" type="submit">Sign In</button>
       </form>
-    </>
+    </div>
   );
 }
 

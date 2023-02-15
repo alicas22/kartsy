@@ -16,6 +16,7 @@ from .config import Config
 
 app = Flask(__name__, static_folder='../react-app/build', static_url_path='/')
 
+
 # Setup login manager
 login = LoginManager(app)
 login.login_view = 'auth.unauthorized'
@@ -69,6 +70,10 @@ def inject_csrf_token(response):
     return response
 
 
+@app.route('/')
+def all_products_redirect():
+    return redirect('/products')
+
 @app.route("/api/docs")
 def api_help():
     """
@@ -92,6 +97,7 @@ def react_root(path):
     if path == 'favicon.ico':
         return app.send_from_directory('public', 'favicon.ico')
     return app.send_static_file('index.html')
+
 
 
 @app.errorhandler(404)
