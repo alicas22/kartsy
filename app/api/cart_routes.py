@@ -5,6 +5,17 @@ from ..forms.cart_item_form import CartItemForm
 
 cart_routes = Blueprint('cart', __name__)
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
+
+
 @cart_routes.route('/')
 def get_all_cart_items():
     all_cart_items = ShoppingCartItem.query.all()
@@ -44,7 +55,7 @@ def create_cart_item():
         db.session.commit()
         return item.to_dict()
     else:
-        return "error: could not add to cart"
+        return {"error: could not add to cart"}
 
 
 @cart_routes.route('/', methods=['PUT'])
@@ -59,7 +70,7 @@ def update_cart_item():
         item = cart_item.to_dict()
         return jsonify(item)
     else:
-        return 'Cannot update count'
+        return {'error': 'Cannot update count'}
 
 
 @cart_routes.route('/', methods=['DELETE'])
@@ -73,4 +84,4 @@ def delete_cart_item():
         db.session.commit()
         return res
     else:
-        return 'Cannot delete item'
+        return {'error': 'Cannot delete item'}
