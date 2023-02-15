@@ -29,7 +29,6 @@ def create_cart_item():
     if(item_in_cart):
         item_id = item_in_cart.product_id
         item_in_cart.count_of_product += 1
-        print('>>>>>>>>>>>>>>>>>>item in cart', (item_id))
         db.session.commit()
         item = cart_item.to_dict()
         return jsonify(item)
@@ -65,7 +64,6 @@ def update_cart_item():
 @cart_routes.route('/', methods=['DELETE'])
 def delete_cart_item():
     res = request.get_json()
-    print('res from delete route', res)
     cart_item = ShoppingCartItem.query.get(res['cartItemId'])
 
     if cart_item:
