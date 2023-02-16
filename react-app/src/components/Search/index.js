@@ -3,19 +3,22 @@ import { useSelector } from 'react-redux';
 
 const Search = () => {
 
-    const searchRes = useSelector((state) => state.search.searchResults)
+    const searchRes = useSelector((state) => state.search)
     if (!searchRes) return null
-    if (searchRes.undefined.name == null) return <h1>no results found</h1>
+    const searchArr = Object.values(searchRes)
+
+    console.log('search results from component', searchArr)
+    if (!searchArr.length) return <h1>No results</h1>
 
     return searchRes && (
         <>
             <h1> Here are your search results: </h1>
             <ul>
-                {searchRes.undefined.map((result, index) => <li key={index}>{result.name}
+                {searchArr.map((result, index) => <li key={index}>{result.name}
 
                 </li>
 
-                )}
+                 )}
             </ul>
         </>
     )
