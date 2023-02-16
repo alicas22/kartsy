@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { deleteReviewThunk } from "../../store/reviews";
-// import { loadSingleSpotThunk } from "../../store/single"; update this line later
 import './SingleReviewCard.css';
 
 import EditReview from "../EditReview";
@@ -11,8 +10,6 @@ const SingleReviewCard = ({review, userId, star, reviewId, productId, time, user
     const dispatch = useDispatch();
     const history = useHistory()
     const currentUser = useSelector(state => state.session.user);
-
-    console.log('>>>>>>>>>>>', user)
 
     const timeFormat = (time) => {
         if (time) {
