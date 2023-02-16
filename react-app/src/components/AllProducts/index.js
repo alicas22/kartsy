@@ -27,7 +27,7 @@ const AllProducts = () => {
     }
     const Product1Click = (e, id) => {
         e.preventDefault()
-        history.push(`/products/13`)
+        history.push(`/products/14`)
     }
     const Product2Click = (e, id) => {
         e.preventDefault()

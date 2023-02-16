@@ -35,10 +35,10 @@ function App() {
           <Route path='/products/:productId'>
             <SingleProduct />
           </Route>
-          <Route path='/cart'>
+          <Route exact path='/cart'>
             <Cart />
           </Route>
-          <Route path='/cart/purchasecomplete'>
+          <Route exact path='/cart/purchasecomplete'>
             <PurchaseSplash />
           </Route>
           <Route path='/search'>

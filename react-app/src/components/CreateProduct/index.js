@@ -105,7 +105,7 @@ const CreateProduct = () => {
                     <p>
                     Image URL
                     </p>
-                    <textarea
+                    <input
                         id="imageUrl"
                         type="url"
                         name="imageUrl"

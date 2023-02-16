@@ -69,6 +69,7 @@
     font-size: 25px;
     color: rgb(88, 88, 88);
     margin-top: -2px;
+    word-break: break-word;
 }
 
 .add-to-cart-button {
@@ -78,6 +79,20 @@
     width: 100%;
     height: 45px;
     background-color: black;
+    color: white;
+    border-radius: 30px;
+    font-size: 15px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    cursor: pointer;
+}
+.add-to-cart-button-logged-out{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 45px;
+    background-color: gray;
     color: white;
     border-radius: 30px;
     font-size: 15px;
@@ -111,6 +126,7 @@
     color: rgb(100, 100, 100);
     height: 15em;
     overflow-y: scroll;
+    word-break: break-word;
 }
 
 .all-reviews-area-container {
@@ -155,7 +171,7 @@
 }
 
 .add-to-cart-button-container :hover {
-    cursor: pointer;
+
     box-shadow: 2px 2px 5px rgb(174, 174, 174);
 }
 

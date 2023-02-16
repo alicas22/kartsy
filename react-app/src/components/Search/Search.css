@@ -1,0 +1,57 @@
+.search-title {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+.search-subheader {
+    font-weight: lighter;
+    color: #222;
+    font-size: 14px;
+}
+.search-image {
+    border-radius: 2px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}
+.search-image-container :hover {
+    cursor: pointer;
+    box-shadow: 5px 5px 10px lightgray, -.5em 0 .3em lightgray;
+}
+.all-search {
+    width: 100%;
+    margin: 0px;
+    padding: 0px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+}
+.all-search-container {
+    width: 100%;
+}
+.search-card {
+    position: relative;
+    max-width: 100%;
+}
+.mapped-search-container {
+    padding: 1rem 5rem 1rem 5rem;
+    display: flex;
+    justify-content: center;
+    max-width: 100%;
+}
+.search-name-container {
+    font-size: 14px;
+    font-weight: 400px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    max-width: 100%;
+}
+.search-price-container {
+    font-size: 16px;
+    font-weight: bolder;
+    line-height: 20px;
+    color: black;
+}

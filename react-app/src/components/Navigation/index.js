@@ -42,6 +42,7 @@ function Navigation({ isLoaded }){
 		// query = request.args.get('q')
 		dispatch(cleanUpSearchAction())
 		dispatch(thunkCreateSearch(query))
+		setQuery('')
 		// console.log('RESULTS', results[0])
 		// console.log('DATA FROM NAV COMPONENT', data)
 		history.push('/search')
