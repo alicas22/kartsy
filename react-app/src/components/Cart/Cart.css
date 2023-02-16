@@ -73,6 +73,7 @@
     padding: 0px 10px;
     margin: 0px 15px;
     font-size: 16px;
+    cursor: pointer;
 }
 .title-delete {
     display: flex;
@@ -100,6 +101,7 @@
     border-radius: 18px;
     width: fit-content;
     margin-top: 10px;
+    cursor: pointer;
 
 }
 .delete-cart-item:hover{
@@ -128,6 +130,8 @@
 .checkout-button {
     background-color: #222;
     color: white;
+    cursor: pointer;
+    text-decoration:none;
     border: none;
     border-radius: 24px;
     font-size: 16px;
@@ -135,7 +139,7 @@
     margin: 10px;
 }
 .checkout-button:hover {
-    background-color: rgba(34, 34, 34, 0.8)
+    background-color: rgba(44, 44, 44, 0.8)
 }
 .cart-taxes {
     font-size: 12px;

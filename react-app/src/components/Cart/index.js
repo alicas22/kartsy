@@ -63,7 +63,7 @@ const GetCart = () => {
     if (cart) {
         for (let item of cart) {
             totalPrice += item.productPrice * item.countOfProduct
-            displayTotal = totalPrice.toString().slice(0, 5)
+            displayTotal = totalPrice.toFixed(2)
         }
     }
     // const singlePrice = async (cartItem) => {
@@ -139,24 +139,12 @@ const GetCart = () => {
                             <h4>Item(s) total: </h4>
                             <p>${displayTotal}</p>
                         </div>
-                        <button className='checkout-button'>Proceed to checkout</button>
+                        <NavLink className='checkout-button' to={'/purchasecomplete'}>Complete purchase</NavLink>
                         <p className='cart-taxes'>* Additional duties and taxes may apply</p>
                     </div>
                 </div>
                 <p className='carbon-emissions'><i class="fa-solid fa-leaf"></i> Kartsy offsets carbon emissions from every delivery</p>
             </div >
-            <div className='cart-footer'>
-                <div className="footer-top">
-                    <p><i class="fa-regular fa-copyright"></i> 2023 Kartsy, Inc. </p>
-                    <p className='footer-tech'>
-                        <p>Javascript</p>
-                        <p>Python</p>
-                        <p>Flask</p>
-                    </p>
-                </div>
-                <p>Merchant is Kartsy, Inc. (USA), and the currency in which the seller transacts is fake.</p>
-                <p>Kartsy, Inc., USA 117 Fake Street Brooklyn, NY 11201</p>
-            </div>
         </>
 
     )
