@@ -17,7 +17,7 @@ def price_valid(form, field):
 def description_length(form, field):
     description = field.data
     if len(description) > 2000 or len(description) <3:
-        raise ValidationError('Description must be between 3 and 2000 characters long.')
+        raise ValidationError('Description must be between 3 and 4000 characters long.')
 
 
 class ProductForm(FlaskForm):
