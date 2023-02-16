@@ -116,12 +116,7 @@ const GetCart = () => {
                                                 ))}
                                             </select>
                                             <div className='cart-item-price'>
-                                                {cartItem.productPrice.toString().includes('.') && (
-                                                    <div>${cartItem.productPrice.toString().concat('00').slice(0, 5)}</div>
-                                                )}
-                                                {!cartItem.productPrice.toString().includes('.') && (
-                                                    <div>${cartItem.productPrice.toString().concat('.00').slice(0, 5)}</div>
-                                                )}
+                                                {cartItem.productPrice.toFixed(2)}
                                             </div>
                                         </div>
                                     </div>

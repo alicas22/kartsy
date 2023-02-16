@@ -23,6 +23,7 @@ def search():
     query = request.args.get('q')
     print('QUERY', query)
     products = Product.query.filter(or_(Product.name.like("%" + query + "%"),  Product.description.like("%" + query + "%"))).all()
+    # products = Product.query.filter(Product.name.like("%" + query + "%")).all()
     print('products', products)
     if products:
         return jsonify([product.to_dict() for product in products])
