@@ -2,6 +2,7 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
 import { thunkDeleteProduct, thunkGetSingleProduct } from "../../store/products"
+import { cleanUpSingleProductAction } from "../../store/products"
 import OpenModalButton from "../OpenModalButton"
 import LoginFormModal from "../LoginFormModal"
 import EditProduct from "../EditProduct"
@@ -17,6 +18,7 @@ const SingleProduct = () => {
 
     useEffect(() => {
         dispatch(thunkGetSingleProduct(productId))
+        return () => dispatch(cleanUpSingleProductAction());
     }, [dispatch, productId])
 
     const product = useSelector((state) => state.products.singleProduct)
