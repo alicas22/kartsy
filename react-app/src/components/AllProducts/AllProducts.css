@@ -1,14 +1,14 @@
 .all-products {
     width: 100%;
     margin: 5px auto;
-	-webkit-column-count: 3;
-	-moz-column-count: 3;
-	column-count: 3;
-	
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+
 }
 
 .product-card {
-    position: relative;  
+    position: relative;
     padding-bottom: 10px;
 }
 
@@ -29,7 +29,8 @@
     padding: 8px;
 
 }
-.inside-product-box{
+
+.inside-product-box {
     position: relative;
 }
 
@@ -40,8 +41,8 @@
 
 .welcomeback-background {
     background-color: #f5d9e3;
-    padding-top: 30px;
-    padding-bottom: 30px;
+    padding-top: 1px;
+    padding-bottom: 1px;
 }
 
 .welcome-back {
@@ -51,9 +52,6 @@
     justify-content: center;
 }
 
-.welcome-back-container {
-    padding-bottom: 4%;
-}
 
 .mapped-products-container {
     padding: 1rem 5rem 1rem 5rem;
@@ -69,14 +67,78 @@
     width: fit-content;
 }
 
-.users-name{
+.users-name::after {
     padding-left: 10px;
     text-decoration-line: underline;
 }
-.create-product-modal :hover{
+
+.create-product-modal :hover {
     cursor: pointer;
 }
 
-.create-product-modal-container{
+.create-product-modal-container {
     padding-left: 120px;
+}
+
+.first-image {
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    /* transition-duration: 1s; */
+    /* filter: grayscale(100%); */
+}
+
+.each-image-catagories {
+    padding: 1rem 10rem 1rem 10rem;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-evenly;
+    background: linear-gradient(to bottom, #f5d9e3 50%, white 50%)
+}
+
+.top-catagories-container {
+    z-index: -1;
+    background-color: #f5d9e3;
+    padding-bottom: 50px;
+}
+
+.container-holding-image-catagories {
+    margin: auto;
+}
+
+.image-container-circle-name>h4 {
+    margin-top: 10px;
+}
+
+.image-container-circle-name :hover {
+    transform: scale(1.1);
+    box-shadow: 5px 5px 10px lightgray, -.5em 0 .3em lightgray;
+}
+
+.this-div:hover .h4-div{
+   border-bottom: solid black;
+}
+
+.tech-container {
+    padding-left: 40px;
+}
+
+.decor-container {
+    padding-left: 35px;
+}
+
+.jewelry-container {
+    padding-left: 30px;
+}
+
+.boardgame-container {
+    padding-left: 12px;
+}
+
+.shoes-container {
+    padding-left: 35px;
+}
+
+.each-image-catagories {
+    margin: auto;
 }
