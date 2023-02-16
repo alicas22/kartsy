@@ -1,15 +1,12 @@
 import { useSelector, useDispatch } from "react-redux"
 import { cleanUpCartAction, loadAllCartItemsThunk, updateCartItemThunk, deleteCartItemThunk } from "../../store/shoppingCartItems"
+import "./PurchaseSplash.css";
 
 const PurchaseComplete = () => {
-    const dispatch= useDispatch()
-
-    const purchasedItems = dispatch(loadAllCartItemsThunk())
-    console.log('purchased', purchasedItems)
-
  return (
-    <h1>Thank you for your purchase!{purchasedItems[0]}</h1>
-
+   <div className="complete-page-header">
+      <h1>Thank you for your purchase!</h1>
+   </div>
  )
 }
 
