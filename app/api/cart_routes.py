@@ -71,6 +71,13 @@ def update_cart_item():
     else:
         return {'error': 'Cannot update count'}
 
+@cart_routes.route('/purchasecomplete/', methods=['DELETE'])
+def clear_cart_items():
+        print("from clear cart route")
+        db.session.query(ShoppingCartItem).delete()
+        db.session.commit()
+        return {'message':"successfully deleted"}
+
 
 @cart_routes.route('/', methods=['DELETE'])
 def delete_cart_item():

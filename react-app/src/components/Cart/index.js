@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useHistory, NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
-import { cleanUpCartAction, loadAllCartItemsThunk, updateCartItemThunk, deleteCartItemThunk } from "../../store/shoppingCartItems"
+import { cleanUpCartAction, loadAllCartItemsThunk, updateCartItemThunk, deleteCartItemThunk, clearCartItemsThunk } from "../../store/shoppingCartItems"
 import { thunkGetProducts } from "../../store/products"
 import './Cart.css';
 
@@ -57,10 +57,17 @@ const GetCart = () => {
         dispatch(deleteCartItemThunk(payload))
         // .then(dispatch(loadAllCartItemsThunk()))
     }
+
+    const clearCart = async (e)=>{
+        console.log('from clearCart')
+        dispatch(clearCartItemsThunk())
+    }
+
     // get total price for all items in cart
     let totalPrice = 0
     let displayTotal
     if (cart) {
+        console.log(cart)
         for (let item of cart) {
             totalPrice += item.productPrice * item.countOfProduct
             displayTotal = totalPrice.toFixed(2)
@@ -95,7 +102,7 @@ const GetCart = () => {
                                             <div className='cartItem-text'>
                                                 <div className='title-delete'>
                                                     <div>
-                                                        <NavLink to={`/products/${cartItem.id}`} className='single-prod-link'>
+                                                        <NavLink to={`/products/${cartItem.productId}`} className='single-prod-link'>
                                                             {cartItem.productName}
                                                         </NavLink>
                                                     </div>
@@ -139,7 +146,7 @@ const GetCart = () => {
                             <h4>Item(s) total: </h4>
                             <p>${displayTotal}</p>
                         </div>
-                        <NavLink className='checkout-button' to={'/purchasecomplete'}>Complete purchase</NavLink>
+                        <NavLink className='checkout-button' to={'/cart/purchasecomplete'} onClick={clearCart}>Complete purchase</NavLink>
                         <p className='cart-taxes'>* Additional duties and taxes may apply</p>
                     </div>
                 </div>
