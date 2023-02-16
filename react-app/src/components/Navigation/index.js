@@ -19,7 +19,7 @@ function Navigation({ isLoaded }){
 	const [errors, setErrors] = useState([]);
 
 	const history= useHistory()
-	const email = 'demo@aa.io'
+	const email = 'magic@mike.com'
 	const password = 'password'
 
 	const handleSubmit = async (e) => {
@@ -82,7 +82,7 @@ function Navigation({ isLoaded }){
 
 		<div className='nav-bar-header-container'>
 			<div className='nav-bar-home-button'>
-				<NavLink exact to="/products" activeClassName="not-going-to-be-active" style={{textDecoration: 'none', color:'#F1641E '}}>Kartsy</NavLink>
+				<NavLink exact to="/" activeClassName="not-going-to-be-active" style={{textDecoration: 'none', color:'#F1641E '}}>Kartsy</NavLink>
 			</div>
 			<div className='nav-bar-search-container'>
  				<form onSubmit={handleSearch} className='nav-bar-search-form'>

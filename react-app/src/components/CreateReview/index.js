@@ -6,6 +6,7 @@ import { useModal } from "../../context/Modal"
 import { createReviewThunk } from "../../store/reviews"
 import { thunkGetSingleProduct } from "../../store/products"
 import { loadAllReviewsThunk } from "../../store/reviews"
+import "./CreateReview.css"
 
 const CreateReview = ({ productId }) => {
     const dispatch = useDispatch()
@@ -17,7 +18,7 @@ const CreateReview = ({ productId }) => {
     const [createdReview, setCreatedReview] = useState()
 
     const user = useSelector(state => state.session.user)
-    //console.log('user', user)
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -31,41 +32,37 @@ const CreateReview = ({ productId }) => {
 
         if (!user) return null
 
-        await dispatch(createReviewThunk(productId, payload))
-            .then((review) => {
-                setCreatedReview(review)
-            })
-            .then(closeModal)
-            // .catch(
-            //     async (res) => {
-            //         const data = await res.json();
-            //         if (data && (data.errors)) setErrors(data.errors)
-            //     });
+        const data =  await dispatch(createReviewThunk(productId, payload))
+
+        if (Array.isArray(data)) {
+            setErrors(data);
+        } else {
+            await setCreatedReview(data)
+            closeModal();
+        }
 
         history.push(`/products/${productId}`)
     }
 
     useEffect(() => {
-        // if (createdReview) {
-        //     history.push(`/products/${productId}`)
-        // }
+
         dispatch(loadAllReviewsThunk(productId))
         return () => dispatch(thunkGetSingleProduct(productId));
-        // dispatch(thunkGetSingleProduct(productId))
+
     }, [productId])
 
     return (
         <div className="create-review-form">
             <h1>Create Review</h1>
             <form className='review-product-form' onSubmit={handleSubmit}>
-                <ul>
+                <ul className="validation-errors">
                     {errors.map((error, index) => <li className="errors-text" key={index}>{error}</li>)}
                 </ul>
                 <label>
                     <p>
                     review
                     </p>
-                    <input
+                    <textarea
                         id="review"
                         type="text"
                         name="review"
@@ -81,11 +78,13 @@ const CreateReview = ({ productId }) => {
                         id="star"
                         type="number"
                         name="star"
+                        min="1"
+                        max="5"
                         value={star}
                         onChange={(e) => setStar(e.target.value)}
                     />
                 </label>
-                <button type="submit">Submit</button>
+                <button className="create-review-submit-button" type="submit">Submit</button>
             </form>
         </div>
     )

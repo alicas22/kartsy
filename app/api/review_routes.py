@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, jsonify
+from flask import Flask, Blueprint, jsonify, request
 from flask_login import login_required
 from ..models import db, Review
 from ..forms.review_form import ReviewForm
@@ -38,8 +38,7 @@ def edit_review(id):
         db.session.commit()
         res = found_review.to_dict()
         return jsonify(res)
-    else:
-        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @review_routes.route('/<int:id>', methods=['DELETE'])
@@ -53,4 +52,3 @@ def delete_review(id):
         return current_review.to_dict()
     else:
         return {'error':'Could not delete review'}
-
