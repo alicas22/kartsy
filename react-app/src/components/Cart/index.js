@@ -59,7 +59,6 @@ const GetCart = () => {
     }
 
     const clearCart = async (e)=>{
-        console.log('from clearCart')
         dispatch(clearCartItemsThunk())
     }
 
@@ -73,23 +72,13 @@ const GetCart = () => {
             displayTotal = totalPrice.toFixed(2)
         }
     }
-    // const singlePrice = async (cartItem) => {
-    //     let singlePrice
-    //     if (cartItem.productPrice.toString().inludes('.')) {
-    //         singlePrice= cartItem.productPrice.toString().concat('00').slice(0,5)
-    //     } else {
-    //         singlePrice= cartItem.productPrice.toString().concat('.00').slice(0,5)
-    //     }
-    //     console.log('single price', singlePrice)
-    //     return singlePrice
-    // }
 
     return (
         <>
             <div className='cart-page'>
                 <div className='cart-header'>
                     <h1 className='cart-title'> {cart.length} item(s) in your cart</h1>
-                    <NavLink className='keep-shopping' to={'/products'}>Keep shopping</NavLink>
+                    <NavLink className='keep-shopping' to={'/'}>Keep shopping</NavLink>
                 </div>
                 <div className='left-right-cart'>
                     <ul className='cart-ul'>
@@ -146,7 +135,11 @@ const GetCart = () => {
                             <h4>Item(s) total: </h4>
                             <p>${displayTotal}</p>
                         </div>
-                        <NavLink className='checkout-button' to={'/cart/purchasecomplete'} onClick={clearCart}>Complete purchase</NavLink>
+                        {cart.length !== 0 ? (
+                            <NavLink className='checkout-button' to={'/cart/purchasecomplete'} onClick={clearCart}>Complete purchase</NavLink>
+                        ) : (
+                            <button className='checkout-button-disabled' disabled={true}>Complete purchase</button>
+                        )}
                         <p className='cart-taxes'>* Additional duties and taxes may apply</p>
                     </div>
                 </div>
