@@ -33,7 +33,7 @@
     position: relative;
 }
 
-.product-card :hover {
+.image-container :hover {
     cursor: pointer;
     box-shadow: 5px 5px 10px lightgray, -.5em 0 .3em lightgray;
 }

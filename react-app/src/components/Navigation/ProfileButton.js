@@ -51,12 +51,14 @@ function ProfileButton({ user }) {
             <div className='nav-bar-dropdown-menu'>
               {/* <span><i className="fa-solid fa-user"></i></span>
               <span style={{margin:"10px"}}>{user.username}</span> */}
-            <div>
-              <div onClick={handleLogout} className='nav-bar-dropdown-menu-signout'>
-                <i class="fa-solid fa-arrow-right-from-bracket fa-flip-horizontal"></i>
-                Sign Out
+              <div>
+                <div onClick={handleLogout} className='nav-bar-dropdown-menu-signout'>
+                  <div className="button-container-signout">
+                    <i class="fa-solid fa-arrow-right-from-bracket fa-flip-horizontal"></i>
+                    Sign Out
+                  </div>
+                </div>
               </div>
-            </div>
             </div>
           </div>
         ) : (

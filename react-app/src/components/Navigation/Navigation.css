@@ -89,6 +89,19 @@
 
 .nav-bar-dropdown-menu-signout{
   cursor: pointer;
+  display: flex;
+  position: relative;
+  /* align-items: center; */
+  background-color: #FFF;
+  top: -5px;
+  right: 100px;
+  box-shadow: 0px 0px 14px 0.5px rgba(221, 221, 221, 0.7);
+  border-radius: 15px;
+  padding: 15px 0px;
+  z-index: 1;
+  width: 200px;
+
+  height: 4em;
 }
 .nav-bar-profile-button{
   cursor: pointer;
@@ -100,7 +113,7 @@
 .nav-bar-dropdown-menu{
   text-align: left;
   width:100%;
-  border:1px solid red;
+
 
 
 }
@@ -127,4 +140,11 @@
 
 .hidden {
   display: none;
+}
+
+.button-container-signout{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 35px;
 }

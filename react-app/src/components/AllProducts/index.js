@@ -60,7 +60,9 @@ const AllProducts = () => {
                     {products.map((product) => {
                         return (
                             <div className='product-card' key={product.id} onClick={(e) => ProductClick(e, product.id)}>
+                                <div className='image-container'>
                                 <img className='product-image' src={product.imagesUrl}></img>
+                                </div>
                                 <div className='product-price-container'>
                                     ${product.price.toFixed(2)}
                                 </div>
