@@ -22,13 +22,13 @@
 .single-product-information-container {
     display: flex;
     flex-direction: column;
-    margin-top: 10px;
+    /* margin-top: 10px; */
     min-width: 350px;
     max-width: 500px;
 }
 
 .single-product-sidebar-container {
-    margin-left: 90px;
+    margin-left: 100px;
     position: relative;
 }
 
@@ -97,6 +97,9 @@
     max-width: 100%;
     max-height: auto;
     border-radius: 15px;
+    aspect-ratio: 1/1;
+    object-fit: contain;
+    margin-top: 10px;
 }
 
 .single-product-description-header {
@@ -106,6 +109,8 @@
 .single-product-description {
     line-height: 23px;
     color: rgb(100, 100, 100);
+    height: 15em;
+    overflow-y: scroll;
 }
 
 .all-reviews-area-container {
@@ -113,7 +118,7 @@
     display: flex;
     flex-direction: column;
     margin-top: 15px;
-    padding: 1rem 5rem 1rem 13%;
+    padding: 1rem 5rem 1rem 7%;
 }
 
 .all-reviews-header {
