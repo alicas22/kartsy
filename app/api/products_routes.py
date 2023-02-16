@@ -5,9 +5,20 @@ from ..forms.review_form import ReviewForm
 from flask_login import current_user, login_required
 from ..models import Product
 
-
-
 product_routes = Blueprint('product', __name__)
+
+
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
+
+
 
 @product_routes.route('/')
 def all_products():
@@ -48,6 +59,8 @@ def create_product():
         db.session.commit()
         return product.to_dict()
 
+    return {'errors': validation_errors_to_error_messages(product.errors)}, 401
+
 @product_routes.route('/<int:id>')
 def single_product(id):
     product = Product.query.get(id)
@@ -59,11 +72,10 @@ def single_product(id):
 def edit_product(id):
     current_product = Product.query.get(id)
     res = request.get_json()
-
     product = ProductForm()
     product["csrf_token"].data = request.cookies["csrf_token"]
 
-    if current_product:
+    if product.validate_on_submit():
         product.populate_obj(current_product)
 
         current_product.name = res["name"]
@@ -73,8 +85,9 @@ def edit_product(id):
         db.session.commit()
         prod = current_product.to_dict()
         return jsonify(prod)
-    else:
-        return 'Product Not Found'
+    return {'errors': validation_errors_to_error_messages(product.errors)}, 401
+
+      
 
 @product_routes.route('/<int:id>', methods=["DELETE"])
 def delete_product(id):
@@ -84,7 +97,7 @@ def delete_product(id):
         db.session.delete(current_product)
         db.session.commit()
     else:
-        return 'error'
+        return {'error': 'Coult not delete product'}
 
 
 @product_routes.route('/<int:id>/reviews', methods=['GET'])
@@ -129,3 +142,4 @@ def post_review(id):
         db.session.add(form)
         db.session.commit()
         return form.to_dict()
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401

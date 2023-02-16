@@ -62,9 +62,18 @@ export const thunkCreateProduct = (payload) => async (dispatch) => {
     if (response.ok) {
         const newProduct = await response.json()
         dispatch(createProduct(newProduct))
-        return newProduct
+        return newProduct;
+    } else if (response.status < 500) {
+        const newProduct = await response.json()
+        if (newProduct.errors) {
+			return newProduct.errors;
+		}
+    } else {
+        return ["An error occurred. Please try again."];
     }
 }
+
+
 
 export const thunkEditProduct = (updatedProduct) => async (dispatch) => {
     const response = await fetch(`/api/products/${updatedProduct.id}`, {
@@ -74,10 +83,19 @@ export const thunkEditProduct = (updatedProduct) => async (dispatch) => {
     })
 
     if (response.ok) {
-        const product = await response.json()
-        dispatch(editProduct(product))
-        return product
+        const updatedProduct = await response.json()
+        dispatch(editProduct(updatedProduct))
+        return updatedProduct;
+
+    } else if (response.status < 500) {
+        const updatedProduct = await response.json()
+        if (updatedProduct.errors) {
+            return updatedProduct.errors;
+		}
+    } else {
+        return ["An error occurred. Please try again."];
     }
+
 }
 
 export const thunkDeleteProduct = (undoProduct) => async (dispatch) => {

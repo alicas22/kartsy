@@ -7,6 +7,16 @@ from ..forms.review_form import ReviewForm
 
 review_routes = Blueprint('review', __name__)
 
+def validation_errors_to_error_messages(validation_errors):
+    """
+    Simple function that turns the WTForms validation errors into a simple list
+    """
+    errorMessages = []
+    for field in validation_errors:
+        for error in validation_errors[field]:
+            errorMessages.append(f'{field} : {error}')
+    return errorMessages
+
 
 
 
@@ -28,8 +38,7 @@ def edit_review(id):
         db.session.commit()
         res = found_review.to_dict()
         return jsonify(res)
-    else:
-        return 'Review Not Found'
+    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
 @review_routes.route('/<int:id>', methods=['DELETE'])
@@ -42,4 +51,4 @@ def delete_review(id):
         db.session.commit()
         return current_review.to_dict()
     else:
-        return 'error'
+        return {'error':'Could not delete review'}

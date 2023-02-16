@@ -61,10 +61,18 @@ export const createReviewThunk = (productId, newReview) => async dispatch => {
     });
 
     if (response.ok) {
-        const createdReview = await response.json();
-        dispatch(createReviewAction(createdReview));
+        const createdReview = await response.json()
+        dispatch(createReviewAction(createdReview))
         return createdReview;
+    } else if (response.status < 500) {
+        const createdReview = await response.json()
+        if (createdReview.errors) {
+			return createdReview.errors;
+		}
+    } else {
+        return ["An error occurred. Please try again."];
     }
+
 };
 
 export const updateReviewThunk = (review) => async dispatch => {
@@ -75,10 +83,25 @@ export const updateReviewThunk = (review) => async dispatch => {
     });
 
     if (response.ok) {
-        const updatedReview = await response.json();
-        dispatch(updateReviewAction(updatedReview));
+        const updatedReview = await response.json()
+        dispatch(createReviewAction(updatedReview))
         return updatedReview;
+    } else if (response.status < 500) {
+        const updatedReview = await response.json()
+        if (updatedReview.errors) {
+			return updatedReview.errors;
+		}
+    } else {
+        return ["An error occurred. Please try again."];
     }
+
+
+
+    // if (response.ok) {
+    //     const updatedReview = await response.json();
+    //     dispatch(updateReviewAction(updatedReview));
+    //     return updatedReview;
+    // }
 };
 
 export const deleteReviewThunk = (badReviewId) => async dispatch => {

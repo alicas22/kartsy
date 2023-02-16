@@ -1,5 +1,6 @@
 import React from 'react';
 import { useModal } from '../../context/Modal';
+import './OpenModalButton.css'
 
 function OpenModalButton({
   modalComponent, // component to render inside the modal
@@ -10,13 +11,17 @@ function OpenModalButton({
   const { setModalContent, setOnModalClose } = useModal();
 
   const onClick = () => {
-    if (onModalClose) setOnModalClose(onModalClose);
+    // if (onModalClose) setOnModalClose(onModalClose);
+    // setModalContent(modalComponent);
+    // if (onButtonClick) onButtonClick();
+    if (typeof onButtonClick === 'function') onButtonClick();
+    if (typeof onModalClose === 'function') setOnModalClose(onModalClose);
     setModalContent(modalComponent);
-    if (onButtonClick) onButtonClick();
+
   };
 
   return (
-    <button onClick={onClick}>{buttonText}</button>
+    <div onClick={onClick}>{buttonText}</div>
   );
 }
 

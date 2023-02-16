@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react"
-import { useHistory } from 'react-router-dom'
+import { useHistory, NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import { cleanUpCartAction, loadAllCartItemsThunk, updateCartItemThunk, deleteCartItemThunk } from "../../store/shoppingCartItems"
 import { thunkGetProducts } from "../../store/products"
-import { useModal } from "../../context/Modal"
+import './Cart.css';
 
 
 const GetCart = () => {
@@ -15,26 +15,23 @@ const GetCart = () => {
     const cartObj = useSelector((state) => state.cart.allCartItems)
     const products = useSelector((state) => state.products.allProducts)
     const user = useSelector((state) => state.session.user)
-    
-        useEffect(() => {
-            dispatch(loadAllCartItemsThunk())
-            .then(dispatch(thunkGetProducts()))
-        }, [dispatch])
 
-        useEffect(() => {
-            if (user == null) {
-                    dispatch(cleanUpCartAction())
-                }
-        }, [user])
+    useEffect(() => {
+        dispatch(loadAllCartItemsThunk())
+            .then(dispatch(thunkGetProducts()))
+    }, [dispatch])
+
+    useEffect(() => {
+        if (user == null) {
+            dispatch(cleanUpCartAction())
+        }
+    }, [user])
 
 
     if (!cartObj) return null
     const cart = Object.values(cartObj)
     if (!products) return null
     if (!cart) return null
-
-
-
 
 
     const updateItem = async (cartItemId, e) => {
@@ -58,45 +55,98 @@ const GetCart = () => {
             cartItemId: cartItemId
         }
         dispatch(deleteCartItemThunk(payload))
-                .then(dispatch(loadAllCartItemsThunk()))
+        // .then(dispatch(loadAllCartItemsThunk()))
     }
+    // get total price for all items in cart
+    let totalPrice = 0
+    let displayTotal
+    if (cart) {
+        for (let item of cart) {
+            totalPrice += item.productPrice * item.countOfProduct
+            displayTotal = totalPrice.toFixed(2)
+        }
+    }
+    // const singlePrice = async (cartItem) => {
+    //     let singlePrice
+    //     if (cartItem.productPrice.toString().inludes('.')) {
+    //         singlePrice= cartItem.productPrice.toString().concat('00').slice(0,5)
+    //     } else {
+    //         singlePrice= cartItem.productPrice.toString().concat('.00').slice(0,5)
+    //     }
+    //     console.log('single price', singlePrice)
+    //     return singlePrice
+    // }
 
-
-    return  (
-        <div>
-            <h1> hello from cart</h1>
-            <ul>
-                {cart.map(cartItem => {
-                    return (
-                        <div className='cartItem-card' key={cartItem.id}>
-                            <div className='cartItem-image'>
-                                {cartItem.productName}
-                                {cartItem.productPrice}
-
-                                <img src={products[cartItem.productId]['imagesUrl']}></img>
-                            </div>
-                            <select
-                                className="dropdown-count"
-                                id="count"
-                                value={cartObj[cartItem.id].countOfProduct} //changed to store value so value will persist on refresh
-                                onChange={e => updateItem(cartItem.id, e)}
-                            >
-                                {numbers.map((count) => (
-                                    <option
-                                        key={count}
-                                        value={count}
-                                    >
-                                        {count}
-                                    </option>
-                                ))}
-                            </select>
-                            <button onClick={(e) => deleteCartItem(cartItem.id, e)}>Delete</button>
+    return (
+        <>
+            <div className='cart-page'>
+                <div className='cart-header'>
+                    <h1 className='cart-title'> {cart.length} item(s) in your cart</h1>
+                    <NavLink className='keep-shopping' to={'/products'}>Keep shopping</NavLink>
+                </div>
+                <div className='left-right-cart'>
+                    <ul className='cart-ul'>
+                        {cart.map(cartItem => {
+                            return (
+                                <div>
+                                    <div className='cartItem-card' key={cartItem.id}>
+                                        <div className='cartItem-left'>
+                                            <img className='cartItem-image' src={products[cartItem.productId]['imagesUrl']}></img>
+                                            <div className='cartItem-text'>
+                                                <div className='title-delete'>
+                                                    <div>
+                                                        <NavLink to={`/products/${cartItem.id}`} className='single-prod-link'>
+                                                            {cartItem.productName}
+                                                        </NavLink>
+                                                    </div>
+                                                    <button className='delete-cart-item' onClick={(e) => deleteCartItem(cartItem.id, e)}>Remove</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div className='cartItem-right'>
+                                            <select
+                                                className="dropdown-count"
+                                                id="count"
+                                                value={cartObj[cartItem.id].countOfProduct} //changed to store value so value will persist on refresh
+                                                onChange={e => updateItem(cartItem.id, e)}
+                                            >
+                                                {numbers.map((count) => (
+                                                    <option
+                                                        key={count}
+                                                        value={count}
+                                                    >
+                                                        {count}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                            <div className='cart-item-price'>
+                                                {cartItem.productPrice.toString().includes('.') && (
+                                                    <div>${cartItem.productPrice.toString().concat('00').slice(0, 5)}</div>
+                                                )}
+                                                {!cartItem.productPrice.toString().includes('.') && (
+                                                    <div>${cartItem.productPrice.toString().concat('.00').slice(0, 5)}</div>
+                                                )}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })
+                        }
+                    </ul>
+                    <div className='buy-card'>
+                        <div className='total-price'>
+                            <h4>Item(s) total: </h4>
+                            <p>${displayTotal}</p>
                         </div>
-                    )
-                })
-                }
-            </ul>
-        </div>
+                        <NavLink className='checkout-button' to={'/purchasecomplete'}>Complete purchase</NavLink>
+                        <p className='cart-taxes'>* Additional duties and taxes may apply</p>
+                    </div>
+                </div>
+                <p className='carbon-emissions'><i class="fa-solid fa-leaf"></i> Kartsy offsets carbon emissions from every delivery</p>
+            </div >
+        </>
+
     )
 }
 

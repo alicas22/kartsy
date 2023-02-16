@@ -6,6 +6,7 @@ import { useModal } from "../../context/Modal"
 import SingleProduct from "../SingleProduct"
 import { thunkGetSingleProduct } from "../../store/products"
 import { updateReviewThunk } from "../../store/reviews"
+import "./EditReview.css"
 
 
 const EditReview = ({ productId, reviewId }) => {
@@ -33,34 +34,29 @@ const EditReview = ({ productId, reviewId }) => {
 
         if (!user) return null
 
-        await dispatch(updateReviewThunk(payload))
-            // .then((product) => {
-            //     console.log('product', product)
-            //     setCreatedProduct(product)
-            //     console.log('created prod', createdProduct)
-            // })
-            .then(closeModal)
-        // .catch(
-        //     async (res) => {
-        //         const data = await res.json();
-        //         if (data && (data.errors)) setErrors(data.errors)
-        //     });
+        const data = await dispatch(updateReviewThunk(payload))
+        if (Array.isArray(data)) {
+            setErrors(data);
+        } else {
+            await setReview(data)
+            history.push(`/products/${productId}`)
+            closeModal();
+        }
 
-        history.push(`/products/${productId}`)
     }
 
     return (
         <div className="edit-review-form">
             <h1>Edit Review</h1>
             <form className='edit-review-form' onSubmit={handleSubmit}>
-                <ul>
+                <ul className="validation-errors">
                     {errors.map((error, index) => <li className="errors-text" key={index}>{error}</li>)}
                 </ul>
                 <label>
                     <p>
                         Review
                     </p>
-                    <input
+                    <textarea
                         id="review"
                         type="text"
                         name="review"
@@ -76,11 +72,13 @@ const EditReview = ({ productId, reviewId }) => {
                         id="star"
                         type="number"
                         name="star"
+                        min="1"
+                        max="5"
                         value={star}
                         onChange={(e) => setStar(e.target.value)}
                     />
                 </label>
-                <button type="submit">Submit</button>
+                <button className= "edit-review-submit-button" type="submit">Submit</button>
             </form>
         </div>
     )

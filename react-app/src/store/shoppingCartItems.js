@@ -101,24 +101,12 @@ export const deleteCartItemThunk = (badCartItemId) => async dispatch => {
 
     if (response.ok) {
         const badCartItem = await response.json();
-        dispatch(deleteCartItemAction(badCartItem));
+        console.log('>>>>>>>>>>>>>response delete >>>>>>', badCartItem.cartItemId)
+        console.log('>>>>>>>>>>>>>response delete >>>>>>', badCartItemId)
+        dispatch(deleteCartItemAction(badCartItem.cartItemId));
         return badCartItem;
     }
 };
-
-// export const deleteAllCartThunk = (badCartItemIdArr) => async dispatch => {
-//     const response = await fetch(`/api/cart/`, {
-//       method: "DELETE",
-//       headers: {'Content-Type': 'application/json'},
-//       body: JSON.stringify(badCartItemId),
-//     });
-
-//     if (response.ok) {
-//         const badCartItem = await response.json();
-//         dispatch(deleteCartItemAction(badCartItem));
-//         return badCartItem;
-//     }
-// };
 
 // normalize helper function
 const normalize = (arr) => {
@@ -156,8 +144,10 @@ const cartItemReducer = (state = initialState, action) => {
             return newState;
         }
         case DELETE_CART_ITEM: {
-            const newState = { ...state, allCartItems: { ...state.allCartItems } };
+            const newState = { ...state };
             delete newState.allCartItems[action.badCartItemId];
+            newState.allCartItems = { ...newState.allCartItems }
+            newState.singleCartItem = { ...state}
             return newState;
         }
         case CLEAN_UP_CART: {
