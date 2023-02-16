@@ -46,10 +46,9 @@ const CreateReview = ({ productId }) => {
 
     useEffect(() => {
 
-        dispatch(loadAllReviewsThunk(productId))
-        return () => dispatch(thunkGetSingleProduct(productId));
+        return () => dispatch(loadAllReviewsThunk(productId))
 
-    }, [productId])
+    }, [dispatch, productId])
 
     return (
         <div className="create-review-form">
@@ -84,7 +83,9 @@ const CreateReview = ({ productId }) => {
                         onChange={(e) => setStar(e.target.value)}
                     />
                 </label>
-                <button className="create-review-submit-button" type="submit">Submit</button>
+                <div className="create-review-submit-button-container">
+                    <button className="create-review-submit-button" type="submit">Submit</button>
+                </div>
             </form>
         </div>
     )
