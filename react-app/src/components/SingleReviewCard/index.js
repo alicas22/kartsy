@@ -43,10 +43,12 @@ const SingleReviewCard = ({review, userId, star, reviewId, productId, time, user
                 <div className="delete-review-button-container">
                     {(currentUser && currentUser.id == userId && (
                     <div className="delete-review-buttons">
-                        <OpenModalButton
-                        buttonText="Edit Review"
-                        modalComponent={<EditReview productId={productId} reviewId={reviewId}/>}
-                        />
+                        <div className="edit-review-button">
+                            <OpenModalButton
+                            buttonText="Edit Review"
+                            modalComponent={<EditReview productId={productId} reviewId={reviewId}/>}
+                            />
+                        </div>
                         <button className="delete-review-button" onClick={deleteReviewHandler}>Delete Review</button>
                     </div>
                     ))}
