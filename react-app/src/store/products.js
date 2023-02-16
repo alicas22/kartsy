@@ -3,7 +3,7 @@ const LOAD_SINGLE_PRODUCT = 'products/LOAD_SINGLE_PRODUCT'
 const CREATE_PRODUCT = 'products/CREATE_PRODUCT'
 const EDIT_PRODUCT = 'products/EDIT_PRODUCT'
 const DELETE_PRODUCT = 'products/DELETE_PRODUCT'
-
+const CLEAN_UP_PRODUCT = 'single-product/CLEANUP';
 
 const loadProducts = (products) => ({
     type: LOAD_PRODUCTS,
@@ -29,6 +29,12 @@ const deleteAProduct = (undoProduct) => ({
     type: DELETE_PRODUCT,
     undoProduct
 })
+
+export const cleanUpSingleProductAction = () => {
+    return {
+        type: CLEAN_UP_PRODUCT
+    }
+};
 
 
 export const thunkGetProducts = () => async (dispatch) => {
@@ -146,6 +152,10 @@ const productReducer = (state = initialState, action) => {
             newState = { ...state }
             delete newState.allProducts[action.undoProduct.id]
             return newState
+        case CLEAN_UP_PRODUCT: {
+            const newState = { ...initialState };
+            return newState;
+        }
         default:
             return state
     }

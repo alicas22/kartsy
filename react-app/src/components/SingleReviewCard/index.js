@@ -12,6 +12,8 @@ const SingleReviewCard = ({review, userId, star, reviewId, productId, time, user
     const history = useHistory()
     const currentUser = useSelector(state => state.session.user);
 
+    console.log('>>>>>>>>>>>', user)
+
     const timeFormat = (time) => {
         if (time) {
             time = time.slice(4, 16);

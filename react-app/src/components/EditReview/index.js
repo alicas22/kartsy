@@ -5,6 +5,7 @@ import { thunkEditProduct } from "../../store/products"
 import { useModal } from "../../context/Modal"
 import SingleProduct from "../SingleProduct"
 import { thunkGetSingleProduct } from "../../store/products"
+import { loadAllReviewsThunk } from "../../store/reviews"
 import { updateReviewThunk } from "../../store/reviews"
 import "./EditReview.css"
 
@@ -45,6 +46,12 @@ const EditReview = ({ productId, reviewId }) => {
 
     }
 
+    useEffect(() => {
+
+        return () => dispatch(loadAllReviewsThunk(productId))
+
+    }, [dispatch, productId])
+
     return (
         <div className="edit-review-form">
             <h1>Edit Review</h1>
@@ -78,7 +85,9 @@ const EditReview = ({ productId, reviewId }) => {
                         onChange={(e) => setStar(e.target.value)}
                     />
                 </label>
-                <button className= "edit-review-submit-button" type="submit">Submit</button>
+                <div className= "edit-review-submit-button-container">
+                    <button className= "edit-review-submit-button" type="submit">Submit</button>
+                </div>
             </form>
         </div>
     )
