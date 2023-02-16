@@ -70,10 +70,6 @@ def inject_csrf_token(response):
     return response
 
 
-@app.route('/')
-def all_products_redirect():
-    return redirect('/products')
-
 @app.route("/api/docs")
 def api_help():
     """
