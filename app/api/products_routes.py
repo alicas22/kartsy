@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request
 from ..models import db, Product, Review, ProductImage
 from ..forms import ProductForm
 from ..forms.review_form import ReviewForm
@@ -87,7 +87,7 @@ def edit_product(id):
         return jsonify(prod)
     return {'errors': validation_errors_to_error_messages(product.errors)}, 401
 
-      
+
 
 @product_routes.route('/<int:id>', methods=["DELETE"])
 def delete_product(id):
@@ -108,7 +108,7 @@ def all_reviews(id):
 
     review_res = []
     for review in reviews:
-        print('review', type(review['user']))
+       
         review_res.append({
             'id': review['id'],
             'userId': review['userId'],

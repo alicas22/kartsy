@@ -48,7 +48,7 @@ const SingleProduct = () => {
     const deleteButton = (async (e) => {
         e.preventDefault()
         await dispatch(thunkDeleteProduct(product))
-        history.push('/products')
+        history.push('/')
     })
 
     const averageFunc = (arr) =>{
@@ -64,6 +64,8 @@ const SingleProduct = () => {
         if (avg && typeof avg === 'number') return avg.toFixed(2);
         else if (!avg || typeof avg !== 'number') return "No ratings yet";
     }
+
+
 
     const starFunc = (num) => {
         if (num < 1 || num > 5) return 'No ratings yet';
@@ -100,12 +102,8 @@ const SingleProduct = () => {
                                 {user ? (
                                     <button onClick={addToCart} className="add-to-cart-button">Add to cart</button>
                                 ) : (
-                                    <div className="add-to-cart-button">
-                                        <OpenModalButton
-                                        buttonText="Add to cart"
-                                        modalComponent={<LoginFormModal />}
-                                        />
-                                    </div>
+
+                                    <button className="add-to-cart-button-logged-out" disabled={true}>Sign in to add to cart</button>
                                 )}
                             </div>
                             <div className="single-product-description-container">
