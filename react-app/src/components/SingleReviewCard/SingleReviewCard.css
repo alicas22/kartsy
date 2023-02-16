@@ -63,3 +63,6 @@
 .delete-review-buttons :hover {
     cursor: pointer;
 }
+.single-review-content {
+    word-break: break-word;
+}

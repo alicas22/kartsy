@@ -4,7 +4,11 @@
     align-items: center;
     justify-content: center;
 }
-
+.search-subheader {
+    font-weight: lighter;
+    color: #222;
+    font-size: 14px;
+}
 .search-image {
     border-radius: 2px;
     width: 100%;

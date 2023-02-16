@@ -19,7 +19,8 @@ const Search = () => {
 
     return searchRes && (
         <>
-            <h1 className='search-title'> Search results: </h1>
+            <h1 className='search-title'>Search results:</h1>
+            <h4 className='search-title search-subheader'>Items matched by name or description</h4>
             <div className='all-search-container'>
                 <div className='mapped-search-container'>
                     <ul className='all-search'>

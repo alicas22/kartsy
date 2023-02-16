@@ -69,6 +69,7 @@
     font-size: 25px;
     color: rgb(88, 88, 88);
     margin-top: -2px;
+    word-break: break-word;
 }
 
 .add-to-cart-button {
@@ -120,6 +121,7 @@
 .single-product-description {
     line-height: 23px;
     color: rgb(100, 100, 100);
+    word-break: break-word;
 }
 
 .all-reviews-area-container {
