@@ -17,11 +17,14 @@ def validation_errors_to_error_messages(validation_errors):
     return errorMessages
 
 
-@search_routes.route('/', methods=['GET', 'POST'])
+@search_routes.route('', methods=['GET', 'POST'])
 def search():
 
     query = request.args.get('q')
+    print('QUERY', query)
     products = Product.query.filter(or_(Product.name.like("%" + query + "%"),  Product.description.like("%" + query + "%"))).all()
+    print('products', products)
     if products:
         return jsonify([product.to_dict() for product in products])
-    return {"No Products match your search"}
+    print('did not find result')
+    return {}
