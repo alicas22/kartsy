@@ -5,6 +5,7 @@ import { thunkEditProduct } from "../../store/products"
 import { useModal } from "../../context/Modal"
 import SingleProduct from "../SingleProduct"
 import { thunkGetSingleProduct } from "../../store/products"
+import './EditProduct.css'
 
 
 const EditProduct = () => {
@@ -16,6 +17,7 @@ const EditProduct = () => {
     const [price, setPrice] = useState(editproduct.price)
     const [description, setDescription] = useState(editproduct.description)
     const [errors, setErrors] = useState([])
+
 
     const user = useSelector(state => state.session.user)
 
@@ -33,27 +35,24 @@ const EditProduct = () => {
 
         if (!user) return null
 
-        await dispatch(thunkEditProduct(payload))
-            // .then((product) => {
-            //     console.log('product', product)
-            //     setCreatedProduct(product)
-            //     console.log('created prod', createdProduct)
-            // })
-            .then(closeModal)
-        // .catch(
-        //     async (res) => {
-        //         const data = await res.json();
-        //         if (data && (data.errors)) setErrors(data.errors)
-        //     });
-        history.push(`/products/${payload.id}`)
+        const data = await dispatch(thunkEditProduct(payload))
+
+        if (Array.isArray(data)) {
+            setErrors(data);
+        } else {
+            history.push(`/products/${payload.id}`)
+            closeModal();
+        }
 
     }
+
+
 
     return (
         <div className="edit-product-form">
             <h1>Edit Product</h1>
             <form className='edit-product-form' onSubmit={handleSubmit}>
-                <ul>
+                <ul className="validation-errors">
                     {errors.map((error, index) => <li className="errors-text" key={index}>{error}</li>)}
                 </ul>
                 <label>
@@ -84,7 +83,7 @@ const EditProduct = () => {
                     <p>
                         Description
                     </p>
-                    <input
+                    <textarea
                         id="description"
                         type="textarea"
                         name="description"
@@ -92,7 +91,7 @@ const EditProduct = () => {
                         onChange={(e) => setDescription(e.target.value)}
                     />
                 </label>
-                <button type="submit">Submit</button>
+                <button className="edit-product-submit-button" type="submit">Submit</button>
             </form>
         </div>
     )
