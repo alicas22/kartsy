@@ -1,5 +1,6 @@
 const CREATE_SEARCH = 'search/CREATE_SEARCH'
 const LOAD_SEARCH = 'search/LOAD_SEARCH'
+const CLEAN_SEARCH = 'search/CLEAN_SEARCH'
 
 const createSearch = (results) => ({
     type: CREATE_SEARCH,
@@ -10,6 +11,12 @@ const loadSearch = (search) => ({
     type: LOAD_SEARCH,
     search
 })
+
+export const cleanUpSearchAction = () => {
+    return {
+        type: CLEAN_SEARCH
+    }
+};
 
 export const thunkCreateSearch = (query) => async (dispatch) => {
     const response = await fetch(`/api/search?q=${query}`, {
@@ -36,6 +43,15 @@ export const thunkLoadSearch = () => async (dispatch) => {
     }
 }
 
+// export const thunkCleanupSearch = () => async (dispatch) => {
+//     const response = await fetch('/api/search/')
+//     if (response.ok) {
+//         const search = await response.json()
+//         dispatch(cleanSearch(search))
+//         return search
+//     }
+// }
+
 const normalize = (arr) => {
     const resObj = {}
     arr.forEach((ele) => { resObj[ele.id] = ele })
@@ -46,16 +62,27 @@ const initialState = {}
 
 const searchReducer = (state = initialState, action) => {
     let newState
+
     switch (action.type){
         case LOAD_SEARCH:
             newState = { ...state }
             newState.searchResults = normalize(action.search)
             return newState
         case CREATE_SEARCH:
-            newState = { ...state }
-            newState.searchResults = { ...newState.search, [action.results.id]: action.results }
-            return newState
-
+            if(Object.keys(action.results).length > 0){
+                newState = { ...state }
+                action.results.forEach((result) => {
+                    newState[result.id] = result
+                })
+                return newState
+            } else {
+                newState = { ...state  }
+                return newState
+            }
+        case CLEAN_SEARCH: {
+            const newState = { ...initialState };
+            return newState;
+            }
         default:
             return state
     }

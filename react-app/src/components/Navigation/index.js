@@ -8,7 +8,7 @@ import LoginFormModal from '../LoginFormModal';
 import { login } from "../../store/session";
 import { useModal } from "../../context/Modal";
 import './Navigation.css';
-import { thunkCreateSearch } from '../../store/search';
+import { cleanUpSearchAction, thunkCreateSearch } from '../../store/search';
 
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
@@ -40,7 +40,7 @@ function Navigation({ isLoaded }){
 		// const data = await response.json();
         // setResults(data);
 		// query = request.args.get('q')
-
+		dispatch(cleanUpSearchAction())
 		dispatch(thunkCreateSearch(query))
 		// console.log('RESULTS', results[0])
 		// console.log('DATA FROM NAV COMPONENT', data)
