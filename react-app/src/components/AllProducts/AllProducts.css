@@ -1,10 +1,10 @@
 .all-products {
     width: 100%;
-    margin: 5px auto;
+    margin: auto;
     -webkit-column-count: 4;
     -moz-column-count: 4;
     column-count: 4;
-
+    padding: 0;
 }
 
 .product-card {
@@ -78,7 +78,7 @@
 
 .create-product-modal-container {
     padding-top: 40px;
-    padding-left: 280px;
+    padding-left: 245px;
 }
 
 .first-image {
@@ -185,5 +185,15 @@
 
     .this-div {
         padding-left: 20px;
+    }
+
+    .mapped-products-container {
+        padding: 1rem 5rem 1rem 5rem;
+       
+    }
+
+    .create-product-modal-container {
+        padding-top: 40px;
+        padding-left: 80px;
     }
 }
