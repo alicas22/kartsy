@@ -83,8 +83,6 @@ Karsy is a clone of Etsy. It allows you to post and browse products, leave revie
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] My Products
-- [ ] My Reviews
 - [ ] Categories
   - [ ] Search by Category
   - [ ] Add Categories to All Products Page  
