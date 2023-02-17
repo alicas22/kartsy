@@ -117,9 +117,10 @@
     padding: 18px;
     font-size: 16px;
     height: fit-content;
-    width: 40%;
+    width: 30%;
     text-align: center;
     min-width: 200px;
+
 }
 .total-price {
     display: flex;
