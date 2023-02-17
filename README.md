@@ -71,8 +71,6 @@ Karsy is a clone of Etsy. It allows you to post and browse products, leave revie
    flask run
    ```
 
-7. To run the React App in development, checkout the [README](./react-app/README.md) inside the `react-app` directory.
-
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
