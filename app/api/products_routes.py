@@ -32,7 +32,8 @@ def all_products():
             'id': product['id'],
             'name': product['name'],
             'price': product['price'],
-            'imagesUrl': product['imagesUrl']
+            'imagesUrl': product['imagesUrl'],
+            'ownerId': product['ownerId']
         })
 
     return jsonify(prod_res)
@@ -108,7 +109,7 @@ def all_reviews(id):
 
     review_res = []
     for review in reviews:
-       
+
         review_res.append({
             'id': review['id'],
             'userId': review['userId'],

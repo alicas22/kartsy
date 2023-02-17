@@ -24,33 +24,14 @@ export const thunkCreateSearch = (query) => async (dispatch) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(query)
     })
-    //console.log('>>>>>>>>>response', response)
+
     if (response.ok) {
         const newSearch = await response.json()
-        console.log('newsearch', newSearch)
         dispatch(createSearch(newSearch))
         return newSearch
     }
 }
 
-// export const thunkLoadSearch = () => async (dispatch) => {
-//     const response = await fetch('/api/search/')
-
-//     if (response.ok) {
-//         const search = await response.json()
-//         dispatch(loadSearch(search))
-//         return search
-//     }
-// }
-
-// export const thunkCleanupSearch = () => async (dispatch) => {
-//     const response = await fetch('/api/search/')
-//     if (response.ok) {
-//         const search = await response.json()
-//         dispatch(cleanSearch(search))
-//         return search
-//     }
-// }
 
 const normalize = (arr) => {
     const resObj = {}

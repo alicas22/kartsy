@@ -36,15 +36,9 @@ function Navigation({ isLoaded }){
 	const handleSearch = async (e) => {
         e.preventDefault();
 
-        // const response = await fetch(`/api/search?q=${query}`)
-		// const data = await response.json();
-        // setResults(data);
-		// query = request.args.get('q')
 		dispatch(cleanUpSearchAction())
 		dispatch(thunkCreateSearch(query))
 		setQuery('')
-		// console.log('RESULTS', results[0])
-		// console.log('DATA FROM NAV COMPONENT', data)
 		history.push('/search')
     };
 
@@ -52,12 +46,7 @@ function Navigation({ isLoaded }){
 	if (sessionUser) {
 	  sessionLinks = (
 		<div className='nav-bar-right'>
-		  {/* <div className='modal-create-group'>
-		  <OpenModalButton
-			buttonText="Start a new group"
-			modalComponent={<CreateGroupModal />}
-		  />
-		</div> */}
+		  
 		<div style = {{marginRight:'15px'}}>
 		  <ProfileButton user={sessionUser} />
 		</div>

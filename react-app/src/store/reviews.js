@@ -2,6 +2,7 @@ const LOAD_ALL_REVIEWS = 'reviews/LOAD';
 const CREATE_REVIEW = 'review/CREATE';
 const UPDATE_REVIEW = 'review/UPDATE';
 const DELETE_REVIEW = 'review/DELETE';
+const LOAD_ALL_PRODUCT_REVIEWS = 'review/ALLPRODUCTREVIEWS'
 const CLEAN_UP_REVIEWS = 'reviews/CLEANUP';
 
 //action creators
@@ -9,6 +10,13 @@ export const loadAllReviewsAction = (reviews, productId) => {
     return {
         type: LOAD_ALL_REVIEWS,
         productId,
+        reviews
+    }
+};
+
+export const loadAllProductReviewsAction = (reviews) => {
+    return {
+        type: LOAD_ALL_PRODUCT_REVIEWS,
         reviews
     }
 };
@@ -44,13 +52,23 @@ export const cleanUpReviewsAction = () => {
 //thunks
 export const loadAllReviewsThunk = (productId) => async dispatch => {
     const response = await fetch(`/api/products/${productId}/reviews`);
-    console.log('response', response)
 
     if (response.ok) {
         const allReviews = await response.json();
         dispatch(loadAllReviewsAction(productId, allReviews));
         return allReviews;
     }
+}
+;
+export const loadAllProductReviewsThunk = () => async dispatch => {
+    const response = await fetch(`/api/reviews/`);
+
+    if (response.ok) {
+        const allReviews = await response.json();
+        dispatch(loadAllProductReviewsAction(allReviews));
+        return allReviews;
+    }
+
 };
 
 export const createReviewThunk = (productId, newReview) => async dispatch => {
@@ -95,13 +113,6 @@ export const updateReviewThunk = (review) => async dispatch => {
         return ["An error occurred. Please try again."];
     }
 
-
-
-    // if (response.ok) {
-    //     const updatedReview = await response.json();
-    //     dispatch(updateReviewAction(updatedReview));
-    //     return updatedReview;
-    // }
 };
 
 export const deleteReviewThunk = (badReviewId) => async dispatch => {
@@ -116,6 +127,12 @@ export const deleteReviewThunk = (badReviewId) => async dispatch => {
     }
 };
 
+const normalize = (arr) => {
+    const resObj = {}
+    arr.forEach((ele) => { resObj[ele.id] = ele })
+    return resObj
+}
+
 //reviews reducer
 const initialState = {};
 
@@ -128,6 +145,11 @@ const reviewsReducer = (state = initialState, action) => {
             });
             return newState;
         };
+        case LOAD_ALL_PRODUCT_REVIEWS: {
+            const newState = { ...state };
+            newState['allReviews'] = normalize(action.reviews)
+            return newState;
+        };
         case CREATE_REVIEW: {
             const newState = { ...state };
             newState[action.productId.id] = action.productId;
@@ -135,13 +157,11 @@ const reviewsReducer = (state = initialState, action) => {
         };
         case UPDATE_REVIEW: {
             const newState = { ...state };
-            console.log('!!!!!!!!!!!!', action)
             newState[action.updatedReview.id] = action.updatedReview;
             return newState;
         };
         case DELETE_REVIEW: {
             const newState = { ...state };
-            console.log("this is the action: ", action)
             delete newState[action.badReviewId];
             return newState;
         };
