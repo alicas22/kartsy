@@ -21,6 +21,19 @@ Karsy is a clone of Etsy. It allows you to post and browse products, leave revie
 * WtForms
 
 
+### Features and Screenshots
+* Kartsy All Products page - You will be able to test the features without signing up by clicking on the "Demo User" button.
+![All Products Page](https://github.com/alicas22/kartsy/blob/main/kartsy-allproducts.PNG?raw=true)
+
+* Etsy All Products Page - Visual inspiration
+![Etsy All Products Page](https://github.com/alicas22/kartsy/blob/main/etsy-allproducts.PNG?raw=true)
+
+* Single Products Page - View product details, edit product, add review, edit review, delete review
+![Groups Page](https://github.com/alicas22/kartsy/blob/main/kartsy-singleProduct.PNG?raw=true)
+
+
+
+
 ## Getting started
 1. Clone this repository (only this branch)
 
@@ -66,22 +79,12 @@ Karsy is a clone of Etsy. It allows you to post and browse products, leave revie
 
 
 
-### Features and Screenshots
-* Kartsy All Products page - You will be able to test the features without signing up by clicking on the "Demo User" button.
-![All Products Page](https://github.com/alicas22/kartsy/blob/main/kartsy-allproducts.PNG?raw=true)
-
-* Etsy All Products Page - Visual inspiration
-![Etsy All Products Page](https://github.com/alicas22/kartsy/blob/main/etsy-allproducts.PNG?raw=true)
-
-* Single Products Page - View product details, edit product, add review, edit review, delete review
-![Groups Page](https://github.com/alicas22/kartsy/blob/main/kartsy-singleProduct.PNG?raw=true)
-
-
-
 
 <!-- ROADMAP -->
 ## Roadmap
 
+- [ ] My Products
+- [ ] My Reviews
 - [ ] Categories
   - [ ] Search by Category
   - [ ] Add Categories to All Products Page  
