@@ -109,14 +109,15 @@
     margin: auto;
     position: relative;
     margin: auto;
-   
+
 }
 
 .this-div:hover {
     transform: scale(1.1);
     border-bottom: 1px solid black;
     position: relative;
-    margin: auto
+    margin: auto;
+    cursor: pointer;
 }
 
 .this-div {
@@ -160,7 +161,7 @@
 
     .each-image-catagories {
         display: flex;
-        justify-content: space-around; 
+        justify-content: space-around;
     }
 
     .shoes-container {
@@ -178,7 +179,7 @@
     .tech-container {
         padding-left: 25px;
     }
-    
+
     .decor-container {
         padding-left: 20px;
     }
@@ -189,7 +190,7 @@
 
     .mapped-products-container {
         padding: 1rem 5rem 1rem 5rem;
-       
+
     }
 
     .create-product-modal-container {
