@@ -116,7 +116,7 @@ const GetCart = () => {
                                                 ))}
                                             </select>
                                             <div className='cart-item-price'>
-                                                {cartItem.productPrice.toFixed(2)}
+                                                ${cartItem.productPrice.toFixed(2)}
                                             </div>
                                         </div>
                                     </div>

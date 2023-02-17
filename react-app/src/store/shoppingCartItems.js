@@ -1,5 +1,5 @@
 const LOAD_ALL_CART_ITEMS = 'cart/LOAD_CART_ITEMS';
-const LOAD_SINGLE_CART_ITEM = 'cart/LOAD_SINGLE_CART_ITEM';
+// const LOAD_SINGLE_CART_ITEM = 'cart/LOAD_SINGLE_CART_ITEM';
 const CREATE_CART_ITEM = 'cart/CREATE_CART_ITEM';
 const UPDATE_CART_ITEM = 'cart/UPDATE_CART_ITEM';
 const DELETE_CART_ITEM = 'cart/DELETE_CART_ITEM';
@@ -52,16 +52,6 @@ export const loadAllCartItemsThunk = () => async dispatch => {
     }
 };
 
-// export const getSingleCartItemThunk = (cartItemId) => async (dispatch) => {
-//     const response = await fetch(`/api/cart/${cartItemId}`)
-
-//     if (response.ok) {
-//         const cartItem = await response.json()
-//         dispatch(loadSingleCartItemAction(cartItem))
-//         return cartItem
-//     }
-
-// }
 
 export const createCartItemThunk = (payload) => async (dispatch) => {
     const response = await fetch('/api/cart/', {
@@ -138,28 +128,28 @@ const cartItemReducer = (state = initialState, action) => {
             newState.allCartItems = normalize(action.cartItems)
             return newState
         }
-        case LOAD_SINGLE_CART_ITEM: {
-            newState = { ...state }
-            newState.singleCartItem = action.cartItem
-            return newState
-        }
+        // case LOAD_SINGLE_CART_ITEM: {
+        //     newState = { ...state }
+        //     newState.singleCartItem = action.cartItem
+        //     return newState
+        // }
         case CREATE_CART_ITEM:{
             newState = { ...state }
             newState.allCartItems = {...newState.allCartItems, [action.newCartItem.id]: action.newCartItem}
-            newState.singleCartItem = {...newState.singleCartItem, ...action.newCartItem}
+            // newState.singleCartItem = {...newState.singleCartItem, ...action.newCartItem}
             return newState
         }
         case UPDATE_CART_ITEM: {
             const newState = { ...state };
             newState.allCartItems = { ...state.allCartItems, [action.updatedCartItem.id]: action.updatedCartItem }
-            newState.singleCartItem = { ...newState.singleCartItem, ...action.updatedCartItem }
+            // newState.singleCartItem = { ...newState.singleCartItem, ...action.updatedCartItem }
             return newState;
         }
         case DELETE_CART_ITEM: {
             const newState = { ...state };
             delete newState.allCartItems[action.badCartItemId];
             newState.allCartItems = { ...newState.allCartItems }
-            newState.singleCartItem = { ...state}
+            // newState.singleCartItem = { ...state}
             return newState;
         }
         case CLEAN_UP_CART: {
