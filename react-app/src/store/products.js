@@ -146,7 +146,6 @@ const productReducer = (state = initialState, action) => {
             newState = { ...state }
             newState.allProducts = { ...newState.allProducts, [action.updatedProduct.id]: action.updatedProduct }
             newState.singleProduct = { ...newState.singleProduct, ...action.updatedProduct }
-
             return newState
         case DELETE_PRODUCT:
             newState = { ...state }
