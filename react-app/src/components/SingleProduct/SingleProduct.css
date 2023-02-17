@@ -170,8 +170,11 @@
     cursor: pointer;
 }
 
-.add-to-cart-button-container :hover {
+.add-to-cart-button-logged-out :hover {
+    cursor: pointer;
+}
 
+.add-to-cart-button-container :hover {
     box-shadow: 2px 2px 5px rgb(174, 174, 174);
 }
 

@@ -99,11 +99,14 @@ const SingleProduct = () => {
                             <h1 className="single-product-price">${product.price.toFixed(2)}</h1>
                             <h3 className="single-product-name">{product.name}</h3>
                             <div className="add-to-cart-button-container">
-                                {user ? (
-                                    <button onClick={addToCart} className="add-to-cart-button">Add to cart</button>
-                                ) : (
-
+                                {!user && (
                                     <button className="add-to-cart-button-logged-out" disabled={true}>Sign in to add to cart</button>
+                                )}
+                                {user && user.id !== product.ownerId && (
+                                    <button onClick={addToCart} className="add-to-cart-button">Add to cart</button>
+                                )}
+                                {user && user.id === product.ownerId && (
+                                    <button className="add-to-cart-button-logged-out" disabled={true}>Can't purchase your own product</button>
                                 )}
                             </div>
                             <div className="single-product-description-container">
