@@ -16,12 +16,16 @@ def price_valid(form, field):
 
 def description_length(form, field):
     description = field.data
-    if len(description) > 2000 or len(description) <3:
+    if len(description) > 2000 or len(description) < 3:
         raise ValidationError('Description must be between 3 and 4000 characters long.')
 
+def images_url_valid(form, field):
+    imageUrl = field.data
+    if not imageUrl.endswith(('.png', '.jpg', '.gif')):
+        raise ValidationError('URL does not contain an image.')
 
 class ProductForm(FlaskForm):
     name= StringField('name', validators=[DataRequired(),name_length])
     price = FloatField('price', validators=[DataRequired(), price_valid])
     description = TextAreaField('description', validators=[DataRequired(), description_length])
-    # images_url = StringField('image_url', validators=[DataRequired(), images_url_valid])
+    imageUrl = StringField('imageUrl', validators=[DataRequired(), images_url_valid])

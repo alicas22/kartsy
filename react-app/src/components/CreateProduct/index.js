@@ -109,6 +109,7 @@ const CreateProduct = () => {
                         id="imageUrl"
                         type="url"
                         name="imageUrl"
+                        placeholder="https://www.example.com/image.jpg"
                         value={imageUrl}
                         onChange={(e) => setImageUrl(e.target.value)}
                     />
