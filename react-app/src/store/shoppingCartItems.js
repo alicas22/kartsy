@@ -97,12 +97,12 @@ export const deleteCartItemThunk = (badCartItemId) => async dispatch => {
 };
 
 export const clearCartItemsThunk = () => async dispatch => {
-    console.log("from clearCartItems 1")
+  
     const response = await fetch(`/api/cart/purchasecomplete/`, {
         method: "DELETE",
         headers: {'Content-Type': 'application/json'},
     });
-    console.log("from clearCartItems 2")
+   
 
     if (response.ok) {
         dispatch(cleanUpCartAction());

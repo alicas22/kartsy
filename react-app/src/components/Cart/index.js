@@ -66,7 +66,7 @@ const GetCart = () => {
     let totalPrice = 0
     let displayTotal
     if (cart) {
-        console.log(cart)
+        
         for (let item of cart) {
             totalPrice += item.productPrice * item.countOfProduct
             displayTotal = totalPrice.toFixed(2)

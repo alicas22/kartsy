@@ -90,6 +90,7 @@
 .nav-bar-dropdown-menu-signout{
   cursor: pointer;
   display: flex;
+  flex-direction: column;
   position: relative;
   /* align-items: center; */
   background-color: #FFF;
@@ -144,6 +145,7 @@
 
 .button-container-signout{
   display: flex;
+  flex-direction: row;
   align-items: center;
   justify-content: center;
   padding-left: 35px;

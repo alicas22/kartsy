@@ -81,10 +81,10 @@ export const signUp = (firstName, lastName, username, email, password) => async 
 			password,
 		}),
 	});
-	console.log('response', response)
+	
 	if (response.ok) {
 		const data = await response.json();
-		console.log('data', data)
+		
 		dispatch(setUser(data));
 		return null;
 	} else if (response.status < 500) {
