@@ -1,5 +1,5 @@
 # Kartsy
-# Flask React Project
+## Flask React Project
 <a name="readme-top"></a>
 
 Check out a live version of Kartsy here:
