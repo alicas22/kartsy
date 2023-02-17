@@ -3,7 +3,7 @@ const LOAD_SINGLE_PRODUCT = 'products/LOAD_SINGLE_PRODUCT'
 const CREATE_PRODUCT = 'products/CREATE_PRODUCT'
 const EDIT_PRODUCT = 'products/EDIT_PRODUCT'
 const DELETE_PRODUCT = 'products/DELETE_PRODUCT'
-
+const CLEAN_UP_PRODUCT = 'single-product/CLEANUP';
 
 const loadProducts = (products) => ({
     type: LOAD_PRODUCTS,
@@ -29,6 +29,12 @@ const deleteAProduct = (undoProduct) => ({
     type: DELETE_PRODUCT,
     undoProduct
 })
+
+export const cleanUpSingleProductAction = () => {
+    return {
+        type: CLEAN_UP_PRODUCT
+    }
+};
 
 
 export const thunkGetProducts = () => async (dispatch) => {
@@ -62,9 +68,18 @@ export const thunkCreateProduct = (payload) => async (dispatch) => {
     if (response.ok) {
         const newProduct = await response.json()
         dispatch(createProduct(newProduct))
-        return newProduct
+        return newProduct;
+    } else if (response.status < 500) {
+        const newProduct = await response.json()
+        if (newProduct.errors) {
+			return newProduct.errors;
+		}
+    } else {
+        return ["An error occurred. Please try again."];
     }
 }
+
+
 
 export const thunkEditProduct = (updatedProduct) => async (dispatch) => {
     const response = await fetch(`/api/products/${updatedProduct.id}`, {
@@ -74,10 +89,19 @@ export const thunkEditProduct = (updatedProduct) => async (dispatch) => {
     })
 
     if (response.ok) {
-        const product = await response.json()
-        dispatch(editProduct(product))
-        return product
+        const updatedProduct = await response.json()
+        dispatch(editProduct(updatedProduct))
+        return updatedProduct;
+
+    } else if (response.status < 500) {
+        const updatedProduct = await response.json()
+        if (updatedProduct.errors) {
+            return updatedProduct.errors;
+		}
+    } else {
+        return ["An error occurred. Please try again."];
     }
+
 }
 
 export const thunkDeleteProduct = (undoProduct) => async (dispatch) => {
@@ -128,6 +152,10 @@ const productReducer = (state = initialState, action) => {
             newState = { ...state }
             delete newState.allProducts[action.undoProduct.id]
             return newState
+        case CLEAN_UP_PRODUCT: {
+            const newState = { ...initialState };
+            return newState;
+        }
         default:
             return state
     }

@@ -8,6 +8,7 @@ import LoginFormModal from '../LoginFormModal';
 import { login } from "../../store/session";
 import { useModal } from "../../context/Modal";
 import './Navigation.css';
+import { cleanUpSearchAction, thunkCreateSearch } from '../../store/search';
 
 function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
@@ -19,7 +20,7 @@ function Navigation({ isLoaded }){
 	const [errors, setErrors] = useState([]);
 
 	const history= useHistory()
-	const email = 'demo@aa.io'
+	const email = 'magic@mike.com'
 	const password = 'password'
 
 	const handleSubmit = async (e) => {
@@ -35,10 +36,16 @@ function Navigation({ isLoaded }){
 	const handleSearch = async (e) => {
         e.preventDefault();
 
-        const response = await fetch(`/api/search?q=${query}`)
-		const data = await response.json();
-        setResults(data);
-		// history.push('/search')
+        // const response = await fetch(`/api/search?q=${query}`)
+		// const data = await response.json();
+        // setResults(data);
+		// query = request.args.get('q')
+		dispatch(cleanUpSearchAction())
+		dispatch(thunkCreateSearch(query))
+		setQuery('')
+		// console.log('RESULTS', results[0])
+		// console.log('DATA FROM NAV COMPONENT', data)
+		history.push('/search')
     };
 
 	let sessionLinks;
@@ -82,7 +89,7 @@ function Navigation({ isLoaded }){
 
 		<div className='nav-bar-header-container'>
 			<div className='nav-bar-home-button'>
-				<NavLink exact to="/products" activeClassName="not-going-to-be-active" style={{textDecoration: 'none', color:'#F1641E '}}>Kartsy</NavLink>
+				<NavLink exact to="/" activeClassName="not-going-to-be-active" style={{textDecoration: 'none', color:'#F1641E '}}>Kartsy</NavLink>
 			</div>
 			<div className='nav-bar-search-container'>
  				<form onSubmit={handleSearch} className='nav-bar-search-form'>

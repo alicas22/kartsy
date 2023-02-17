@@ -73,6 +73,7 @@
     padding: 0px 10px;
     margin: 0px 15px;
     font-size: 16px;
+    cursor: pointer;
 }
 .title-delete {
     display: flex;
@@ -100,6 +101,7 @@
     border-radius: 18px;
     width: fit-content;
     margin-top: 10px;
+    cursor: pointer;
 
 }
 .delete-cart-item:hover{
@@ -115,8 +117,10 @@
     padding: 18px;
     font-size: 16px;
     height: fit-content;
-    width: 40%;
+    width: 30%;
     text-align: center;
+    min-width: 200px;
+
 }
 .total-price {
     display: flex;
@@ -128,14 +132,31 @@
 .checkout-button {
     background-color: #222;
     color: white;
+    cursor: pointer;
+    text-decoration:none;
     border: none;
     border-radius: 24px;
     font-size: 16px;
     padding: 12px 18px;
     margin: 10px;
+    display: inline-block;
+
 }
+
+.checkout-button-disabled {
+    background-color: grey;
+    color: white;
+    text-decoration:none;
+    border: none;
+    border-radius: 24px;
+    font-size: 16px;
+    padding: 12px 18px;
+    margin: 10px;
+    display: inline-block;
+}
+
 .checkout-button:hover {
-    background-color: rgba(34, 34, 34, 0.8)
+    background-color: rgba(44, 44, 44, 0.8)
 }
 .cart-taxes {
     font-size: 12px;

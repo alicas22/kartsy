@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useHistory, NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
-import { cleanUpCartAction, loadAllCartItemsThunk, updateCartItemThunk, deleteCartItemThunk } from "../../store/shoppingCartItems"
+import { cleanUpCartAction, loadAllCartItemsThunk, updateCartItemThunk, deleteCartItemThunk, clearCartItemsThunk } from "../../store/shoppingCartItems"
 import { thunkGetProducts } from "../../store/products"
 import './Cart.css';
 
@@ -57,32 +57,28 @@ const GetCart = () => {
         dispatch(deleteCartItemThunk(payload))
         // .then(dispatch(loadAllCartItemsThunk()))
     }
+
+    const clearCart = async (e)=>{
+        dispatch(clearCartItemsThunk())
+    }
+
     // get total price for all items in cart
     let totalPrice = 0
     let displayTotal
     if (cart) {
+        console.log(cart)
         for (let item of cart) {
             totalPrice += item.productPrice * item.countOfProduct
-            displayTotal = totalPrice.toString().slice(0, 5)
+            displayTotal = totalPrice.toFixed(2)
         }
     }
-    // const singlePrice = async (cartItem) => {
-    //     let singlePrice
-    //     if (cartItem.productPrice.toString().inludes('.')) {
-    //         singlePrice= cartItem.productPrice.toString().concat('00').slice(0,5)
-    //     } else {
-    //         singlePrice= cartItem.productPrice.toString().concat('.00').slice(0,5)
-    //     }
-    //     console.log('single price', singlePrice)
-    //     return singlePrice
-    // }
 
     return (
         <>
             <div className='cart-page'>
                 <div className='cart-header'>
                     <h1 className='cart-title'> {cart.length} item(s) in your cart</h1>
-                    <NavLink className='keep-shopping' to={'/products'}>Keep shopping</NavLink>
+                    <NavLink className='keep-shopping' to={'/'}>Keep shopping</NavLink>
                 </div>
                 <div className='left-right-cart'>
                     <ul className='cart-ul'>
@@ -95,7 +91,7 @@ const GetCart = () => {
                                             <div className='cartItem-text'>
                                                 <div className='title-delete'>
                                                     <div>
-                                                        <NavLink to={`/products/${cartItem.id}`} className='single-prod-link'>
+                                                        <NavLink to={`/products/${cartItem.productId}`} className='single-prod-link'>
                                                             {cartItem.productName}
                                                         </NavLink>
                                                     </div>
@@ -120,12 +116,7 @@ const GetCart = () => {
                                                 ))}
                                             </select>
                                             <div className='cart-item-price'>
-                                                {cartItem.productPrice.toString().includes('.') && (
-                                                    <div>${cartItem.productPrice.toString().concat('00').slice(0, 5)}</div>
-                                                )}
-                                                {!cartItem.productPrice.toString().includes('.') && (
-                                                    <div>${cartItem.productPrice.toString().concat('.00').slice(0, 5)}</div>
-                                                )}
+                                                {cartItem.productPrice.toFixed(2)}
                                             </div>
                                         </div>
                                     </div>
@@ -139,24 +130,16 @@ const GetCart = () => {
                             <h4>Item(s) total: </h4>
                             <p>${displayTotal}</p>
                         </div>
-                        <button className='checkout-button'>Proceed to checkout</button>
+                        {cart.length !== 0 ? (
+                            <NavLink className='checkout-button' to={'/cart/purchasecomplete'} onClick={clearCart}>Complete purchase</NavLink>
+                        ) : (
+                            <button className='checkout-button-disabled' disabled={true}>Complete purchase</button>
+                        )}
                         <p className='cart-taxes'>* Additional duties and taxes may apply</p>
                     </div>
                 </div>
                 <p className='carbon-emissions'><i class="fa-solid fa-leaf"></i> Kartsy offsets carbon emissions from every delivery</p>
             </div >
-            <div className='cart-footer'>
-                <div className="footer-top">
-                    <p><i class="fa-regular fa-copyright"></i> 2023 Kartsy, Inc. </p>
-                    <p className='footer-tech'>
-                        <p>Javascript</p>
-                        <p>Python</p>
-                        <p>Flask</p>
-                    </p>
-                </div>
-                <p>Merchant is Kartsy, Inc. (USA), and the currency in which the seller transacts is fake.</p>
-                <p>Kartsy, Inc., USA 117 Fake Street Brooklyn, NY 11201</p>
-            </div>
         </>
 
     )

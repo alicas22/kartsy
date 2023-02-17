@@ -116,7 +116,8 @@
     transform: scale(1.1);
     border-bottom: 1px solid black;
     position: relative;
-    margin: auto
+    margin: auto;
+    cursor: pointer;
 }
 
 .this-div {
@@ -204,4 +205,15 @@
     .this-div {
         padding-left: 20px;
     }
+
+    .mapped-products-container {
+        padding: 1rem 5rem 1rem 5rem;
+
+    }
+
+    .create-product-modal-container {
+        padding-top: 40px;
+        padding-left: 80px;
+    }
 }
+

@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import { thunkCreateProduct } from "../../store/products"
 import { useModal } from "../../context/Modal"
+import "./CreateProduct.css"
+
 
 const CreateProduct = () => {
     const dispatch = useDispatch()
@@ -16,7 +18,7 @@ const CreateProduct = () => {
     const [createdProduct, setCreatedProduct] = useState()
 
     const user = useSelector(state => state.session.user)
-    
+
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -32,18 +34,18 @@ const CreateProduct = () => {
 
         if (!user) return null
 
-        return dispatch(thunkCreateProduct(payload))
-            .then((product) => {
-                setCreatedProduct(product)
-            })
-            .then(closeModal)
-            .catch(
-                async (res) => {
-                    const data = await res.json();
-                    if (data && (data.errors)) setErrors(data.errors)
-                });
+        const data = await dispatch(thunkCreateProduct(payload))
+
+
+        if (Array.isArray(data)) {
+            setErrors(data);
+        } else {
+            await setCreatedProduct(data)
+            closeModal();
+        }
 
     }
+
 
     useEffect(() => {
         if (createdProduct) {
@@ -55,8 +57,10 @@ const CreateProduct = () => {
         <div className="create-product-form">
             <h1>Create Product</h1>
             <form className='product-form' onSubmit={handleSubmit}>
-                <ul>
-                    {errors.map((error, index) => <li className="errors-text" key={index}>{error}</li>)}
+                <ul className="validation-errors">
+                    {errors.map((error, idx) => (
+					    <li key={idx}>{error}</li>
+					))}
                 </ul>
                 <label>
                     <p>
@@ -89,7 +93,7 @@ const CreateProduct = () => {
                     <p>
                     Description
                     </p>
-                    <input
+                    <textarea
                         id="description"
                         type="textarea"
                         name="description"
@@ -109,7 +113,7 @@ const CreateProduct = () => {
                         onChange={(e) => setImageUrl(e.target.value)}
                     />
                 </label>
-                <button type="submit">Submit</button>
+                <button className="create-product-submit-button" type="submit">Submit</button>
             </form>
         </div>
     )

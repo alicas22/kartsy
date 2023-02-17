@@ -1,6 +1,6 @@
-from flask import Flask, Blueprint, jsonify, request
-from ..models import db, ShoppingCartItem, Product
-from ..forms.cart_item_form import CartItemForm
+from flask import Blueprint, jsonify, request
+from ..models import db, ShoppingCartItem
+
 
 
 cart_routes = Blueprint('cart', __name__)
@@ -70,6 +70,13 @@ def update_cart_item():
         return jsonify(item)
     else:
         return {'error': 'Cannot update count'}
+
+@cart_routes.route('/purchasecomplete/', methods=['DELETE'])
+def clear_cart_items():
+        print("from clear cart route")
+        db.session.query(ShoppingCartItem).delete()
+        db.session.commit()
+        return {'message':"successfully deleted"}
 
 
 @cart_routes.route('/', methods=['DELETE'])

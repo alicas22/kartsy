@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { deleteReviewThunk } from "../../store/reviews";
-// import { loadSingleSpotThunk } from "../../store/single"; update this line later
 import './SingleReviewCard.css';
 
 import EditReview from "../EditReview";
@@ -43,10 +42,12 @@ const SingleReviewCard = ({review, userId, star, reviewId, productId, time, user
                 <div className="delete-review-button-container">
                     {(currentUser && currentUser.id == userId && (
                     <div className="delete-review-buttons">
-                        <OpenModalButton
-                        buttonText="Edit Review"
-                        modalComponent={<EditReview productId={productId} reviewId={reviewId}/>}
-                        />
+                        <div className="edit-review-button">
+                            <OpenModalButton
+                            buttonText="Edit Review"
+                            modalComponent={<EditReview productId={productId} reviewId={reviewId}/>}
+                            />
+                        </div>
                         <button className="delete-review-button" onClick={deleteReviewHandler}>Delete Review</button>
                     </div>
                     ))}

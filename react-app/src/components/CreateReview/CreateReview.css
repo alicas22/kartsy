@@ -1,8 +1,9 @@
-.create-product-form{
+.create-review-form{
     width: 100%;
     max-width:100%
 }
-.create-product-submit-button {
+
+.create-review-submit-button {
     border-radius: 24px;
     color: #fff;
     fill: #fff;
@@ -17,14 +18,7 @@
     width: 100%;
 }
 
-p, label {
-    display: block;
-    text-align: left;
-    line-height: 24px;
-    margin-bottom: 4px;
-    font-weight: 500;
 
-}
-textarea {
-    resize: vertical;
+.create-review-submit-button-container :hover {
+    cursor: pointer;
 }

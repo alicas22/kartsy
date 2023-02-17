@@ -7,7 +7,9 @@ import { authenticate } from "./store/session";
 import Navigation from "./components/Navigation";
 import AllProducts from "./components/AllProducts";
 import SingleProduct from "./components/SingleProduct";
+import PurchaseSplash from "./components/PurchaseSplash";
 import Cart from "./components/Cart"
+import Search from "./components/Search";
 
 function App() {
   const dispatch = useDispatch();
@@ -27,17 +29,36 @@ function App() {
           <Route path="/signup">
             <SignupFormPage />
           </Route>
-          <Route exact path='/products'>
+          <Route exact path='/'>
             <AllProducts />
           </Route>
           <Route path='/products/:productId'>
             <SingleProduct />
           </Route>
-          <Route path='/cart'>
+          <Route exact path='/cart'>
             <Cart />
           </Route>
+          <Route exact path='/cart/purchasecomplete'>
+            <PurchaseSplash />
+          </Route>
+          <Route path='/search'>
+            <Search />
+          </Route>
+
         </Switch>
       )}
+      <div className='cart-footer'>
+        <div className="footer-top">
+          <p><i class="fa-regular fa-copyright"></i> 2023 Kartsy, Inc. </p>
+          <p className='footer-tech'>
+            <p>Javascript</p>
+            <p>Python</p>
+            <p>Flask</p>
+          </p>
+        </div>
+        <p>Merchant is Kartsy, Inc. (USA), and the currency in which the seller transacts is fake.</p>
+        <p>Kartsy, Inc., USA 117 Fake Street Brooklyn, NY 11201</p>
+      </div>
     </>
   );
 }

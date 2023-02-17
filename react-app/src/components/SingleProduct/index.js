@@ -2,7 +2,9 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
 import { thunkDeleteProduct, thunkGetSingleProduct } from "../../store/products"
+import { cleanUpSingleProductAction } from "../../store/products"
 import OpenModalButton from "../OpenModalButton"
+import LoginFormModal from "../LoginFormModal"
 import EditProduct from "../EditProduct"
 import AllReviewsComponent from "../AllReviews"
 import CreateReview from "../CreateReview"
@@ -16,6 +18,7 @@ const SingleProduct = () => {
 
     useEffect(() => {
         dispatch(thunkGetSingleProduct(productId))
+        return () => dispatch(cleanUpSingleProductAction());
     }, [dispatch, productId])
 
     const product = useSelector((state) => state.products.singleProduct)
@@ -23,6 +26,30 @@ const SingleProduct = () => {
     const reviews = Object.values(reviewsObj)
 
     const user = useSelector((state) => state.session.user)
+
+    if (!product) return null
+    // if (!user) return null
+
+    let cart_item;
+    if (user) {
+        cart_item={
+            productId:product.id,
+            userId: user.id,
+            countOfProduct:1
+        }
+    }
+
+    const addToCart = async (e) =>{
+        e.preventDefault()
+        await dispatch(createCartItemThunk(cart_item))
+        history.push('/cart')
+    }
+
+    const deleteButton = (async (e) => {
+        e.preventDefault()
+        await dispatch(thunkDeleteProduct(product))
+        history.push('/')
+    })
 
     const averageFunc = (arr) =>{
         let amount = 0;
@@ -38,6 +65,8 @@ const SingleProduct = () => {
         else if (!avg || typeof avg !== 'number') return "No ratings yet";
     }
 
+
+
     const starFunc = (num) => {
         if (num < 1 || num > 5) return 'No ratings yet';
         else if (num >= 1 && num < 2) return '★☆☆☆☆';
@@ -47,70 +76,67 @@ const SingleProduct = () => {
         else if (num === 5) return '★★★★★';
     }
 
-    if (!product) return null
-    if (!user) return null
-
-    const deleteButton = (async (e) => {
-        e.preventDefault()
-        await dispatch(thunkDeleteProduct(product))
-        history.push('/products')
-    })
-
-    const cart_item={
-        productId:product.id,
-        userId: user.id,
-        countOfProduct:1
-    }
-    const addToCart = async (e) =>{
-        e.preventDefault()
-        await dispatch(createCartItemThunk(cart_item))
-        history.push('/cart')
-    }
-
     return (
-        <div className="main-single-product-container">
-            <div className="single-product-container">
-                <div className="single-product-image-container">
-                    <img className="single-product-image" src={product.imagesUrl}></img>
+        <div className="biggest-container">
+            <div className="main-single-product-container">
+                <div className="single-product-container">
+                    <div className="single-product-image-container">
+                        <img className="single-product-image" src={product.imagesUrl}></img>
+                    </div>
+                    <div className="single-product-sidebar-container">
+                        {user && user.id === product.ownerId &&(
+                            <div className="edit-delete-product-buttons">
+                                <div className="edit-product-button">
+                                    <OpenModalButton
+                                        buttonText="Edit Product"
+                                        modalComponent={<EditProduct />}
+                                    />
+                                </div>
+                                <button onClick={deleteButton} className="delete-product-button">Delete Product</button>
+                            </div>
+                        )}
+                        <div className="single-product-information-container">
+                            <h1 className="single-product-price">${product.price.toFixed(2)}</h1>
+                            <h3 className="single-product-name">{product.name}</h3>
+                            <div className="add-to-cart-button-container">
+                                {user ? (
+                                    <button onClick={addToCart} className="add-to-cart-button">Add to cart</button>
+                                ) : (
+
+                                    <button className="add-to-cart-button-logged-out" disabled={true}>Sign in to add to cart</button>
+                                )}
+                            </div>
+                            <div className="single-product-description-container">
+                                <div className="single-product-description-header">Description:</div>
+                                <p className="single-product-description">{product.description}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div className="single-product-sidebar-container">
-                    {user && user.id === product.ownerId &&(
-                        <div className="edit-delete-product-buttons">
-                            <OpenModalButton
-                                buttonText="Edit Product"
-                                modalComponent={<EditProduct />}
+                <div className="all-reviews-area-container">
+                    <div className="all-reviews-header">
+                        <h3>{reviews.length} reviews</h3>
+                        <div>{starFunc(averageFunc(reviews))}</div>
+                        <div className="create-review-button-container">
+                        {user && user.id !== product.ownerId && (
+                            !reviews.find(review => review.userId === user.id)
+                        ) && (
+                            <div className="create-review-button">
+                                <OpenModalButton
+                                    buttonText="Create Review"
+                                    modalComponent={<CreateReview productId={productId} />}
                                 />
-                                <button onClick={deleteButton} className="delete-button">Delete Product</button>
+                            </div>
+                        )}
                         </div>
-                    )}
-                    <div className="single-product-information-container">
-                        <h1 className="single-product-price">${product.price}</h1>
-                        <h3 className="single-product-name">{product.name}</h3>
-                        <div>
-                            <button onClick={addToCart} className="add-to-cart-button">Add to cart</button>
-                        </div>
-                        <div>{product.description}</div>
+                    </div>
+                    <div>
+                        <AllReviewsComponent productId={productId} />
                     </div>
                 </div>
-            </div>
-            <div className="all-reviews-container">
-                <div className="all-reviews-header">
-                    <h3>{reviews.length} reviews</h3>
-                    <div>{starFunc(averageFunc(reviews))}</div>
-                    <div className="create-review-button-container">
-                    {user && (
-                        !reviews.find(review => review.userId === user.id)
-                    ) && (
-                        <OpenModalButton
-                            buttonText="Create Review"
-                            modalComponent={<CreateReview productId={productId} />}
-                        />
-                    )}
-                    </div>
-                </div>
-                <AllReviewsComponent productId={productId} />
             </div>
         </div>
+
     )
 }
 

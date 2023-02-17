@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, jsonify, request
+from flask import Blueprint, jsonify, request
 from ..models import db, Product, Review, ProductImage
 from ..forms import ProductForm
 from ..forms.review_form import ReviewForm
@@ -58,7 +58,7 @@ def create_product():
         db.session.add(image)
         db.session.commit()
         return product.to_dict()
-    print(product.errors)
+
     return {'errors': validation_errors_to_error_messages(product.errors)}, 401
 
 @product_routes.route('/<int:id>')
@@ -72,11 +72,10 @@ def single_product(id):
 def edit_product(id):
     current_product = Product.query.get(id)
     res = request.get_json()
-
     product = ProductForm()
     product["csrf_token"].data = request.cookies["csrf_token"]
 
-    if current_product:
+    if product.validate_on_submit():
         product.populate_obj(current_product)
 
         current_product.name = res["name"]
@@ -86,8 +85,9 @@ def edit_product(id):
         db.session.commit()
         prod = current_product.to_dict()
         return jsonify(prod)
-    else:
-        return {'errors': validation_errors_to_error_messages(product.errors)}, 401
+    return {'errors': validation_errors_to_error_messages(product.errors)}, 401
+
+
 
 @product_routes.route('/<int:id>', methods=["DELETE"])
 def delete_product(id):
@@ -108,7 +108,7 @@ def all_reviews(id):
 
     review_res = []
     for review in reviews:
-        print('review', type(review['user']))
+       
         review_res.append({
             'id': review['id'],
             'userId': review['userId'],
