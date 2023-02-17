@@ -8,6 +8,7 @@ import Navigation from "./components/Navigation";
 import AllProducts from "./components/AllProducts";
 import SingleProduct from "./components/SingleProduct";
 import PurchaseSplash from "./components/PurchaseSplash";
+import Footer from './components/Footer'
 import Cart from "./components/Cart"
 import Search from "./components/Search";
 
@@ -47,18 +48,7 @@ function App() {
 
         </Switch>
       )}
-      <div className='cart-footer'>
-        <div className="footer-top">
-          <p><i class="fa-regular fa-copyright"></i> 2023 Kartsy, Inc. </p>
-          <p className='footer-tech'>
-            <p>Javascript</p>
-            <p>Python</p>
-            <p>Flask</p>
-          </p>
-        </div>
-        <p>Merchant is Kartsy, Inc. (USA), and the currency in which the seller transacts is fake.</p>
-        <p>Kartsy, Inc., USA 117 Fake Street Brooklyn, NY 11201</p>
-      </div>
+     <Footer />
     </>
   );
 }
