@@ -38,8 +38,6 @@ class Product(db.Model):
             'name': self.name,
             'price': self.price,
             'description': self.description,
-            #'owner': self.owner,
-            #'reviews': self.reviews,
             'imagesUrl': self.images[0].url,
-            #'shoppingCartItem': self.shopping_cart_item
+         
         }

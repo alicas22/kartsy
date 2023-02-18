@@ -29,6 +29,5 @@ class ShoppingCartItem(db.Model):
             'userId': self.user_id,
             'countOfProduct': self.count_of_product,
             'productName': self.product.name,
-            #'productImage': self.product.imagesUrl,
             'productPrice': self.product.price
         }

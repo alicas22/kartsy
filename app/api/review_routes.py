@@ -1,4 +1,4 @@
-from flask import Flask, Blueprint, jsonify, request
+from flask import  Blueprint, jsonify, request
 from flask_login import login_required
 from ..models import db, Review
 from ..forms.review_form import ReviewForm
@@ -20,22 +20,9 @@ def validation_errors_to_error_messages(validation_errors):
 
 @review_routes.route('/')
 def all_reviews():
-   
+
     all_rev = Review.query.all()
     reviews = [review.to_dict() for review in all_rev]
-
-
-    # rev_res = []
-    # for review in reviews:
-
-    #     rev_res.append({
-    #         'id': review['id'],
-    #         # 'user_id ': review['userId '],
-    #         'productId': review['productId'],
-    #         'star': review['star'],
-    #         'review': review['review'],
-    #         'createdAt': review['createdAt']
-    #     })
 
     return jsonify(reviews)
 
