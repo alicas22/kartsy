@@ -8,18 +8,24 @@ import './AllReviews.css';
 const AllReviewsComponent = ({ productId }) => {
     const dispatch = useDispatch();
     const allReviewsObj = useSelector(state => state.reviews);
-    const allReviews = Object.values(allReviewsObj);
+    // const allReviews = Object.values(allReviewsObj);
+    const reviewsArr = Object.values(allReviewsObj)
+
+    const reviews = []
+    for (const key in reviewsArr[reviewsArr.length -1]){
+        reviews.push(reviewsArr[reviewsArr.length -1][key])
+    }
 
     useEffect(() => {
         dispatch(loadAllReviewsThunk(productId));
         return () => dispatch(cleanUpReviewsAction());
     }, [dispatch, productId]);
 
-    if (!allReviews || !allReviewsObj) return null;
+    if (!reviews || !allReviewsObj) return null;
 
     return (
         <div className="all-reviews-container">
-            {allReviews.map((singleReview) => (
+            {reviews.map((singleReview) => (
                 <SingleReviewCard key={singleReview.id}
                 review={singleReview.review}
                 user={singleReview.firstName}
