@@ -9,6 +9,8 @@ import AllProducts from "./components/AllProducts";
 import SingleProduct from "./components/SingleProduct";
 import PurchaseSplash from "./components/PurchaseSplash";
 import Footer from './components/Footer'
+import MyProducts from "./components/MyProducts";
+import MyReviews from "./components/MyReviews";
 import Cart from "./components/Cart"
 import Search from "./components/Search";
 
@@ -41,6 +43,12 @@ function App() {
           </Route>
           <Route exact path='/cart/purchasecomplete'>
             <PurchaseSplash />
+          </Route>
+          <Route path='/myproducts'>
+            <MyProducts />
+          </Route>
+          <Route path='/myreviews'>
+            <MyReviews />
           </Route>
           <Route path='/search'>
             <Search />

@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField
-from wtforms.validators import DataRequired, Email, ValidationError
+from wtforms.validators import DataRequired, ValidationError
 from app.models import User
 
 def valid_first_name(form,field):
@@ -10,7 +10,7 @@ def valid_first_name(form,field):
 
 def valid_last_name(form, field):
     lastName = field.data
-    
+
     if len(lastName)< 2 or len(lastName) > 20:
         raise ValidationError('Last name must be between 2 and 20 characters')
 

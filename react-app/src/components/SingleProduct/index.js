@@ -22,13 +22,25 @@ const SingleProduct = () => {
     }, [dispatch, productId])
 
     const product = useSelector((state) => state.products.singleProduct)
-    const reviewsObj = useSelector((state) => state.reviews)
-    const reviews = Object.values(reviewsObj)
-
     const user = useSelector((state) => state.session.user)
+    const reviewsObj = useSelector((state) => state.reviews)
+    if (!reviewsObj) return null
+
+    const reviewsArr = Object.values(reviewsObj)
+    if (!reviewsArr) return null
+
+    // essentially keying into state.reviews.productReviews in a non-intuitive way
+    // because useSelector isnt working the way we need it to
+    const reviews = []
+    for (const key in reviewsArr[reviewsArr.length -1]){
+        reviews.push(reviewsArr[reviewsArr.length -1][key])
+    }
+
+
+
 
     if (!product) return null
-    // if (!user) return null
+   
 
     let cart_item;
     if (user) {

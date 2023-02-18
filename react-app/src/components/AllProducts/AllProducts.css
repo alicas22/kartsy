@@ -1,8 +1,6 @@
 .all-products {
     width: 100%;
     margin: auto;
-    -webkit-column-count: 4;
-    -moz-column-count: 4;
     column-count: 4;
     padding: 0;
 }
@@ -19,7 +17,6 @@
     height: 100%;
 }
 
-
 .product-price-container {
     position: absolute;
     bottom: 9%;
@@ -29,6 +26,17 @@
     padding: 8px;
 
 }
+
+.product-price-container1 {
+    position: absolute;
+    bottom: 6%;
+    left: 3%;
+    background-color: white;
+    border-radius: 15px;
+    padding: 8px;
+
+}
+
 
 .inside-product-box {
     position: relative;
@@ -56,7 +64,7 @@
 .mapped-products-container {
     padding: 1rem 10rem 1rem 10rem;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
 }
 
@@ -78,7 +86,7 @@
 
 .create-product-modal-container {
     padding-top: 40px;
-    padding-left: 165px;
+    padding-right: 165px;
 }
 
 .first-image {
@@ -152,17 +160,40 @@
     margin: auto;
 }
 
-@media screen and (max-width: 1024px) {
-    /* .first-image {
-        border-radius: 50%;
-        width: 80px;
-        height: 80px;
-    } */
+.square-image :hover {
+    cursor: pointer;
+    box-shadow: 5px 5px 10px lightgray, -.5em 0 .3em lightgray;
+}
 
-    
+.square-image {
+    position: relative;
+}
+
+.img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.main-main-square-container {
+    padding: 1rem 10rem 10rem 10rem;
 
 }
 
+.main-square-container {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(100px, auto));
+    grid-auto-rows: minmax(200px, 200px);
+    grid-gap: 20px;
+    /* padding: 50px; */
+
+}
+
+.something {
+    padding-top: 40px;
+    padding-left: 165px;
+}
 
 @media screen and (max-width: 1400px) {
 
@@ -213,7 +244,15 @@
 
     .create-product-modal-container {
         padding-top: 40px;
+        padding-right: 80px;
+    }
+
+    .main-main-square-container {
+        padding: 1rem 5rem 10rem 5rem;
+
+    }
+
+    .something {
         padding-left: 80px;
     }
 }
-

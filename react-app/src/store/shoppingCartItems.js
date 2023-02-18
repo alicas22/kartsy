@@ -1,5 +1,4 @@
 const LOAD_ALL_CART_ITEMS = 'cart/LOAD_CART_ITEMS';
-// const LOAD_SINGLE_CART_ITEM = 'cart/LOAD_SINGLE_CART_ITEM';
 const CREATE_CART_ITEM = 'cart/CREATE_CART_ITEM';
 const UPDATE_CART_ITEM = 'cart/UPDATE_CART_ITEM';
 const DELETE_CART_ITEM = 'cart/DELETE_CART_ITEM';
@@ -97,12 +96,12 @@ export const deleteCartItemThunk = (badCartItemId) => async dispatch => {
 };
 
 export const clearCartItemsThunk = () => async dispatch => {
-    console.log("from clearCartItems 1")
+
     const response = await fetch(`/api/cart/purchasecomplete/`, {
         method: "DELETE",
         headers: {'Content-Type': 'application/json'},
     });
-    console.log("from clearCartItems 2")
+
 
     if (response.ok) {
         dispatch(cleanUpCartAction());
@@ -128,28 +127,21 @@ const cartItemReducer = (state = initialState, action) => {
             newState.allCartItems = normalize(action.cartItems)
             return newState
         }
-        // case LOAD_SINGLE_CART_ITEM: {
-        //     newState = { ...state }
-        //     newState.singleCartItem = action.cartItem
-        //     return newState
-        // }
+
         case CREATE_CART_ITEM:{
             newState = { ...state }
             newState.allCartItems = {...newState.allCartItems, [action.newCartItem.id]: action.newCartItem}
-            // newState.singleCartItem = {...newState.singleCartItem, ...action.newCartItem}
             return newState
         }
         case UPDATE_CART_ITEM: {
             const newState = { ...state };
             newState.allCartItems = { ...state.allCartItems, [action.updatedCartItem.id]: action.updatedCartItem }
-            // newState.singleCartItem = { ...newState.singleCartItem, ...action.updatedCartItem }
             return newState;
         }
         case DELETE_CART_ITEM: {
             const newState = { ...state };
             delete newState.allCartItems[action.badCartItemId];
             newState.allCartItems = { ...newState.allCartItems }
-            // newState.singleCartItem = { ...state}
             return newState;
         }
         case CLEAN_UP_CART: {

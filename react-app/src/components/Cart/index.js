@@ -1,8 +1,10 @@
 import { useEffect, useState } from "react"
-import { useHistory, NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import { cleanUpCartAction, loadAllCartItemsThunk, updateCartItemThunk, deleteCartItemThunk, clearCartItemsThunk } from "../../store/shoppingCartItems"
 import { thunkGetProducts } from "../../store/products"
+import OpenModalButton from "../OpenModalButton"
+import CheckoutCart from '../CheckoutCart'
 import './Cart.css';
 
 
@@ -11,6 +13,7 @@ const GetCart = () => {
 
     const dispatch = useDispatch()
     const [number, setNumber] = useState({ 1: 1 })
+    const [money, setMoney] = useState(null)
 
     const cartObj = useSelector((state) => state.cart.allCartItems)
     const products = useSelector((state) => state.products.allProducts)
@@ -37,9 +40,7 @@ const GetCart = () => {
     const updateItem = async (cartItemId, e) => {
         setNumber({ ...number, [cartItemId]: e.target.value })
 
-        // const itemCount = number[cartItemId]
-        // if(!itemCount) return null
-
+ 
         const payload = {
             countOfProduct: e.target.value, //e.target.value will send the selected value instead of having to wait for number to update (delayed bc of async)
             cartItemId: cartItemId
@@ -55,18 +56,16 @@ const GetCart = () => {
             cartItemId: cartItemId
         }
         dispatch(deleteCartItemThunk(payload))
-        // .then(dispatch(loadAllCartItemsThunk()))
+
     }
 
-    const clearCart = async (e)=>{
-        dispatch(clearCartItemsThunk())
-    }
+
 
     // get total price for all items in cart
     let totalPrice = 0
     let displayTotal
     if (cart) {
-        console.log(cart)
+
         for (let item of cart) {
             totalPrice += item.productPrice * item.countOfProduct
             displayTotal = totalPrice.toFixed(2)
@@ -126,14 +125,51 @@ const GetCart = () => {
                         }
                     </ul>
                     <div className='buy-card'>
+                        {cart.length !==0 && (
+                            <form className='currency-type'>
+                                <label className='how-youll-pay' htmlFor="money">How you'll pay </label>
+                                <div className='money-container'>
+                                    <input
+                                        id="money"
+                                        type="radio"
+                                        checked={money === 'bitcoin'}
+                                        name="bitcoin"
+                                        onChange={(e) => setMoney(e.target.name)}
+                                        value={money}
+                                    /><i class="fa-brands fa-bitcoin"></i><p className='button-text'>Bitcoin</p>
+                                </div>
+                                <div className='money-container'>
+                                    <input
+                                        id="money"
+                                        type="radio"
+                                        checked={money === 'monopoly money'}
+                                        name="monopoly money"
+                                        onChange={(e) => setMoney(e.target.name)}
+                                        value={money}
+                                    /><i class="fa-solid fa-sack-dollar"></i><p className='button-text'>Monopoly Money</p>
+                                </div>
+                            </form>
+                        )}
                         <div className='total-price'>
-                            <h4>Item(s) total: </h4>
-                            <p>${displayTotal}</p>
+                            <h4 className='total-price-text'>Item(s) total: </h4>
+                            <p className='total-price-text'>${displayTotal}</p>
                         </div>
-                        {cart.length !== 0 ? (
-                            <NavLink className='checkout-button' to={'/cart/purchasecomplete'} onClick={clearCart}>Complete purchase</NavLink>
+                        {money && (
+                            <div className='checkout-message'>Checkout with {money}.</div>
+                        )}
+                        {money == null && cart.length !== 0 && (
+                            <div className='please-select-payment'>Please select a payment type.</div>
+                        )}
+                        {money && cart.length !== 0 ? (
+                            // <NavLink className='checkout-button' to={'/cart/purchasecomplete'} onClick={clearCart}>Complete purchase</NavLink>
+                            <div className="checkout-cart-modal">
+                                <OpenModalButton
+                                    buttonText='Proceed to checkout'
+                                    modalComponent={<CheckoutCart />}
+                                />
+                            </div>
                         ) : (
-                            <button className='checkout-button-disabled' disabled={true}>Complete purchase</button>
+                            <button className='checkout-button-disabled' disabled={true}>Proceed to checkout</button>
                         )}
                         <p className='cart-taxes'>* Additional duties and taxes may apply</p>
                     </div>

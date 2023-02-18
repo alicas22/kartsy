@@ -43,5 +43,5 @@ class Review(db.Model):
             'createdAt': self.created_at,
             'updatedAt': self.updated_at,
             'user': self.user.first_name,
-            # 'product': self.product
+           
         }

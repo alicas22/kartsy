@@ -46,6 +46,40 @@ const AllProducts = () => {
         history.push(`/products/8`)
     }
 
+    //BREAK
+    const Product6Click = (e, id) => {
+        e.preventDefault()
+        history.push(`/products/11`)
+    }
+    const Product7Click = (e, id) => {
+        e.preventDefault()
+        history.push(`/products/24`)
+    }
+    const Product8Click = (e, id) => {
+        e.preventDefault()
+        history.push(`/products/26`)
+    }
+    const Product9Click = (e, id) => {
+        e.preventDefault()
+        history.push(`/products/36`)
+    }
+    const Product10Click = (e, id) => {
+        e.preventDefault()
+        history.push(`/products/38`)
+    }
+    const Product11Click = (e, id) => {
+        e.preventDefault()
+        history.push(`/products/28`)
+    }
+    const Product12Click = (e, id) => {
+        e.preventDefault()
+        history.push(`/products/23`)
+    }
+    const Product13Click = (e, id) => {
+        e.preventDefault()
+        history.push(`/products/32`)
+    }
+
     return (
         <div className='all-products-container'>
             <div className='welcome-back-container'>
@@ -109,28 +143,74 @@ const AllProducts = () => {
                         </div>
                     </div>
                 </div>
-                
-            </div>
-            {user && (
-                <div className='create-product-modal-container'>
-                    <div className="create-product-modal">
-                        <OpenModalButton
-                            buttonText="Create Product"
-                            modalComponent={<CreateProduct />}
-                        />
+                {user && (
+                    <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
+                        <div className='something'>
+                        <h3>Favorites & more</h3>
+                        </div>
+                        <div className='create-product-modal-container'>
+                            <div className="create-product-modal">
+                                <OpenModalButton
+                                    buttonText="Create Product"
+                                    modalComponent={<CreateProduct />}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                )}
+                <div className='main-main-square-container'>
+                    <div>
+                        <div className='main-square-container'>
+                            <div className='square-image'>
+                                <img className='img'  onClick={(e) => Product6Click(e)} src='https://i.etsystatic.com/5153755/r/il/58f978/3606302592/il_794xN.3606302592_f1zq.jpg'></img>
+                                <div className='product-price-container1 '>$96.00</div>
+                            </div>
+                            <div className='square-image'>
+                                <img className='img'  onClick={(e) => Product7Click(e)} src='https://www.etsy.com/img/35001350/r/il/96e0f8/4302314069/il_794xN.4302314069_qdbb.jpg'></img>
+                                <div className='product-price-container1 '>$129.00</div>
+                            </div>
+                            <div className='square-image'>
+                                <img className='img'  onClick={(e) => Product8Click(e)} src='https://www.etsy.com/img/12953790/r/il/385c57/2336200012/il_794xN.2336200012_4ocm.jpg'></img>
+                                <div className='product-price-container1 '>$2115.28</div>
+                            </div>
+                            <div className='square-image'>
+                                <img className='img'  onClick={(e) => Product9Click(e)} src='https://www.etsy.com/img/18224097/r/il/04097b/1818968298/il_794xN.1818968298_4cvu.jpg'></img>
+                                <div className='product-price-container1 '>$142.68</div>
+                            </div>
+                            <div className='square-image'>
+                                <img className='img'  onClick={(e) => Product10Click(e)} src='https://www.etsy.com/img/38673016/r/il/be3cc5/4590192881/il_794xN.4590192881_64pb.jpg'></img>
+                                <div className='product-price-container1 '>$16.97</div>
+                            </div>
+                            <div className='square-image'>
+                                <img className='img'  onClick={(e) => Product11Click(e)} src='https://www.etsy.com/img/14217457/r/il/154077/1507211365/il_794xN.1507211365_pum8.jpg'></img>
+                                <div className='product-price-container1 '>$8.32</div>
+                            </div>
+                            <div className='square-image'>
+                                <img className='img'  onClick={(e) => Product12Click(e)} src='https://www.etsy.com/img/28674208/r/il/80fa8f/4177697016/il_794xN.4177697016_qwr0.jpg'></img>
+                                <div className='product-price-container1 '>$124.79</div>
+                            </div>
+                            <div className='square-image'>
+                                <img className='img'  onClick={(e) => Product13Click(e)} src='https://www.etsy.com/img/13343182/r/il/6a50b1/1598844339/il_794xN.1598844339_53j7.jpg'></img>
+                                <div className='product-price-container1 '>$13.99</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            )}
+
+            </div>
             <div className='mapped-products-container'>
+                <h1>Browse for more inspiration</h1>
                 <ul className='all-products'>
                     {products.map((product) => {
                         return (
-                            <div className='product-card' key={product.id} onClick={(e) => ProductClick(e, product.id)}>
-                                <div className='image-container'>
-                                    <img className='product-image' src={product.imagesUrl}></img>
-                                </div>
-                                <div className='product-price-container'>
-                                    ${product.price.toFixed(2)}
+                            <div>
+                                <div className='product-card' key={product.id} onClick={(e) => ProductClick(e, product.id)}>
+                                    <div className='image-container'>
+                                        <img className='product-image' src={product.imagesUrl}></img>
+                                    </div>
+                                    <div className='product-price-container'>
+                                        ${product.price.toFixed(2)}
+                                    </div>
                                 </div>
                             </div>
                         )

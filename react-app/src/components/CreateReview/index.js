@@ -1,10 +1,8 @@
 import { useEffect, useState } from "react"
 import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
-import { thunkCreateProduct } from "../../store/products"
 import { useModal } from "../../context/Modal"
 import { createReviewThunk } from "../../store/reviews"
-import { thunkGetSingleProduct } from "../../store/products"
 import { loadAllReviewsThunk } from "../../store/reviews"
 import "./CreateReview.css"
 
