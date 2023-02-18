@@ -14,7 +14,7 @@ const GetCart = () => {
     const dispatch = useDispatch()
     const [number, setNumber] = useState({ 1: 1 })
     const [money, setMoney] = useState(null)
-    console.log('money', money)
+
     const cartObj = useSelector((state) => state.cart.allCartItems)
     const products = useSelector((state) => state.products.allProducts)
     const user = useSelector((state) => state.session.user)
@@ -40,9 +40,7 @@ const GetCart = () => {
     const updateItem = async (cartItemId, e) => {
         setNumber({ ...number, [cartItemId]: e.target.value })
 
-        // const itemCount = number[cartItemId]
-        // if(!itemCount) return null
-
+ 
         const payload = {
             countOfProduct: e.target.value, //e.target.value will send the selected value instead of having to wait for number to update (delayed bc of async)
             cartItemId: cartItemId
@@ -58,18 +56,16 @@ const GetCart = () => {
             cartItemId: cartItemId
         }
         dispatch(deleteCartItemThunk(payload))
-        // .then(dispatch(loadAllCartItemsThunk()))
+
     }
 
-    // const clearCart = async (e) => {
-    //     dispatch(clearCartItemsThunk())
-    // }
+
 
     // get total price for all items in cart
     let totalPrice = 0
     let displayTotal
     if (cart) {
-        
+
         for (let item of cart) {
             totalPrice += item.productPrice * item.countOfProduct
             displayTotal = totalPrice.toFixed(2)

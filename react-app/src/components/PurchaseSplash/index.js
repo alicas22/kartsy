@@ -1,5 +1,3 @@
-import { useSelector, useDispatch } from "react-redux"
-import { cleanUpCartAction, loadAllCartItemsThunk, updateCartItemThunk, deleteCartItemThunk } from "../../store/shoppingCartItems"
 import "./PurchaseSplash.css";
 
 const PurchaseComplete = () => {

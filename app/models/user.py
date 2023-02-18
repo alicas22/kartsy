@@ -1,4 +1,4 @@
-from .db import db, environment, SCHEMA, add_prefix_for_prod
+from .db import db, environment, SCHEMA
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from sqlalchemy.orm import validates
@@ -63,7 +63,5 @@ class User(db.Model, UserMixin):
             'lastName': self.last_name,
             'username': self.username,
             'email': self.email,
-            # 'reviews': self.reviews,
-            # 'products': self.products,
-            # 'shoppingCartItem': self.shopping_cart_item
+
         }

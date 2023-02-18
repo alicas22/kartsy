@@ -141,9 +141,6 @@ const reviewsReducer = (state = initialState, action) => {
         case LOAD_ALL_REVIEWS: {
             const newState = { ...state };
             newState.productReviews = normalize(action.productId)
-            // action.productId.forEach((review) => {
-            //     newState.[review.id] = review;
-            // });
             return newState;
         };
         //this is all reviews on the site for "My Reviews Tab"

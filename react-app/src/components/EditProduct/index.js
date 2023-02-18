@@ -1,10 +1,8 @@
-import { useEffect, useState } from "react"
-import { useHistory, useParams } from 'react-router-dom'
+import {  useState } from "react"
+import { useHistory} from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import { thunkEditProduct } from "../../store/products"
 import { useModal } from "../../context/Modal"
-import SingleProduct from "../SingleProduct"
-import { thunkGetSingleProduct } from "../../store/products"
 import './EditProduct.css'
 
 

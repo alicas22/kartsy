@@ -14,9 +14,7 @@ function Navigation({ isLoaded }){
 	const sessionUser = useSelector(state => state.session.user);
 	const dispatch=useDispatch()
 	const { closeModal } = useModal();
-
 	const [query, setQuery] = useState('');
-    const [results, setResults] = useState([]);
 	const [errors, setErrors] = useState([]);
 
 	const history= useHistory()
@@ -46,7 +44,7 @@ function Navigation({ isLoaded }){
 	if (sessionUser) {
 	  sessionLinks = (
 		<div className='nav-bar-right'>
-		  
+
 		<div style = {{marginRight:'15px'}}>
 		  <ProfileButton user={sessionUser} />
 		</div>
@@ -64,12 +62,6 @@ function Navigation({ isLoaded }){
 			  modalComponent={<LoginFormModal />}
 			/>
 		  </div>
-		  {/* <div className='modals-logged-out'>
-			<OpenModalButton
-			  buttonText="Sign Up"
-			  modalComponent={<SignupFormModal />}
-			/>
-		  </div> */}
 		</div >
 	  );
 	}

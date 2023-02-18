@@ -40,7 +40,7 @@ const SingleProduct = () => {
 
 
     if (!product) return null
-    // if (!user) return null
+   
 
     let cart_item;
     if (user) {

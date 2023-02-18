@@ -215,7 +215,13 @@
     align-items: center;
     justify-content: left;
     margin: 3px 0px;
+
 }
+
+input[type="radio"]:focus {
+    outline: none;
+}
+
 .fa-sack-dollar {
     display: flex;
     color: green;

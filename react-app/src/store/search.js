@@ -1,16 +1,10 @@
 const CREATE_SEARCH = 'search/CREATE_SEARCH'
-// const LOAD_SEARCH = 'search/LOAD_SEARCH'
 const CLEAN_SEARCH = 'search/CLEAN_SEARCH'
 
 const createSearch = (results) => ({
     type: CREATE_SEARCH,
     results
 })
-
-// const loadSearch = (search) => ({
-//     type: LOAD_SEARCH,
-//     search
-// })
 
 export const cleanUpSearchAction = () => {
     return {
@@ -45,10 +39,7 @@ const searchReducer = (state = initialState, action) => {
     let newState
 
     switch (action.type){
-        // case LOAD_SEARCH:
-        //     newState = { ...state }
-        //     newState.searchResults = normalize(action.search)
-        //     return newState
+ 
         case CREATE_SEARCH:
             if(Object.keys(action.results).length > 0){
                 newState = { ...state }
