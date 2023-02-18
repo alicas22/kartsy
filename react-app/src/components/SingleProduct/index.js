@@ -29,6 +29,8 @@ const SingleProduct = () => {
     const reviewsArr = Object.values(reviewsObj)
     if (!reviewsArr) return null
 
+    // essentially keying into state.reviews.productReviews in a non-intuitive way
+    // because useSelector isnt working the way we need it to
     const reviews = []
     for (const key in reviewsArr[reviewsArr.length -1]){
         reviews.push(reviewsArr[reviewsArr.length -1][key])
