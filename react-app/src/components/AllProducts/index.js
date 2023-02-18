@@ -145,7 +145,7 @@ const AllProducts = () => {
                 </div>
                 {user && (
                     <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                        <div style={{ paddingTop: '40px', paddingLeft: '165px'}}>
+                        <div className='something'>
                         <h3>Favorites & more</h3>
                         </div>
                         <div className='create-product-modal-container'>
@@ -160,7 +160,6 @@ const AllProducts = () => {
                 )}
                 <div className='main-main-square-container'>
                     <div>
-
                         <div className='main-square-container'>
                             <div className='square-image'>
                                 <img className='img'  onClick={(e) => Product6Click(e)} src='https://i.etsystatic.com/5153755/r/il/58f978/3606302592/il_794xN.3606302592_f1zq.jpg'></img>
@@ -200,7 +199,7 @@ const AllProducts = () => {
 
             </div>
             <div className='mapped-products-container'>
-                <h3>Browse for more inspiration</h3>
+                <h1>Browse for more inspiration</h1>
                 <ul className='all-products'>
                     {products.map((product) => {
                         return (

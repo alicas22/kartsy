@@ -52,15 +52,15 @@ function ProfileButton({ user }) {
             <div className='nav-bar-dropdown-menu'>
               <div className='nav-bar-dropdown-menu-signout'>
                 <NavLink className='button-container-signout' to={'/myproducts'} style={{ textDecoration: 'none', color: "black" }}>
-                  <i class="fa-solid fa-box-open"></i>
+                  <i style={{paddingRight: '10px'}} class="fa-solid fa-box-open"></i>
                   My Products
                 </NavLink>
                 <NavLink className='button-container-signout' to={'/myreviews'} style={{ textDecoration: 'none', color: "black" }}>
-                  <i class="fa-solid fa-pencil"></i>
+                  <i style={{paddingRight: '15px'}}  class="fa-solid fa-pencil"></i>
                   My Reviews
                 </NavLink>
-                <div onClick={handleLogout} className='button-container-signout'>
-                  <i class="fa-solid fa-arrow-right-from-bracket fa-flip-horizontal"></i>
+                <div onClick={handleLogout} className='button-container-signout1'>
+                  <i style={{paddingLeft: '15px'}}  class="fa-solid fa-arrow-right-from-bracket fa-flip-horizontal"></i>
                   Sign Out
                 </div>
               </div>

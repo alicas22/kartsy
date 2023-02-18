@@ -164,6 +164,7 @@
     cursor: pointer;
     box-shadow: 5px 5px 10px lightgray, -.5em 0 .3em lightgray;
 }
+
 .square-image {
     position: relative;
 }
@@ -187,6 +188,11 @@
     grid-gap: 20px;
     /* padding: 50px; */
 
+}
+
+.something {
+    padding-top: 40px;
+    padding-left: 165px;
 }
 
 @media screen and (max-width: 1400px) {
@@ -238,7 +244,15 @@
 
     .create-product-modal-container {
         padding-top: 40px;
+        padding-right: 80px;
+    }
+
+    .main-main-square-container {
+        padding: 1rem 5rem 10rem 5rem;
+
+    }
+
+    .something {
         padding-left: 80px;
     }
 }
-
