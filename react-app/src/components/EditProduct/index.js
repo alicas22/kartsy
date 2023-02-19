@@ -14,6 +14,7 @@ const EditProduct = () => {
     const [name, setName] = useState(editproduct.name)
     const [price, setPrice] = useState(editproduct.price)
     const [description, setDescription] = useState(editproduct.description)
+    const [imagesUrl, setImagesUrl] = useState(editproduct.imagesUrl)
     const [errors, setErrors] = useState([])
 
 
@@ -28,7 +29,8 @@ const EditProduct = () => {
             ...editproduct,
             name,
             price,
-            description
+            description,
+            imageUrl:imagesUrl
         }
 
         if (!user) return null

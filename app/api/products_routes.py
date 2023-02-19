@@ -72,16 +72,18 @@ def single_product(id):
 @product_routes.route('/<int:id>', methods=["PUT"])
 def edit_product(id):
     current_product = Product.query.get(id)
+    current_product_image = ProductImage.query.filter_by(product_id=id)
+
     res = request.get_json()
     product = ProductForm()
     product["csrf_token"].data = request.cookies["csrf_token"]
-
     if product.validate_on_submit():
         product.populate_obj(current_product)
 
         current_product.name = res["name"]
         current_product.price = res['price']
         current_product.description = res['description']
+        current_product_image.url = res['imagesUrl']
 
         db.session.commit()
         prod = current_product.to_dict()
