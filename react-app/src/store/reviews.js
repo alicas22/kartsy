@@ -156,12 +156,12 @@ const reviewsReducer = (state = initialState, action) => {
         };
         case UPDATE_REVIEW: {
             const newState = { ...state };
-            newState[action.updatedReview.id] = action.updatedReview;
+            newState.reviews.productReviews[action.updatedReview.id] = action.updatedReview;
             return newState;
         };
         case DELETE_REVIEW: {
             const newState = { ...state };
-            delete newState[action.badReviewId];
+            delete newState.reviews.productReviews[action.badReviewId];
             return newState;
         };
         case CLEAN_UP_REVIEWS: {
