@@ -4,7 +4,6 @@ import { useHistory, useParams } from "react-router-dom"
 import { thunkDeleteProduct, thunkGetSingleProduct } from "../../store/products"
 import { cleanUpSingleProductAction } from "../../store/products"
 import OpenModalButton from "../OpenModalButton"
-import LoginFormModal from "../LoginFormModal"
 import EditProduct from "../EditProduct"
 import AllReviewsComponent from "../AllReviews"
 import CreateReview from "../CreateReview"
@@ -40,7 +39,7 @@ const SingleProduct = () => {
 
 
     if (!product) return null
-   
+
 
     let cart_item;
     if (user) {

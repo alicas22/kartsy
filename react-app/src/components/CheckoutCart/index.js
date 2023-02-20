@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react"
 import { NavLink } from 'react-router-dom'
-import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import { clearCartItemsThunk } from "../../store/shoppingCartItems"
 import { useModal } from "../../context/Modal"
@@ -25,7 +23,6 @@ const CheckoutCart = () => {
     let totalPrice = 0
     let displayTotal
     if (cart) {
-        console.log(cart)
         for (let item of cart) {
             totalPrice += item.productPrice * item.countOfProduct
             displayTotal = totalPrice.toFixed(2)

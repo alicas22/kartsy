@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { NavLink } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
-import { cleanUpCartAction, loadAllCartItemsThunk, updateCartItemThunk, deleteCartItemThunk, clearCartItemsThunk } from "../../store/shoppingCartItems"
+import { cleanUpCartAction, loadAllCartItemsThunk, updateCartItemThunk, deleteCartItemThunk } from "../../store/shoppingCartItems"
 import { thunkGetProducts } from "../../store/products"
 import OpenModalButton from "../OpenModalButton"
 import CheckoutCart from '../CheckoutCart'
@@ -28,7 +28,7 @@ const GetCart = () => {
         if (user == null) {
             dispatch(cleanUpCartAction())
         }
-    }, [user])
+    }, [user, dispatch])
 
 
     if (!cartObj) return null
@@ -40,7 +40,7 @@ const GetCart = () => {
     const updateItem = async (cartItemId, e) => {
         setNumber({ ...number, [cartItemId]: e.target.value })
 
- 
+
         const payload = {
             countOfProduct: e.target.value, //e.target.value will send the selected value instead of having to wait for number to update (delayed bc of async)
             cartItemId: cartItemId
