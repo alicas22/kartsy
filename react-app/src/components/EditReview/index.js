@@ -11,7 +11,7 @@ const EditReview = ({ productId, reviewId }) => {
     const dispatch = useDispatch()
     const history = useHistory()
 
-    const editReview = useSelector((state) => state.reviews[reviewId])
+    const editReview = useSelector((state) => state.reviews.productReviews[reviewId])
 
     const { closeModal } = useModal();
     const [review, setReview] = useState(editReview.review)
