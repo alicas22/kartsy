@@ -143,11 +143,13 @@ const AllProducts = () => {
                         </div>
                     </div>
                 </div>
+                <div className='container-fav-create'>
+
+                <div className='something'>
+                    <h3>Favorites & more</h3>
+                </div>
                 {user && (
-                    <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                        <div className='something'>
-                        <h3>Favorites & more</h3>
-                        </div>
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                         <div className='create-product-modal-container'>
                             <div className="create-product-modal">
                                 <OpenModalButton
@@ -158,39 +160,40 @@ const AllProducts = () => {
                         </div>
                     </div>
                 )}
+                </div>
                 <div className='main-main-square-container'>
                     <div>
                         <div className='main-square-container'>
                             <div className='square-image'>
-                                <img className='img'  onClick={(e) => Product6Click(e)} src='https://i.etsystatic.com/5153755/r/il/58f978/3606302592/il_794xN.3606302592_f1zq.jpg'></img>
+                                <img className='img' onClick={(e) => Product6Click(e)} src='https://i.etsystatic.com/5153755/r/il/58f978/3606302592/il_794xN.3606302592_f1zq.jpg'></img>
                                 <div className='product-price-container1 '>$96.00</div>
                             </div>
                             <div className='square-image'>
-                                <img className='img'  onClick={(e) => Product7Click(e)} src='https://www.etsy.com/img/35001350/r/il/96e0f8/4302314069/il_794xN.4302314069_qdbb.jpg'></img>
+                                <img className='img' onClick={(e) => Product7Click(e)} src='https://www.etsy.com/img/35001350/r/il/96e0f8/4302314069/il_794xN.4302314069_qdbb.jpg'></img>
                                 <div className='product-price-container1 '>$129.00</div>
                             </div>
                             <div className='square-image'>
-                                <img className='img'  onClick={(e) => Product8Click(e)} src='https://www.etsy.com/img/12953790/r/il/385c57/2336200012/il_794xN.2336200012_4ocm.jpg'></img>
+                                <img className='img' onClick={(e) => Product8Click(e)} src='https://www.etsy.com/img/12953790/r/il/385c57/2336200012/il_794xN.2336200012_4ocm.jpg'></img>
                                 <div className='product-price-container1 '>$2115.28</div>
                             </div>
                             <div className='square-image'>
-                                <img className='img'  onClick={(e) => Product9Click(e)} src='https://www.etsy.com/img/18224097/r/il/04097b/1818968298/il_794xN.1818968298_4cvu.jpg'></img>
+                                <img className='img' onClick={(e) => Product9Click(e)} src='https://www.etsy.com/img/18224097/r/il/04097b/1818968298/il_794xN.1818968298_4cvu.jpg'></img>
                                 <div className='product-price-container1 '>$142.68</div>
                             </div>
                             <div className='square-image'>
-                                <img className='img'  onClick={(e) => Product10Click(e)} src='https://www.etsy.com/img/38673016/r/il/be3cc5/4590192881/il_794xN.4590192881_64pb.jpg'></img>
+                                <img className='img' onClick={(e) => Product10Click(e)} src='https://www.etsy.com/img/38673016/r/il/be3cc5/4590192881/il_794xN.4590192881_64pb.jpg'></img>
                                 <div className='product-price-container1 '>$16.97</div>
                             </div>
                             <div className='square-image'>
-                                <img className='img'  onClick={(e) => Product11Click(e)} src='https://www.etsy.com/img/14217457/r/il/154077/1507211365/il_794xN.1507211365_pum8.jpg'></img>
+                                <img className='img' onClick={(e) => Product11Click(e)} src='https://www.etsy.com/img/14217457/r/il/154077/1507211365/il_794xN.1507211365_pum8.jpg'></img>
                                 <div className='product-price-container1 '>$8.32</div>
                             </div>
                             <div className='square-image'>
-                                <img className='img'  onClick={(e) => Product12Click(e)} src='https://www.etsy.com/img/28674208/r/il/80fa8f/4177697016/il_794xN.4177697016_qwr0.jpg'></img>
+                                <img className='img' onClick={(e) => Product12Click(e)} src='https://www.etsy.com/img/28674208/r/il/80fa8f/4177697016/il_794xN.4177697016_qwr0.jpg'></img>
                                 <div className='product-price-container1 '>$124.79</div>
                             </div>
                             <div className='square-image'>
-                                <img className='img'  onClick={(e) => Product13Click(e)} src='https://www.etsy.com/img/13343182/r/il/6a50b1/1598844339/il_794xN.1598844339_53j7.jpg'></img>
+                                <img className='img' onClick={(e) => Product13Click(e)} src='https://www.etsy.com/img/13343182/r/il/6a50b1/1598844339/il_794xN.1598844339_53j7.jpg'></img>
                                 <div className='product-price-container1 '>$13.99</div>
                             </div>
                         </div>

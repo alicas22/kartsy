@@ -1,0 +1,31 @@
+.not-found-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.not-found{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.not-found2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.not-found2:hover{
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.image-not-found{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+.img-not-found{
+    border-radius: 20px;
+}
