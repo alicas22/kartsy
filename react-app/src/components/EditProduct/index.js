@@ -1,5 +1,5 @@
-import {  useState } from "react"
-import { useHistory} from 'react-router-dom'
+import { useState } from "react"
+import { useHistory } from 'react-router-dom'
 import { useDispatch, useSelector } from "react-redux"
 import { thunkEditProduct } from "../../store/products"
 import { useModal } from "../../context/Modal"
@@ -30,7 +30,7 @@ const EditProduct = () => {
             name,
             price,
             description,
-            imageUrl:imagesUrl
+            imageUrl: imagesUrl
         }
 
         if (!user) return null
@@ -52,9 +52,9 @@ const EditProduct = () => {
         <div className="edit-product-form">
             <h1>Edit Product</h1>
             <form className='edit-product-form' onSubmit={handleSubmit}>
-                <ul className="validation-errors">
+                {/* <ul className="validation-errors">
                     {errors.map((error, index) => <li className="errors-text" key={index}>{error}</li>)}
-                </ul>
+                </ul> */}
                 <label>
                     <p>
                         Name
@@ -66,6 +66,9 @@ const EditProduct = () => {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
+                    <div className='validation-errors'>
+                        {errors.filter((error) => error.includes('name')).length > 0 ? errors.filter((error) => error.includes('name'))[0].split(': ')[1] : ''}
+                    </div>
                 </label>
                 <label>
                     <p>
@@ -78,6 +81,9 @@ const EditProduct = () => {
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                     />
+                    <div className='validation-errors'>
+                        {errors.filter((error) => error.includes('price')).length > 0 ? errors.filter((error) => error.includes('price'))[0].split(': ')[1] : ''}
+                    </div>
                 </label>
                 <label>
                     <p>
@@ -90,6 +96,9 @@ const EditProduct = () => {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     />
+                    <div className='validation-errors'>
+                        {errors.filter((error) => error.includes('description')).length > 0 ? errors.filter((error) => error.includes('description'))[0].split(': ')[1] : ''}
+                    </div>
                 </label>
                 <button className="edit-product-submit-button" type="submit">Submit</button>
             </form>

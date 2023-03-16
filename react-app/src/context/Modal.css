@@ -1,5 +1,5 @@
 #modal {
-  position: absolute;
+  position: fixed;
   top: 3rem;
   right: 0;
   left: 0;
@@ -31,7 +31,7 @@
   max-height: 100%;
   padding: 36px 40px 32px;
   position: absolute;
-  text-align: center;
+  /* text-align: center; */
   width: 30%;
   /* added myself */
   min-width: 275px;
