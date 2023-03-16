@@ -143,11 +143,13 @@ const AllProducts = () => {
                         </div>
                     </div>
                 </div>
+                <div className='container-fav-create'>
+
+                <div className='something'>
+                    <h3>Favorites & more</h3>
+                </div>
                 {user && (
-                    <div style={{ display:'flex', flexDirection: 'row', justifyContent: 'space-between'}}>
-                        <div className='something'>
-                        <h3>Favorites & more</h3>
-                        </div>
+                    <div style={{ display: 'flex', flexDirection: 'row', justifyContent: 'space-between' }}>
                         <div className='create-product-modal-container'>
                             <div className="create-product-modal">
                                 <OpenModalButton
@@ -158,6 +160,7 @@ const AllProducts = () => {
                         </div>
                     </div>
                 )}
+                </div>
                 <div className='main-main-square-container'>
                     <div>
                         <div className='main-square-container'>
