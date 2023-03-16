@@ -92,7 +92,7 @@ const SingleProduct = () => {
             <div className="main-single-product-container">
                 <div className="single-product-container">
                     <div className="single-product-image-container">
-                        <img className="single-product-image" src={product.imagesUrl}></img>
+                        <img className="single-product-image" src={product.imagesUrl} onError={e => { e.currentTarget.src = "https://www.aepint.nl/wp-content/uploads/2014/12/No_image_available.jpg"; }}></img>
                     </div>
                     <div className="single-product-sidebar-container">
                         {user && user.id === product.ownerId &&(

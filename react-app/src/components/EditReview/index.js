@@ -53,9 +53,9 @@ const EditReview = ({ productId, reviewId }) => {
         <div className="edit-review-form">
             <h1>Edit Review</h1>
             <form className='edit-review-form' onSubmit={handleSubmit}>
-                <ul className="validation-errors">
+                {/* <ul className="validation-errors">
                     {errors.map((error, index) => <li className="errors-text" key={index}>{error}</li>)}
-                </ul>
+                </ul> */}
                 <label>
                     <p>
                         Review
@@ -67,6 +67,9 @@ const EditReview = ({ productId, reviewId }) => {
                         value={review}
                         onChange={(e) => setReview(e.target.value)}
                     />
+                    <div className='validation-errors'>
+                        {errors.filter((error) => error.includes('review')).length > 0 ? errors.filter((error) => error.includes('review'))[0].split(': ')[1] : ''}
+                    </div>
                 </label>
                 <label>
                     <p>
@@ -81,9 +84,12 @@ const EditReview = ({ productId, reviewId }) => {
                         value={star}
                         onChange={(e) => setStar(e.target.value)}
                     />
+                    <div className='validation-errors'>
+                        {errors.filter((error) => error.includes('star')).length > 0 ? errors.filter((error) => error.includes('star'))[0].split(': ')[1] : ''}
+                    </div>
                 </label>
-                <div className= "edit-review-submit-button-container">
-                    <button className= "edit-review-submit-button" type="submit">Submit</button>
+                <div className="edit-review-submit-button-container">
+                    <button className="edit-review-submit-button" type="submit">Submit</button>
                 </div>
             </form>
         </div>

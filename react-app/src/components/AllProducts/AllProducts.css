@@ -27,6 +27,11 @@
 
 }
 
+.container-fav-create{
+    display: flex;
+    justify-content: space-between;
+}
+
 .product-price-container1 {
     position: absolute;
     bottom: 6%;

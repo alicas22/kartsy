@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, ValidationError
 
 def review_length(form, field):
     review = field.data
-    if len(review) < 3:
+    if len(review) < 3 or len(review) > 500:
         raise ValidationError('Review must be between 3 and 500 characters.')
 
 def stars_valid(form, field):

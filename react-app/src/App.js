@@ -13,6 +13,7 @@ import MyProducts from "./components/MyProducts";
 import MyReviews from "./components/MyReviews";
 import Cart from "./components/Cart"
 import Search from "./components/Search";
+import NotFound from "./components/PageNotFound";
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +53,9 @@ function App() {
           </Route>
           <Route path='/search'>
             <Search />
+          </Route>
+          <Route path='/'>
+            <NotFound />
           </Route>
 
         </Switch>
