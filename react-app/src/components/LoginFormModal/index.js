@@ -19,7 +19,7 @@ function LoginFormModal() {
     if (data) {
       setErrors(data);
     } else {
-        closeModal()
+      closeModal()
     }
   };
 
@@ -28,22 +28,22 @@ function LoginFormModal() {
       <div className="login-modal-h2-register-container">
         <h2>Sign in</h2>
         <div className="login-modal-signup-modal-container">
-              <div className="login-modal-register-modal-button">
-                <span className="actual-modal-button">
-                <OpenModalButton
+          <div className="login-modal-register-modal-button">
+            <span className="actual-modal-button">
+              <OpenModalButton
                 buttonText="Register"
                 modalComponent={<SignupFormModal />}
-                />
-                </span>
-              </div>
+              />
+            </span>
+          </div>
         </div>
       </div>
       <form className='login-modal-form' onSubmit={handleSubmit}>
-        <ul className="validation-errors">
+        {/* <ul className="validation-errors">
           {errors.map((error, idx) => (
             <li key={idx}>{error}</li>
           ))}
-        </ul>
+        </ul> */}
 
         <label>
           Email address
@@ -53,6 +53,9 @@ function LoginFormModal() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+          <div className='validation-errors'>
+            {errors.filter((error) => error.includes('email')).length > 0 ? errors.filter((error) => error.includes('email'))[0].split(': ')[1] : ''}
+          </div>
         </label>
         <label>
           Password
@@ -63,6 +66,9 @@ function LoginFormModal() {
             required
           />
         </label>
+        <div className='validation-errors'>
+            {errors.filter((error) => error.includes('password')).length > 0 ? errors.filter((error) => error.includes('password'))[0].split(': ')[1] : ''}
+          </div>
         <button className="login-modal-submit-button" type="submit">Sign In</button>
       </form>
     </div>

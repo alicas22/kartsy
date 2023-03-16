@@ -36,7 +36,6 @@ const CreateProduct = () => {
 
         const data = await dispatch(thunkCreateProduct(payload))
 
-
         if (Array.isArray(data)) {
             setErrors(data);
         } else {
@@ -57,14 +56,14 @@ const CreateProduct = () => {
         <div className="create-product-form">
             <h1>Create Product</h1>
             <form className='product-form' onSubmit={handleSubmit}>
-                <ul className="validation-errors">
+                {/* <ul className="validation-errors">
                     {errors.map((error, idx) => (
 					    <li key={idx}>{error}</li>
 					))}
-                </ul>
+                </ul> */}
                 <label>
                     <p>
-                    Name
+                        Name
                     </p>
                     <input
                         id="name"
@@ -73,10 +72,13 @@ const CreateProduct = () => {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                     />
+                    <div className='validation-errors'>
+                        {errors.filter((error) => error.includes('name')).length > 0 ? errors.filter((error) => error.includes('name'))[0].split(': ')[1] : ''}
+                    </div>
                 </label>
                 <label>
                     <p>
-                    Price
+                        Price
                     </p>
                     <input
                         id="price"
@@ -88,10 +90,13 @@ const CreateProduct = () => {
                         value={price}
                         onChange={(e) => setPrice(e.target.value)}
                     />
+                    <div className='validation-errors'>
+                        {errors.filter((error) => error.includes('price')).length > 0 ? errors.filter((error) => error.includes('price'))[0].split(': ')[1] : ''}
+                    </div>
                 </label>
                 <label>
                     <p>
-                    Description
+                        Description
                     </p>
                     <textarea
                         id="description"
@@ -100,10 +105,13 @@ const CreateProduct = () => {
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                     />
+                    <div className='validation-errors'>
+                        {errors.filter((error) => error.includes('description')).length > 0 ? errors.filter((error) => error.includes('description'))[0].split(': ')[1] : ''}
+                    </div>
                 </label>
                 <label>
                     <p>
-                    Image URL
+                        Image URL
                     </p>
                     <input
                         id="imageUrl"
@@ -113,6 +121,9 @@ const CreateProduct = () => {
                         value={imageUrl}
                         onChange={(e) => setImageUrl(e.target.value)}
                     />
+                    <div className='validation-errors'>
+                        {errors.filter((error) => error.includes('image')).length > 0 ? errors.filter((error) => error.includes('image'))[0].split(': ')[1] : ''}
+                    </div>
                 </label>
                 <button className="create-product-submit-button" type="submit">Submit</button>
             </form>

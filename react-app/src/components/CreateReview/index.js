@@ -30,7 +30,7 @@ const CreateReview = ({ productId }) => {
 
         if (!user) return null
 
-        const data =  await dispatch(createReviewThunk(productId, payload))
+        const data = await dispatch(createReviewThunk(productId, payload))
 
         if (Array.isArray(data)) {
             setErrors(data);
@@ -52,12 +52,12 @@ const CreateReview = ({ productId }) => {
         <div className="create-review-form">
             <h1>Create Review</h1>
             <form className='review-product-form' onSubmit={handleSubmit}>
-                <ul className="validation-errors">
+                {/* <ul className="validation-errors">
                     {errors.map((error, index) => <li className="errors-text" key={index}>{error}</li>)}
-                </ul>
+                </ul> */}
                 <label>
                     <p>
-                    review
+                        review
                     </p>
                     <textarea
                         id="review"
@@ -66,10 +66,13 @@ const CreateReview = ({ productId }) => {
                         value={review}
                         onChange={(e) => setReview(e.target.value)}
                     />
+                    <div className='validation-errors'>
+                        {errors.filter((error) => error.includes('review')).length > 0 ? errors.filter((error) => error.includes('review'))[0].split(': ')[1] : ''}
+                    </div>
                 </label>
                 <label>
                     <p>
-                    star
+                        star
                     </p>
                     <input
                         id="star"
@@ -80,6 +83,9 @@ const CreateReview = ({ productId }) => {
                         value={star}
                         onChange={(e) => setStar(e.target.value)}
                     />
+                    <div className='validation-errors'>
+                        {errors.filter((error) => error.includes('star')).length > 0 ? errors.filter((error) => error.includes('star'))[0].split(': ')[1] : ''}
+                    </div>
                 </label>
                 <div className="create-review-submit-button-container">
                     <button className="create-review-submit-button" type="submit">Submit</button>
