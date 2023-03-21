@@ -20,6 +20,7 @@ class User(db.Model, UserMixin):
     reviews = db.relationship('Review', cascade="all, delete-orphan", back_populates='user')
     products = db.relationship('Product', cascade="all, delete-orphan", back_populates='owner')
     shopping_cart_item = db.relationship('ShoppingCartItem', cascade="all, delete-orphan", back_populates='user')
+    likes = db.relationship('Like', back_populates='user')
 
     @validates('first_name')
     def validate_first_name(self, key, first_name):
