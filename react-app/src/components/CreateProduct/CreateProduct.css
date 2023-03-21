@@ -15,6 +15,7 @@
     margin-top: 1.5rem;
     margin-bottom: 1rem;
     width: 100%;
+    cursor:pointer;
 }
 
 p, label {
@@ -28,4 +29,20 @@ p, label {
 textarea {
     resize: vertical;
     min-height:100px;
+}
+
+select,
+select:focus,
+.select-categories,
+option{
+
+    width:100.5%;
+    border: 1px solid rgb(34, 34, 34, .15);
+    border-radius: 6px;
+    color: #222;
+    margin: 0;
+    font-size: 16px;
+    padding: 8px 12px;
+    box-shadow: 0 1px 4px 0 rgb(34 34 34 / 10%) inset;
+    height: 36px;
 }

@@ -15,6 +15,7 @@ const EditProduct = () => {
     const [price, setPrice] = useState(editproduct.price)
     const [description, setDescription] = useState(editproduct.description)
     const [imagesUrl, setImagesUrl] = useState(editproduct.imagesUrl)
+    const [category, setCategory] = useState(editproduct.categoryId)
     const [errors, setErrors] = useState([])
 
 
@@ -30,7 +31,8 @@ const EditProduct = () => {
             name,
             price,
             description,
-            imageUrl: imagesUrl
+            imageUrl: imagesUrl,
+            categoryId: category
         }
 
         if (!user) return null
@@ -83,6 +85,28 @@ const EditProduct = () => {
                     />
                     <div className='validation-errors'>
                         {errors.filter((error) => error.includes('price')).length > 0 ? errors.filter((error) => error.includes('price'))[0].split(': ')[1] : ''}
+                    </div>
+                </label>
+                <label>
+                    <p>
+                        Category
+                    </p>
+                    <select
+                        id="category"
+                        name="category"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                    >
+                        <option value="">Select a category</option>
+                        <option value="1">Art</option>
+                        <option value="2">Clothing</option>
+                        <option value="3">Electronics</option>
+                        <option value="4">Gifts</option>
+                        <option value="5">Home</option>
+                        <option value="6">Toys</option>
+                    </select>
+                    <div className='validation-errors'>
+                        {errors.filter((error) => error.includes('category')).length > 0 ? errors.filter((error) => error.includes('category'))[0].split(': ')[1] : ''}
                     </div>
                 </label>
                 <label>

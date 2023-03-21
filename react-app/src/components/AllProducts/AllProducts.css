@@ -138,10 +138,16 @@
     transition: border-bottom 200ms ease-in-out;
     margin: auto;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-
-.tech-container {
+.h4-div > h4{
+    display: flex;
+    justify-content: center;
+}
+/* .tech-container {
     padding-left: 40px;
 }
 
@@ -159,7 +165,7 @@
 
 .shoes-container {
     padding-left: 35px;
-}
+} */
 
 .each-image-catagories {
     margin: auto;
