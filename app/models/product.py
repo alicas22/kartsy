@@ -19,7 +19,9 @@ class Product(db.Model):
     reviews = db.relationship('Review', cascade="all, delete-orphan", back_populates='product')
     images = db.relationship('ProductImage', cascade="all, delete-orphan", back_populates='product')
     shopping_cart_item = db.relationship("ShoppingCartItem", cascade="all, delete-orphan", back_populates="product")
+    likes = db.relationship('Like', back_populates='product')
     category = db.relationship('Category', back_populates='products')
+
 
     @validates('price')
     def validate_price(self, key, price):
@@ -42,4 +44,5 @@ class Product(db.Model):
             'description': self.description,
             'imagesUrl': self.images[0].url,
             'categoryId':self.category_id
+
         }

@@ -14,7 +14,9 @@ import MyReviews from "./components/MyReviews";
 import Cart from "./components/Cart"
 import Search from "./components/Search";
 import NotFound from "./components/PageNotFound";
+import MyLikes from "./components/MyLikes";
 import Categories from "./components/Categories";
+
 
 function App() {
   const dispatch = useDispatch();
@@ -52,6 +54,8 @@ function App() {
           <Route path='/myreviews'>
             <MyReviews />
           </Route>
+          <Route path='/myfavorites'>
+            <MyLikes />
           <Route path='/categories/:categoryId'>
             <Categories />
           </Route>
