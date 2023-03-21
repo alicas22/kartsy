@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from ..models import db, Product, Review, ProductImage
+from ..models import db, Product, Review, ProductImage, Like
 from ..forms import ProductForm
 from ..forms.review_form import ReviewForm
 from flask_login import current_user, login_required
@@ -148,26 +148,26 @@ def post_review(id):
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
 
-@product_routes.route('/<int:id>/likes', methods=['GET'])
-def all_likes(id):
-    found_prod = Product.query.get(id)
+# @product_routes.route('/<int:id>/likes', methods=['GET'])
+# def all_likes(id):
+#     found_prod = Product.query.get(id)
 
-    all_likes = found_prod.likes
-    likes = [like.to_dict() for like in all_likes]
+#     all_likes = found_prod.likes
+#     likes = [like.to_dict() for like in all_likes]
 
-    like_res = []
-    for like in likes:
+#     like_res = []
+#     for like in likes:
 
-        like_res.append({
-            'id': like['id'],
-            'userId': like['userId'],
-            'productId': like['productId'],
-            'createdAt': like['createdAt'],
-            'userFirstName': like['userFirstName'],
-            'userLastName': like['userLastName']
-        })
+#         like_res.append({
+#             'id': like['id'],
+#             'userId': like['userId'],
+#             'productId': like['productId'],
+#             'createdAt': like['createdAt'],
+#             'userFirstName': like['userFirstName'],
+#             'userLastName': like['userLastName']
+#         })
 
-    return jsonify(like_res)
+#     return jsonify(like_res)
 
 
 @product_routes.route('/<int:id>/likes', methods=['POST'])

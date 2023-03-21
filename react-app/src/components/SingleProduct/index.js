@@ -1,14 +1,15 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useHistory, useParams } from "react-router-dom"
-import { thunkDeleteProduct, thunkGetSingleProduct } from "../../store/products"
-import { cleanUpSingleProductAction } from "../../store/products"
+import { thunkDeleteProduct, thunkGetSingleProduct, cleanUpSingleProductAction } from "../../store/products"
+import { thunkDeleteLike, thunkLoadAllLikes, thunkPostLike } from "../../store/like"
 import OpenModalButton from "../OpenModalButton"
 import EditProduct from "../EditProduct"
 import AllReviewsComponent from "../AllReviews"
 import CreateReview from "../CreateReview"
 import { createCartItemThunk } from "../../store/shoppingCartItems"
 import './SingleProduct.css'
+
 
 const SingleProduct = () => {
     const history = useHistory()
@@ -17,15 +18,20 @@ const SingleProduct = () => {
 
     useEffect(() => {
         dispatch(thunkGetSingleProduct(productId))
+        dispatch(thunkLoadAllLikes())
         return () => dispatch(cleanUpSingleProductAction());
     }, [dispatch, productId])
 
     const product = useSelector((state) => state.products.singleProduct)
     const user = useSelector((state) => state.session.user)
     const reviewsObj = useSelector((state) => state.reviews)
-    if (!reviewsObj) return null
+    const likes = useSelector((state) => state.likes.allLikes)
+
+    if (!reviewsObj || !likes) return null
 
     const reviewsArr = Object.values(reviewsObj)
+    const likesArr = Object.values(likes)
+    console.log('likes ', likesArr)
     if (!reviewsArr) return null
 
     // essentially keying into state.reviews.productReviews in a non-intuitive way
@@ -35,7 +41,16 @@ const SingleProduct = () => {
         reviews.push(reviewsArr[reviewsArr.length -1][key])
     }
 
+    // set liked to true or false to display red heart or empty heart
+    let isLiked = false;
+    let likeId;
 
+    // check if like is in all likes array
+    const filteredLikes = likesArr.filter(like => ((like.userId === user.id) && like.productId === +productId))
+    if (filteredLikes.length > 0) {
+        isLiked = true
+        likeId = likesArr.filter(like => (like.userId === user.id && like.productId === +productId))[0].id
+    }
 
 
     if (!product) return null
@@ -61,6 +76,16 @@ const SingleProduct = () => {
         await dispatch(thunkDeleteProduct(product))
         history.push('/')
     })
+
+    // function to like a photo
+    const likePhoto = () => {
+        dispatch(thunkPostLike(productId, user.id))
+    }
+    // function to remove a like
+    const removeLike = () => {
+        dispatch(thunkDeleteLike(likeId))
+        isLiked = false
+    }
 
     const averageFunc = (arr) =>{
         let amount = 0;
@@ -93,6 +118,12 @@ const SingleProduct = () => {
                 <div className="single-product-container">
                     <div className="single-product-image-container">
                         <img className="single-product-image" src={product.imagesUrl} onError={e => { e.currentTarget.src = "https://www.aepint.nl/wp-content/uploads/2014/12/No_image_available.jpg"; }}></img>
+                        {isLiked === false && (
+                            <button className='single-photo-like-button' onClick={likePhoto}><i className="fa-regular fa-heart"></i></button>
+                        )}
+                        {isLiked === true && (
+                            <button className='single-photo-like-button' onClick={removeLike}><i className="fa-solid fa-heart heart-liked-color"></i></button>
+                        )}
                     </div>
                     <div className="single-product-sidebar-container">
                         {user && user.id === product.ownerId &&(
