@@ -5,6 +5,7 @@ def seed_products():
 
     anton_product1 = Product(
     owner_id=1,
+    category_id=3,
     name = "Clip on fan",
     price=29.99,
     description= '''【Upgraded Fan Gaps Protect Baby's Fingers】 GUSGU mini stroller fan with Less than 6mm gaps to avoid the baby's little fingers from entering, while ensuring that the fan is cool enough.
@@ -19,6 +20,7 @@ def seed_products():
 
     anton_product2 = Product(
     owner_id=1,
+    category_id=4,
     name = "Cooling Towel",
     price=14.50,
     description= '''About this item
@@ -34,6 +36,7 @@ def seed_products():
 
     anton_product3 = Product(
     owner_id=1,
+    category_id=6,
     name = "Cute Frog",
     price=22.39,
     description= '''CUTE FROG PLUSH: Frog stuffed animal features chubby body, smile face, vivid eyes, and little crown make the frog looks cuter. It is made of super soft plush, leaving your kids with a warming and soothing feeling when they cuddle the plush frog.
@@ -47,6 +50,7 @@ def seed_products():
 
     anton_product4 = Product(
     owner_id=1,
+    category_id=2,
     name = "Fuzzy Red Slippers",
     price=71.84,
     description= '''【Upgraded Fan Gaps Protect Baby's Fingers】 GUSGU mini stroller fan with Less than 6mm gaps to avoid the baby's little fingers from entering, while ensuring that the fan is cool enough.
@@ -61,6 +65,7 @@ def seed_products():
 
     anton_product5 = Product(
     owner_id=1,
+    category_id=6,
     name = "Taco Fighter",
     price=33.33,
     description= '''Wildly Popular All-Ages Card Game - TvB soared on Kickstarter, surpassing the initial goal by 2,400%! A sensation at the Indie Game Showcase at Emerald City Comicon!
@@ -73,6 +78,7 @@ def seed_products():
 
     meredith_product1 = Product(
     owner_id = 2,
+    category_id=4,
     name = "14K Gold Love Ring",
     price=14.95,
     description= '''14k Solid Gold 1mm Thin Wedding Band / Minimalist Wedding Ring for Women / Thin Stacking Ring Hers / Dainty Simple Plain 1mm Ring
@@ -83,6 +89,7 @@ def seed_products():
 
     meredith_product2 = Product(
     owner_id = 2,
+    category_id=5,
     name = "Handmade Candles Clean Essential Oil Candles - Vegan",
     price=17.00,
     description= '''Simple. Clean. Aesthetically pleasing. Our candles are made with 100% soy wax and not a soy wax BLEND like most competitors. Candles come with all natural wood wicks from non-treated fruit trees. The vast majority of our scents are infused with essential oils; these are notated in the fragrance description. Essential oils are essentially aroma compounds that are removed from the seeds, flowers, leaves, roots and stems or bark of plants through methods such as distillation or extraction.'''
@@ -90,6 +97,7 @@ def seed_products():
 
     meredith_product3 = Product(
     owner_id=2,
+    category_id=2,
     name = "Handmade Flat Shoes for Women, Leather Slippers",
     price=69.00,
     description= '''This kind of shoes are made of soft leather making them super comfortable for everyday wear. You'll keep walking all day! Great work shoes. The unique shoes would become an attractive one in your shoe box. THIS SHOES IS REALLY VALUABLE FOR YOU! It would be fit beautifully with trousers or dress.'''
@@ -97,6 +105,7 @@ def seed_products():
 
     meredith_product4 = Product(
     owner_id=2,
+    category_id=3,
     name = "Nikon Fun Touch 6 35mm Point and Shoot camera in working condition (no flash)",
     price=30.60,
     description= '''Nikon Fun Touch 35mm Point and shoot camera in good working condition. Ships via 3 Day USPS Priority Mail. PLEASE NOTE: the flash no longer works on this camera, this can only be used as a daytime or early evening camera! Price has been significantly reduced, this is a great and cheap way to get your feet wet with film photography though!'''
@@ -104,6 +113,7 @@ def seed_products():
 
     meredith_product5 = Product(
     owner_id=2,
+    category_id=6,
     name = "Personalized Dibsies Butterfly Snuggle Doll - 15 Inch",
     price=29.95,
     description= '''Snuggles are going to be so much more comforting for your little one. Our Butterfly Snuggle Doll is as soft and cuddly as can be. Her beautiful pigtails are made of yarn and makes her so cute! Facial features are all embroidered for your child's safety. Your Little Girl will love her Butterfly Snuggle Doll. A great gift for birthdays, Christmas or just to tell her how special she is to you. Dibsies will personalized your doll FOR FREE up to 9 letters max.'''
@@ -111,6 +121,7 @@ def seed_products():
 
     katherin_product1 = Product(
     owner_id=3,
+    category_id=4,
     name = "True love monogram glasses - custom rock glasses, set of 6",
     price=96.00,
     description= '''We will personalize this heart with two letters of your choosing. Simply provide us with the letters you'd like (in the order you'd like them), and choose an ink color. It will take approximately 1-2 weeks for us to print the glasses and ship them out!
@@ -123,6 +134,7 @@ def seed_products():
 
     katherin_product2 = Product(
     owner_id=3,
+    category_id=4,
     name = "Personalized Gifts for Him, Christmas Gifts, Engraved Leather Wallet for Men,Personalized Wallet, Handmade Custom Engraved Wallet for Men",
     price=12.90,
     description= '''I handcraft high-quality top-grain leather wallets. You can personalized with engraving on the front side with a monogram, name, logo. For inside you can add your message or your hand-written which making it very special for someone who will receive it.
@@ -132,6 +144,7 @@ def seed_products():
 
     katherin_product3 = Product(
     owner_id=3,
+    category_id=2,
     name = "Personalized Mens Leather Bracelet with Silver Beads, Valentines Day Gift For Husband or Boyfriend, Custom Kids Name Gift For Him",
     price=20.66,
     description= '''A perfect Christmas Gifts for your loved ones!
@@ -141,6 +154,7 @@ def seed_products():
 
     katherin_product4 = Product(
     owner_id=3,
+    category_id=5,
     name = "Custom Neon Sign | Neon Sign | Personalized Gifts | Wedding Signs | Name Signs | Led Neon Lights | Neon Signs | Neon Sign bar",
     price=40.00,
     description= '''The listed price 40$ is only a deposit price as every sign is different and costs different. We encourage you to send us your sign details(text, font and color) in message to see a visual of your sign before purchasing. Know the size, price and delivery details before you make the purchase.
@@ -150,6 +164,7 @@ def seed_products():
 
     katherin_product5 = Product(
     owner_id=3,
+    category_id=6,
     name = "Grinder Rubik's Cube",
     price=13.59,
     description= '''Unique shape design.
@@ -159,6 +174,7 @@ def seed_products():
 
     sophie_product1 = Product(
     owner_id=4,
+    category_id=5,
     name = "Decorative Throw Pillow",
     price=75.62,
     description= '''The soft color and the abstract design is perfect for any kind of home decoration. Made out of high-quality plushy material that is super soft and resilient.
@@ -168,6 +184,7 @@ def seed_products():
 
     sophie_product2 = Product(
     owner_id=4,
+    category_id=5,
     name = "Medium Gold Splatter Geode Bowl",
     price=120.00,
     description= '''This unique bowl is completely hand formed and textured from porcelain clay. It is unglazed on the textured exterior and glazed on the interior. This bowl is glazed with a clear glaze and splatter painted with real 18k gold.
@@ -181,6 +198,7 @@ def seed_products():
 
     sophie_product3 = Product(
     owner_id=4,
+    category_id=1,
     name = "New Yorker Magazine Cover Poster Set Of 6",
     price=9.00,
     description= '''New Yorker Magazine Cover Poster Set Of 6, Vintage Art, Retro Poster, Mid Century Art Print, Magazine Cover Art, Gallery Wall Set, High Jpeg
@@ -200,6 +218,7 @@ def seed_products():
 
     sophie_product4 = Product(
     owner_id=4,
+    category_id=5,
     name = "Mushroom Bedside Lamp, Table Lamp, Side Light, Orange Desk Lamp",
     price=100.04,
     description= '''The Minimalist Table Lamp fits well into your home in all areas and becomes a distinctive addition to your interior. Contemporary minimalist and modern design table lamp.
@@ -209,6 +228,7 @@ def seed_products():
 
     sophie_product5 = Product(
     owner_id=4,
+    category_id=5,
     name = "Set of 3 Ceramic Planters - 12, 9 and 6 inch - Matte Finish, Kiln Fired and Hand Glazed - Sturdy and Large Plant Pots for Indoor and Outdoor",
     price=79.95,
     description= '''Are you looking for plant pots which will optimize the health of your plants without compromising on style?
@@ -220,6 +240,7 @@ def seed_products():
 
     anton_product6 = Product(
     owner_id=1,
+    category_id=4,
     name = "1.72 CT Round Cut Loose Lab Grown Diamond | F Color | VS2 Clarity",
     price=4310.00,
     description= '''1.72 CT Round European cut loose diamond available in F color, VS2 clarity.
@@ -242,6 +263,7 @@ def seed_products():
 
     anton_product7 = Product(
     owner_id=1,
+    category_id=5,
     name = "Sloth Air Plant Holder, Valentines Day, Small Sloth Planter, Valentine Gift Idea, Small Air Planter, Desk Accessory, Gift for Her",
     price= 38.50,
     description= '''These little sloth air plant holders (approximately 1.5" tall) come with an air plant (approximately 2-3" tall) already in his arms and a care instruction card as well. This listing is for ONE (1) sloth air plant.
@@ -264,6 +286,7 @@ def seed_products():
 
     anton_product8 = Product(
     owner_id=1,
+    category_id=1,
     name = "Highland cow canvas wall art Farmhouse decor Cow Brown cow Rustic wall decor Animals painting Scottish cow wall art",
     price=424.79,
     description= '''Highland cow canvas wall art Farmhouse decor Cow Brown cow Rustic wall decor Animals painting Scottish cow wall art arrives ready to hang and no additional framing required.
@@ -298,6 +321,7 @@ def seed_products():
 
     anton_product9 = Product(
     owner_id=1,
+    category_id=5,
     name = "Hand Forged Damascus Chef's Knife Set of 5 BBQ Knife Kitchen Knife Gift for Her Valentines Gift Camping Knife Gift for Him Groomsmen gift SM",
     price=129.00,
     description= '''Custom Handmade Damascus chef set of five pieces. Utility set.Damascus kitchen set with leather sheet knife set gift for mom Anniversary gift Groomsmen gift Christmas gift birthday gift.
@@ -317,6 +341,7 @@ def seed_products():
 
     anton_product10 = Product(
     owner_id=1,
+    category_id=4,
     name = "Best Dad Keychain - I Love You Charm - Personalized Keychain - Fathers Day - Engraved - Keychain - Husband Gift - Childrens Gift",
     price= 5.95,
     description= '''"Best Dad Penny" Keychain
@@ -328,6 +353,7 @@ def seed_products():
 
     meredith_product6 = Product(
     owner_id = 2,
+    category_id=5,
     name = "Massive Coffee table log raw wood - Wood washer - Unique live edge table",
     price= 2115.28,
     description= '''Massive living room table made of raw wood
@@ -344,6 +370,7 @@ def seed_products():
 
     meredith_product7 = Product(
     owner_id = 2,
+    category_id= 2,
     name = "It's Fine I'm Fine Everything Is Fine Shirt, I'm Fine Shirt, Cat Shirt, Motivational Shirt, Positivity Shirt, Introvert Shirt, Mental Shirt",
     price= 8.99,
     description= '''The cat shirt features a charming image of a cat with a nonchalant expression and the reassuring phrase "it's fine, i'm fine everything is fine." The cat on the shirt looks like it's just been through a disaster, but the optimistic phrase tells a different story.
@@ -358,6 +385,7 @@ def seed_products():
 
     meredith_product8 = Product(
     owner_id=2,
+    category_id=4,
     name = "Samsung S8 Case Galaxy S7 Case Samsung Note 8 Case Clear Case Samsung S8 Plus Case Fox Clear Case Samsung S7 Edge Case Personalized AC1221",
     price= 8.32,
     description= '''Welcome to the Art Cases Design!
@@ -387,6 +415,7 @@ def seed_products():
 
     meredith_product9 = Product(
     owner_id=2,
+    category_id=4,
     name = "Birth Flower Jewelry Travel Case, Birth Month Flower Gift, Personalized Birthday Gift, Leather Jewelry Travel Case, Custom Jewelry Case",
     price= 25.95,
         description= '''Personalized Jewelry Boxes, Birth Flower Jewelry Case, Travel Case For Bridesmaids, Minimal Jewelry Box, Jewelry Organizer, Jewelry Box
@@ -413,6 +442,7 @@ def seed_products():
 
     meredith_product10 = Product(
     owner_id=2,
+    category_id=1,
     name = "Elegant Woman At Tea Time ",
     price= 280.00,
     description= '''Elegant Woman At Tea Time depicts a blue woman drinking tea in a yellow floral dress against a vibrant pink floral background. This item is a giclée print of the original piece made with digital inks and acrylic paints. The print comes in 5 sizes: Small (measures 8” x 10”), Medium (measures 12” x 15”), Large (measures 20” x 25”), Extra Large (measures 24” x 30”), and Grand (measures 32” x 40”). The print comes digitally signed and does not come framed. It is printed at the highest possible resolution on high quality, acid-free, archival paper using Canon LUCIA PRO pigment ink. The giclée printing methods used produce stunning rich and vibrant colors that look absolutely wonderful in person. Each print is carefully packaged and shipped.
@@ -424,6 +454,7 @@ def seed_products():
 
     katherin_product6 = Product(
     owner_id=3,
+    category_id=4,
     name = "Dad keychain, Handyman Keychain, Father keychain, Hammer wrench keychain, personalized keychain, carpenter, handyman keychain, fix it man ",
     price= 12.95,
     description= '''Perfect gift for the special man in your life, whether it is grandpa, your neighbor or your handyman!
@@ -442,6 +473,7 @@ def seed_products():
 
     katherin_product7 = Product(
     owner_id=3,
+    category_id=2,
     name = "Party At My Crib Bodysuit, Funny Baby Clothes, Cute Bodysuit, Baby Boy Clothes, Baby Girl Bodysuit, Baby Girl Clothes, Baby Boy Bodysuit ",
     price= 13.99,
     description= '''We ship next day from Vancouver Washington! From there, it takes USPS 2-4 business days to deliver depending. You also have the option to upgrade to 2-day shipping at checkout!
@@ -461,6 +493,7 @@ def seed_products():
 
     katherin_product8 = Product(
     owner_id=3,
+    category_id=1,
     name = "Large Victorian Birdhouse ",
     price= 129.95,
     description= '''Handcrafted of pine and given a distressed finish, the Large Victorian Birdhouse would truly be a haven for your neighborhood birds, with openings on all four sides. It stands 25" high, 16" wide and 11 1/2" deep. It is available with a hunter green, dark blue, oriental red or burgundy roof (please specify color). The birdhouse is a functional birdhouse finished with a high-quality exterior latex paint, or can be used as a decorator item.'''
@@ -468,6 +501,7 @@ def seed_products():
 
     katherin_product9 = Product(
     owner_id=3,
+    category_id=4,
     name = "Destiny Ghost - 3D printed",
     price= 33.60,
     description= '''"In its dying breath, The Traveler created the Ghosts to seek out those who can wield its Light as a weapon - Guardians - to protect us and do what the Traveler itself no longer can."
@@ -496,6 +530,7 @@ def seed_products():
 
     katherin_product10 = Product(
     owner_id=3,
+    category_id=5,
     name = "Lunch Bag Waxed Canvas , Kitchen Storage Pantry Sack, Canvas Snack Bag, Gift For Him Her for kids , Picnic Bag School Office, Holiday Gift ",
     price=34.00,
     description= '''Back to school, back to office.
@@ -529,6 +564,7 @@ def seed_products():
 
     sophie_product6 = Product(
     owner_id=4,
+    category_id=5,
     name = "Air Plant Office Desk Decor - Wall Planter Indoor - Indoor Plant Gift - Unique Succulent - Wood Planter - Air Plant Holder - Plant Stand ",
     price= 142.68,
     description= '''Looking for that perfect gift for your friends and family? (or maybe for yourself?)
@@ -558,6 +594,7 @@ def seed_products():
 
     sophie_product7 = Product(
     owner_id=4,
+    category_id=5,
     name = 'AS IS Bronze Aria "Sonata" Large, Modern Mirror-#P2',
     price= 485.00,
     description= '''SELLING AS IS! WAS USED IN A PHOTOSHOOT. NO RETURNS. READY TO SHIP IN 3 WEEKS
@@ -575,6 +612,7 @@ def seed_products():
 
     sophie_product8 = Product(
     owner_id=4,
+    category_id=5,
     name = "Reclaimed Wood Switch Plates",
     price= 16.97,
     description= '''Add some style to your home with these reclaimed wood wall plates. Made from 100% reclaimed wood, these wall plates add a touch of elegance to any room. With multiple sizes and styles to choose from, you're sure to find the perfect wall plate to match your home's unique style. To add hand rubbed finish, please select the size plate you would like with the "Finish" option. If you would like custom text on your switch plate please select the custom text option and send us a note of what you would like it to say
@@ -593,6 +631,7 @@ def seed_products():
 
     sophie_product9 = Product(
     owner_id=4,
+    category_id=5,
     name = "6 Pack Solar Lights Outdoor Garden Decorative Solar Garden Lights with Warm Light Waterproof Solar Pathway Landscape Lights for Yard Garden",
     price= 71.85,
     description= '''【Good Decoration】 10 lumens of warm yellow light. These solar landscape lights can project a unique and beautiful pattern. In a dim environment, the garden solar lights can illuminate a corner of the garden and create a beautiful and warm atmosphere. They are very suitable as holiday decorations and gifts for relatives and friends.
@@ -602,6 +641,7 @@ def seed_products():
 
     sophie_product10 = Product(
     owner_id=4,
+    category_id=1,
     name = "The Prince, Regal, Custom Dog Portrait, Pet Painting, Pet Portrait Royal, Renaissance Animal Painting, Funny Pet Lover Gift",
     price=67.63,
     description= '''😍 IT'S SO SIMPLE TO ORDER, JUST READ THE INSTRUCTIONS BELOW 😍

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, FloatField, TextAreaField
+from wtforms import StringField, FloatField, TextAreaField, IntegerField
 from wtforms.validators import DataRequired, ValidationError
 
 
@@ -29,3 +29,4 @@ class ProductForm(FlaskForm):
     price = FloatField('price', validators=[DataRequired(), price_valid])
     description = TextAreaField('description', validators=[DataRequired(), description_length])
     imageUrl = StringField('imageUrl', validators=[DataRequired(), images_url_valid])
+    categoryId = IntegerField('category_id', validators=[DataRequired()])
