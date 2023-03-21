@@ -14,6 +14,7 @@ import MyReviews from "./components/MyReviews";
 import Cart from "./components/Cart"
 import Search from "./components/Search";
 import NotFound from "./components/PageNotFound";
+import MyLikes from "./components/MyLikes";
 
 function App() {
   const dispatch = useDispatch();
@@ -50,6 +51,9 @@ function App() {
           </Route>
           <Route path='/myreviews'>
             <MyReviews />
+          </Route>
+          <Route path='/myfavorites'>
+            <MyLikes />
           </Route>
           <Route path='/search'>
             <Search />

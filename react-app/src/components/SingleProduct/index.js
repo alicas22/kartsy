@@ -119,7 +119,7 @@ const SingleProduct = () => {
                     <div className="single-product-image-container">
                         <img className="single-product-image" src={product.imagesUrl} onError={e => { e.currentTarget.src = "https://www.aepint.nl/wp-content/uploads/2014/12/No_image_available.jpg"; }}></img>
                         {isLiked === false && (
-                            <button className='single-photo-like-button' onClick={likePhoto}><i className="fa-regular fa-heart"></i></button>
+                            <button className='single-photo-like-button' onClick={likePhoto}><i className="fa-regular fa-heart" style={{color: "gray"}}></i></button>
                         )}
                         {isLiked === true && (
                             <button className='single-photo-like-button' onClick={removeLike}><i className="fa-solid fa-heart heart-liked-color"></i></button>
