@@ -38,6 +38,7 @@ export const cleanUpSingleProductAction = () => {
 
 
 export const thunkGetProducts = () => async (dispatch) => {
+  
     const response = await fetch('/api/products/')
 
     if (response.ok) {
@@ -87,7 +88,7 @@ export const thunkEditProduct = (updatedProduct) => async (dispatch) => {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(updatedProduct)
     })
- 
+
 
     if (response.ok) {
         const updatedProduct = await response.json()

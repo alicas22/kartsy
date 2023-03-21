@@ -14,6 +14,7 @@ const CreateProduct = () => {
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
     const [imageUrl, setImageUrl] = useState('')
+    const [category, setCategory] = useState('')
     const [errors, setErrors] = useState([])
     const [createdProduct, setCreatedProduct] = useState()
 
@@ -29,7 +30,8 @@ const CreateProduct = () => {
             name,
             price,
             description,
-            imageUrl
+            imageUrl,
+            categoryId: category
         }
 
         if (!user) return null
@@ -92,6 +94,29 @@ const CreateProduct = () => {
                     />
                     <div className='validation-errors'>
                         {errors.filter((error) => error.includes('price')).length > 0 ? errors.filter((error) => error.includes('price'))[0].split(': ')[1] : ''}
+                    </div>
+                </label>
+                <label>
+                    <p>
+                        Category
+                    </p>
+                    <select
+                        className="select-categories"
+                        id="category"
+                        name="category"
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                    >
+                        <option value="">Select a category</option>
+                        <option value="1">Art</option>
+                        <option value="2">Clothing</option>
+                        <option value="3">Electronics</option>
+                        <option value="4">Gifts</option>
+                        <option value="5">Home</option>
+                        <option value="6">Toys</option>
+                    </select>
+                    <div className='validation-errors'>
+                        {errors.filter((error) => error.includes('category')).length > 0 ? errors.filter((error) => error.includes('category'))[0].split(': ')[1] : ''}
                     </div>
                 </label>
                 <label>

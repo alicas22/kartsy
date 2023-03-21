@@ -22,6 +22,7 @@ const AllProducts = () => {
     const user = useSelector((state) => state.session.user)
     if (!productsObj) return null
 
+
     const products = Object.values(productsObj)
 
     const ProductClick = (e, id) => {
@@ -30,23 +31,27 @@ const AllProducts = () => {
     }
     const Product1Click = (e, id) => {
         e.preventDefault()
-        history.push(`/products/14`)
+        history.push(`/categories/1`)
     }
     const Product2Click = (e, id) => {
         e.preventDefault()
-        history.push(`/products/6`)
+        history.push(`/categories/4`)
     }
     const Product3Click = (e, id) => {
         e.preventDefault()
-        history.push(`/products/9`)
+        history.push(`/categories/3`)
     }
     const Product4Click = (e, id) => {
         e.preventDefault()
-        history.push(`/products/5`)
+        history.push(`/categories/6`)
     }
     const Product5Click = (e, id) => {
         e.preventDefault()
-        history.push(`/products/8`)
+        history.push(`/categories/2`)
+    }
+    const Product15Click = (e, id) => {
+        e.preventDefault()
+        history.push(`/categories/5`)
     }
 
     //BREAK
@@ -110,7 +115,7 @@ const AllProducts = () => {
                             <img onError={e => { e.currentTarget.src = "https://www.aepint.nl/wp-content/uploads/2014/12/No_image_available.jpg"; }} className='first-image' src='https://i.etsystatic.com/26971380/r/il/702111/3483202701/il_794xN.3483202701_bj16.jpg' ></img>
                         </div>
                         <div className='h4-div'>
-                            <h4 className='decor-container'>Decor</h4>
+                            <h4 className='decor-container'>Art</h4>
                         </div>
                     </div>
                     <div className='this-div'>
@@ -118,7 +123,7 @@ const AllProducts = () => {
                             <img onError={e => { e.currentTarget.src = "https://www.aepint.nl/wp-content/uploads/2014/12/No_image_available.jpg"; }} className='first-image' src='https://i.etsystatic.com/36747487/r/il/5c5458/4251418111/il_1588xN.4251418111_sk24.jpg'></img>
                         </div>
                         <div className='h4-div'>
-                            <h4 className='jewelry-container'>Jewelry</h4>
+                            <h4 className='jewelry-container'>Gifts</h4>
                         </div>
                     </div>
                     <div className='this-div'>
@@ -126,7 +131,7 @@ const AllProducts = () => {
                             <img onError={e => { e.currentTarget.src = "https://www.aepint.nl/wp-content/uploads/2014/12/No_image_available.jpg"; }} className='first-image' src='https://i.etsystatic.com/20889344/r/il/c3cefc/2552488485/il_1588xN.2552488485_2ppg.jpg'></img>
                         </div>
                         <div className='h4-div'>
-                            <h4 className='tech-container'>Tech</h4>
+                            <h4 className='tech-container'>Electronics</h4>
                         </div>
                     </div>
                     <div className='this-div'>
@@ -134,7 +139,7 @@ const AllProducts = () => {
                             <img onError={e => { e.currentTarget.src = "https://www.aepint.nl/wp-content/uploads/2014/12/No_image_available.jpg"; }} className='first-image' src='https://m.media-amazon.com/images/I/81pEwkv-KVL._AC_SX466_.jpg'></img>
                         </div>
                         <div className='h4-div'>
-                            <h4 className='boardgame-container' >Board games</h4>
+                            <h4 className='boardgame-container' >Toys</h4>
                         </div>
                     </div>
                     <div className='this-div'>
@@ -142,7 +147,15 @@ const AllProducts = () => {
                             <img onError={e => { e.currentTarget.src = "https://www.aepint.nl/wp-content/uploads/2014/12/No_image_available.jpg"; }} className='first-image' src='https://i.etsystatic.com/8660202/r/il/c14c50/1233724812/il_1588xN.1233724812_up1g.jpg'></img>
                         </div>
                         <div className='h4-div'>
-                            <h4 className='shoes-container'>Shoes</h4>
+                            <h4 className='shoes-container'>Clothing</h4>
+                        </div>
+                    </div>
+                    <div className='this-div'>
+                        <div className='image-container-circle-name' onClick={(e) => Product15Click(e)}>
+                            <img onError={e => { e.currentTarget.src = "https://www.aepint.nl/wp-content/uploads/2014/12/No_image_available.jpg"; }} className='first-image' src='https://i.etsystatic.com/5183084/r/il/0cfcee/4375730600/il_794xN.4375730600_z92x.jpg'></img>
+                        </div>
+                        <div className='h4-div'>
+                            <h4 className='shoes-container'>Home</h4>
                         </div>
                     </div>
                 </div>

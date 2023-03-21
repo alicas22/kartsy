@@ -13,12 +13,15 @@ class Product(db.Model):
     name = db.Column(db.String(200), nullable=False)
     price = db.Column(db.Float, nullable=False)
     description = db.Column(db.String(4000), nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('categories.id')), nullable=False)
 
     owner = db.relationship('User', back_populates='products')
     reviews = db.relationship('Review', cascade="all, delete-orphan", back_populates='product')
     images = db.relationship('ProductImage', cascade="all, delete-orphan", back_populates='product')
     shopping_cart_item = db.relationship("ShoppingCartItem", cascade="all, delete-orphan", back_populates="product")
     likes = db.relationship('Like', back_populates='product')
+    category = db.relationship('Category', back_populates='products')
+
 
     @validates('price')
     def validate_price(self, key, price):
@@ -40,5 +43,6 @@ class Product(db.Model):
             'price': self.price,
             'description': self.description,
             'imagesUrl': self.images[0].url,
+            'categoryId':self.category_id
 
         }
