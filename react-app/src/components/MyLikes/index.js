@@ -14,20 +14,26 @@ const MyLikes = () => {
         dispatch(thunkLoadAllLikes())
     }, [dispatch])
 
+    //select needed objects from state
     const productsObj = useSelector((state) => state.products.allProducts)
     const user = useSelector((state) => state.session.user)
     const likesObj = useSelector((state) => state.likes.allLikes)
+
+    //return null so page isn't blank
     if (!productsObj || !likesObj) return null
 
+    //filter logged in user's likes
     const myLikesArr = Object.values(likesObj).filter((like) => like.userId === user.id);
-    let likedProductsArr = []
 
+    //create array of user's likes and filter the products array based on whether the product id is included in the likes prod id array
+    let likedProductsArr = []
     myLikesArr.forEach((like)=> likedProductsArr.push(like.productId))
     const productsArr = Object.values(productsObj).filter((product) => likedProductsArr.includes(product.id))
-    console.log(productsArr)
+
     if (!myLikesArr) return null
     if (!myLikesArr.length) return <h1 className='search-title'>You currently don't have any favorited products</h1>
 
+    //navigate to single product page if click on liked product
     const ProductClick = (e, id) => {
         e.preventDefault()
         history.push(`/products/${id}`)
