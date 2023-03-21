@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from ..models import db, Product, Review, ProductImage
+from ..models import db, Product, Review, ProductImage, Like
 from ..forms import ProductForm
 from ..forms.review_form import ReviewForm
 from flask_login import current_user, login_required
@@ -24,7 +24,7 @@ def validation_errors_to_error_messages(validation_errors):
 def all_products():
     all_prod = Product.query.all()
     products = [product.to_dict() for product in all_prod]
-
+    print('>>>>>>>>>>>>>>>>>>>>from all products route')
     prod_res = []
     for product in products:
 
@@ -33,13 +33,15 @@ def all_products():
             'name': product['name'],
             'price': product['price'],
             'imagesUrl': product['imagesUrl'],
-            'ownerId': product['ownerId']
+            'ownerId': product['ownerId'],
+            'categoryId':product['categoryId']
         })
 
     return jsonify(prod_res)
 
 @product_routes.route('/', methods=['POST'])
 def create_product():
+    print('>>>>>>>>>>>from product post route')
     res = request.get_json()
     product = ProductForm()
     product["csrf_token"].data = request.cookies["csrf_token"]
@@ -49,7 +51,8 @@ def create_product():
             owner_id=res["ownerId"],
             name=res["name"],
             price=res["price"],
-            description=res["description"]
+            description=res["description"],
+            category_id = res['categoryId']
         )
         image = ProductImage(
             url=res['imageUrl'],
@@ -83,6 +86,7 @@ def edit_product(id):
         current_product.name = res["name"]
         current_product.price = res['price']
         current_product.description = res['description']
+        current_product.category_id = res['categoryId']
         current_product_image.url = res['imagesUrl']
 
         db.session.commit()
@@ -146,3 +150,41 @@ def post_review(id):
         db.session.commit()
         return form.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+# @product_routes.route('/<int:id>/likes', methods=['GET'])
+# def all_likes(id):
+#     found_prod = Product.query.get(id)
+
+#     all_likes = found_prod.likes
+#     likes = [like.to_dict() for like in all_likes]
+
+#     like_res = []
+#     for like in likes:
+
+#         like_res.append({
+#             'id': like['id'],
+#             'userId': like['userId'],
+#             'productId': like['productId'],
+#             'createdAt': like['createdAt'],
+#             'userFirstName': like['userFirstName'],
+#             'userLastName': like['userLastName']
+#         })
+
+#     return jsonify(like_res)
+
+
+@product_routes.route('/<int:id>/likes', methods=['POST'])
+@login_required
+def post_like(id):
+
+    found_prod = Product.query.get(id)
+
+    like = Like(
+        product_id=found_prod.id,
+        user_id=current_user.id,
+    )
+
+    db.session.add(like)
+    db.session.commit()
+    return like.to_dict()

@@ -61,6 +61,10 @@ function ProfileButton({ user }) {
                   <i style={{paddingRight: '15px'}}  class="fa-solid fa-pencil"></i>
                   My Reviews
                 </NavLink>
+                <NavLink className='button-container-signout' to={'/myfavorites'} style={{ textDecoration: 'none', color: "black" }}>
+                  <i style={{paddingRight: '15px'}}  class="fa-solid fa-heart"></i>
+                  My Favorites
+                </NavLink>
                 <div onClick={handleLogout} className='button-container-signout1'>
                   <i style={{paddingLeft: '15px'}}  class="fa-solid fa-arrow-right-from-bracket fa-flip-horizontal"></i>
                   Sign Out

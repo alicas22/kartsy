@@ -19,8 +19,8 @@
 
 .product-price-container {
     position: absolute;
-    bottom: 9%;
-    left: 3%;
+    bottom: 25px;
+    left: 12px;
     background-color: white;
     border-radius: 15px;
     padding: 8px;
@@ -98,6 +98,7 @@
     border-radius: 50%;
     width: 120px;
     height: 120px;
+    object-fit: cover;
     /* transition-duration: 1s; */
     /* filter: grayscale(100%); */
 }
@@ -138,10 +139,16 @@
     transition: border-bottom 200ms ease-in-out;
     margin: auto;
     position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
-
-.tech-container {
+.h4-div > h4{
+    display: flex;
+    justify-content: center;
+}
+/* .tech-container {
     padding-left: 40px;
 }
 
@@ -159,7 +166,7 @@
 
 .shoes-container {
     padding-left: 35px;
-}
+} */
 
 .each-image-catagories {
     margin: auto;
@@ -198,6 +205,28 @@
 .something {
     padding-top: 40px;
     padding-left: 165px;
+}
+.all-product-like-buttons {
+    position: absolute;
+    bottom: 25px;
+    right: 12px;
+    z-index: 2;
+
+
+}
+.all-product-like-button{
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    background-color: white;
+    font-size: 18px;
+    box-shadow: 0px 0px 4px lightgray;
+    cursor: pointer;
+}
+.all-product-like-button:hover{
+    box-shadow: 0px 0px 15px rgb(160, 160, 160);
+    transform: scale(1.1);
 }
 
 @media screen and (max-width: 1400px) {
