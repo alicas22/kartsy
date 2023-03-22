@@ -91,7 +91,7 @@ function Navigation({ isLoaded }) {
 
 	return (
 
-		<div className='nav-bar-header-container'>
+		<div className='nav-bar-header-container' >
 			<div className='nav-bar-home-button'>
 				<NavLink exact to="/" activeClassName="not-going-to-be-active" style={{ textDecoration: 'none', color: '#F1641E ' }}>Kartsy</NavLink>
 			</div>
@@ -103,6 +103,7 @@ function Navigation({ isLoaded }) {
 							className="nav-bar-search-text-field"
 							type="text" value={query}
 							onChange={handleAutocomplete}
+							onBlur={() => setAutocompleteResults([])}
 
 						/>
 
