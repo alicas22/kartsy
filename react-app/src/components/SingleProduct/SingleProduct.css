@@ -86,6 +86,10 @@
     margin-bottom: 40px;
     cursor: pointer;
 }
+.add-to-cart-button:hover {
+    background-color: #404040;
+    transition: .5s;
+}
 .add-to-cart-button-logged-out{
     display: flex;
     align-items: center;
@@ -99,6 +103,7 @@
     margin-top: 10px;
     margin-bottom: 40px;
 }
+
 
 .single-product-image {
     max-width: 660px;
@@ -136,7 +141,6 @@
     background-color: white;
     font-size: 20px;
     color: red;
-    z-index: 2;
     top: 25px;
     right: 15px;
     cursor: pointer;
@@ -187,7 +191,10 @@
     padding-right: 20px;
     font-size: smaller;
 }
-
+.create-review-button:hover {
+    background-color: rgb(229, 229, 229);
+    transition: .7s;
+}
 .edit-delete-product-buttons :hover {
     cursor: pointer;
 }

@@ -16,6 +16,10 @@
     margin-bottom: 1rem;
     width: 100%;
 }
+.edit-review-submit-button:hover {
+    background-color: #404040;
+    transition: .7s;
+}
 
 .edit-review-submit-button-container :hover {
     cursor: pointer;

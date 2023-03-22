@@ -17,6 +17,10 @@
     margin-bottom: 1rem;
     width: 100%;
 }
+.create-review-submit-button:hover {
+    background-color: #404040;
+    transition: .7s;
+}
 
 
 .create-review-submit-button-container :hover {

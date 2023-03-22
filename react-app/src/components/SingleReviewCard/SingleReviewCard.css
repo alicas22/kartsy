@@ -47,6 +47,11 @@
     padding-left: 20px;
     padding-right: 20px;
     font-size: 11px;
+    cursor: pointer
+}
+.edit-review-button:hover {
+    background-color: rgb(229, 229, 229);
+    transition: .7s;
 }
 
 .delete-review-button {
@@ -58,10 +63,12 @@
     padding-left: 20px;
     padding-right: 20px;
     font-size: 11px;
+    cursor: pointer;
 }
 
-.delete-review-buttons :hover {
-    cursor: pointer;
+.delete-review-button:hover {
+    background-color: rgb(229, 229, 229);
+    transition: .7s;
 }
 
 .single-review-content {

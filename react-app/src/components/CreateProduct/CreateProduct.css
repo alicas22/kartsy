@@ -1,6 +1,6 @@
 .create-product-form{
     width: 100%;
-    max-width:100%
+    max-width:100%;
 }
 .create-product-submit-button {
     border-radius: 24px;
@@ -17,6 +17,10 @@
     width: 100%;
     cursor:pointer;
 }
+.create-product-submit-button:hover {
+    background-color: #424242;
+    transition: .7s;
+}
 
 p, label {
     display: block;
@@ -31,11 +35,7 @@ textarea {
     min-height:100px;
 }
 
-select,
-select:focus,
-.select-categories,
-option{
-
+.select-categories{
     width:100.5%;
     border: 1px solid rgb(34, 34, 34, .15);
     border-radius: 6px;
