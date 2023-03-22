@@ -56,6 +56,7 @@ function App() {
           </Route>
           <Route path='/myfavorites'>
             <MyLikes />
+          </Route >
           <Route path='/categories/:categoryId'>
             <Categories />
           </Route>
@@ -68,7 +69,7 @@ function App() {
 
         </Switch>
       )}
-     <Footer />
+      <Footer />
     </>
   );
 }

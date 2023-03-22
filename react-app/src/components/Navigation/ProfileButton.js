@@ -34,6 +34,7 @@ function ProfileButton({ user }) {
   const handleLogout = (e) => {
     e.preventDefault();
     dispatch(logout());
+    closeMenu()
     history.push('/')
   };
 
@@ -53,15 +54,15 @@ function ProfileButton({ user }) {
           <div className="nav-bar-dropdown-menu-container">
             <div className='nav-bar-dropdown-menu'>
               <div className='nav-bar-dropdown-menu-signout'>
-                <NavLink className='button-container-signout' to={'/myproducts'} style={{ textDecoration: 'none', color: "black" }}>
+                <NavLink className='button-container-signout' to={'/myproducts'} style={{ textDecoration: 'none', color: "black" }} onClick={closeMenu}>
                   <i style={{paddingRight: '10px'}} class="fa-solid fa-box-open"></i>
                   My Products
                 </NavLink>
-                <NavLink className='button-container-signout' to={'/myreviews'} style={{ textDecoration: 'none', color: "black" }}>
+                <NavLink className='button-container-signout' to={'/myreviews'} style={{ textDecoration: 'none', color: "black" }} onClick={closeMenu}>
                   <i style={{paddingRight: '15px'}}  class="fa-solid fa-pencil"></i>
                   My Reviews
                 </NavLink>
-                <NavLink className='button-container-signout' to={'/myfavorites'} style={{ textDecoration: 'none', color: "black" }}>
+                <NavLink className='button-container-signout' to={'/myfavorites'} style={{ textDecoration: 'none', color: "black" }} onClick={closeMenu}>
                   <i style={{paddingRight: '15px'}}  class="fa-solid fa-heart"></i>
                   My Favorites
                 </NavLink>

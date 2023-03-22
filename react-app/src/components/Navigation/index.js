@@ -113,8 +113,8 @@ function Navigation({ isLoaded }) {
 					{autocompleteResults.length > 0 && (
 						<ul className="nav-bar-search-autocomplete">
 							{autocompleteResults.map((result) => (
-								<NavLink to={`/products/${result.id}`} onClick={() => {setQuery(''); setAutocompleteResults([])}}>
-								<li key={result.id}>{result.name}</li>
+								<NavLink className='auto-search-link-item' to={`/products/${result.id}`} onClick={() => { setQuery(''); setAutocompleteResults([]) }}>
+									<li className='auto-search-item' key={result.id}>{result.name}</li>
 								</NavLink>
 							))}
 						</ul>
