@@ -1,6 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, FloatField, TextAreaField, IntegerField
+from wtforms import StringField, FloatField, TextAreaField, IntegerField, SubmitField
+# from flask_wtf.file import FileField, FileAllowed, FileRequired
 from wtforms.validators import DataRequired, ValidationError
+# from app.aws import ALLOWED_EXTENSIONS
+
 
 
 def name_length(form, field):
@@ -28,5 +31,7 @@ class ProductForm(FlaskForm):
     name= StringField('name', validators=[DataRequired(),name_length])
     price = FloatField('price', validators=[DataRequired(), price_valid])
     description = TextAreaField('description', validators=[DataRequired(), description_length])
-    imageUrl = StringField('imageUrl', validators=[DataRequired(), images_url_valid])
+    # imageUrl = FileField("Image File", validators=[FileRequired(), FileAllowed(list(ALLOWED_EXTENSIONS))])
     categoryId = IntegerField('category_id', validators=[DataRequired()])
+    imageUrl = StringField('imageUrl', validators=[DataRequired(), images_url_valid])
+    # submit = SubmitField("Create Post")
