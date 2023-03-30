@@ -13,10 +13,12 @@ const CreateProduct = () => {
     const [name, setName] = useState('')
     const [price, setPrice] = useState('')
     const [description, setDescription] = useState('')
-    const [imageUrl, setImageUrl] = useState('')
     const [category, setCategory] = useState('')
     const [errors, setErrors] = useState([])
     const [createdProduct, setCreatedProduct] = useState()
+    //image upload
+    const [imageUrl, setImageUrl] = useState(null)
+    const [imageLoading, setImageLoading] = useState(false);
 
     const user = useSelector(state => state.session.user)
 
@@ -24,27 +26,49 @@ const CreateProduct = () => {
     const handleSubmit = async (e) => {
         e.preventDefault()
         setErrors([])
+        setImageLoading(true);
+
+        let image;
+        if (imageUrl) {
+          const formData = new FormData();
+          formData.append("imageUrl", imageUrl);
+
+          const res = await fetch('/api/images', {
+              method: "POST",
+              body: formData,
+          });
+          if (res.ok) {
+              image = await res.json();
+              console.log('response from image fetch',image)
+          }
+          else {
+              setErrors(["Failed to upload image"]);
+              setImageLoading(false);
+              return;
+          }
+        }
 
         const payload = {
             ownerId: user.id,
             name,
             price,
             description,
-            imageUrl,
+            imageUrl : image?.url,
             categoryId: category
         }
 
         if (!user) return null
 
+        // setImageLoading(true);
         const data = await dispatch(thunkCreateProduct(payload))
 
         if (Array.isArray(data)) {
             setErrors(data);
+            setImageLoading(false);
         } else {
             await setCreatedProduct(data)
             closeModal();
         }
-
     }
 
 
@@ -57,7 +81,10 @@ const CreateProduct = () => {
     return (
         <div className="create-product-form">
             <h1>Create Product</h1>
-            <form className='product-form' onSubmit={handleSubmit}>
+            <form className='product-form'
+            onSubmit={handleSubmit}
+            enctype="multipart/form-data"
+            >
                 {/* <ul className="validation-errors">
                     {errors.map((error, idx) => (
 					    <li key={idx}>{error}</li>
@@ -136,6 +163,22 @@ const CreateProduct = () => {
                 </label>
                 <label>
                     <p>
+                        Image
+                    </p>
+                    <input
+                        id="imageUrl"
+                        type="file"
+                        name="file"
+                        accept="image/*"
+                        onChange={(e) => setImageUrl(e.target.files[0])}
+                    />
+                    {(imageLoading)&& <p>Loading...</p>}
+                    <div className='validation-errors'>
+                        {errors.filter((error) => error.includes('image')).length > 0 ? errors.filter((error) => error.includes('image'))[0].split(': ')[1] : ''}
+                    </div>
+                </label>
+                {/* <label>
+                    <p>
                         Image URL
                     </p>
                     <input
@@ -149,8 +192,9 @@ const CreateProduct = () => {
                     <div className='validation-errors'>
                         {errors.filter((error) => error.includes('image')).length > 0 ? errors.filter((error) => error.includes('image'))[0].split(': ')[1] : ''}
                     </div>
-                </label>
+                </label> */}
                 <button className="create-product-submit-button" type="submit">Submit</button>
+
             </form>
         </div>
     )

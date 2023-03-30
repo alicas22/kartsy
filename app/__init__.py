@@ -12,6 +12,7 @@ from .api.cart_routes import cart_routes
 from .api.review_routes import review_routes
 from .api.search_routes import search_routes
 from .api.like_routes import like_routes
+from .api.aws_routes import aws_routes
 from .seeds import seed_commands
 from .config import Config
 
@@ -39,6 +40,7 @@ app.register_blueprint(cart_routes, url_prefix='/api/cart')
 app.register_blueprint(review_routes, url_prefix='/api/reviews')
 app.register_blueprint(search_routes, url_prefix='/api/search')
 app.register_blueprint(like_routes, url_prefix='/api/likes')
+app.register_blueprint(aws_routes, url_prefix='/api/images')
 db.init_app(app)
 Migrate(app, db)
 
