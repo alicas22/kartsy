@@ -4,6 +4,8 @@ from ..forms import ProductForm
 from ..forms.review_form import ReviewForm
 from flask_login import current_user, login_required
 from ..models import Product
+from app.aws import (
+    upload_file_to_s3, get_unique_filename)
 
 product_routes = Blueprint('product', __name__)
 
@@ -24,7 +26,6 @@ def validation_errors_to_error_messages(validation_errors):
 def all_products():
     all_prod = Product.query.all()
     products = [product.to_dict() for product in all_prod]
-    print('>>>>>>>>>>>>>>>>>>>>from all products route')
     prod_res = []
     for product in products:
 
@@ -41,12 +42,23 @@ def all_products():
 
 @product_routes.route('/', methods=['POST'])
 def create_product():
-    print('>>>>>>>>>>>from product post route')
     res = request.get_json()
     product = ProductForm()
     product["csrf_token"].data = request.cookies["csrf_token"]
 
     if product.validate_on_submit():
+
+        # imageUrl = product.data["imageUrl"]
+        # imageUrl.filename = get_unique_filename(imageUrl.filename)
+        # upload = upload_file_to_s3(imageUrl)
+
+        # if "url" not in upload:
+        # # if the dictionary doesn't have a url key
+        # # it means that there was an error when we tried to upload
+        # # so we send back that error message
+        #     # return render_template("post_form.html", form=product, errors=[upload])
+        #     return {'errors': validation_errors_to_error_messages(upload)}, 401
+
         product = Product(
             owner_id=res["ownerId"],
             name=res["name"],

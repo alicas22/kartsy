@@ -38,7 +38,7 @@ export const cleanUpSingleProductAction = () => {
 
 
 export const thunkGetProducts = () => async (dispatch) => {
-  
+
     const response = await fetch('/api/products/')
 
     if (response.ok) {
