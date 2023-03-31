@@ -21,7 +21,7 @@ const CreateProduct = () => {
     const [imageLoading, setImageLoading] = useState(false);
 
     const user = useSelector(state => state.session.user)
-
+    console.log('url', imageUrl)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -30,22 +30,22 @@ const CreateProduct = () => {
 
         let image;
         if (imageUrl) {
-          const formData = new FormData();
-          formData.append("imageUrl", imageUrl);
+            const formData = new FormData();
+            formData.append("imageUrl", imageUrl);
 
-          const res = await fetch('/api/images', {
-              method: "POST",
-              body: formData,
-          });
-          if (res.ok) {
-              image = await res.json();
-              console.log('response from image fetch',image)
-          }
-          else {
-              setErrors(["Failed to upload image"]);
-              setImageLoading(false);
-              return;
-          }
+            const res = await fetch('/api/images', {
+                method: "POST",
+                body: formData,
+            });
+            if (res.ok) {
+                image = await res.json();
+                console.log('response from image fetch', image)
+            }
+            else {
+                setErrors(["Failed to upload image"]);
+                setImageLoading(false);
+                return;
+            }
         }
 
         const payload = {
@@ -53,7 +53,7 @@ const CreateProduct = () => {
             name,
             price,
             description,
-            imageUrl : image?.url,
+            imageUrl: image?.url,
             categoryId: category
         }
 
@@ -82,8 +82,8 @@ const CreateProduct = () => {
         <div className="create-product-form">
             <h1>Create Product</h1>
             <form className='product-form'
-            onSubmit={handleSubmit}
-            enctype="multipart/form-data"
+                onSubmit={handleSubmit}
+                encType="multipart/form-data"
             >
                 {/* <ul className="validation-errors">
                     {errors.map((error, idx) => (
@@ -161,40 +161,28 @@ const CreateProduct = () => {
                         {errors.filter((error) => error.includes('description')).length > 0 ? errors.filter((error) => error.includes('description'))[0].split(': ')[1] : ''}
                     </div>
                 </label>
-                <label>
-                    <p>
-                        Image
-                    </p>
+
+                <div className='product-image-input-container'>
+                    <label htmlFor="product-image-upload" className="product-image-upload">
+                        <div className="upload-photo-button" >Upload Photo</div>
+                        <div className='upload-loading-container'>
+                            {(imageLoading) && <p>Loading...</p>}
+                            {!imageLoading && imageUrl && <div className='uploaded-image-name'>{imageUrl.name}</div>}
+                        </div>
+                    </label>
                     <input
-                        id="imageUrl"
+                        id="product-image-upload"
+                        className="product-image-upload-input"
                         type="file"
                         name="file"
                         accept="image/*"
                         onChange={(e) => setImageUrl(e.target.files[0])}
                     />
-                    {(imageLoading)&& <p>Loading...</p>}
                     <div className='validation-errors'>
                         {errors.filter((error) => error.includes('image')).length > 0 ? errors.filter((error) => error.includes('image'))[0].split(': ')[1] : ''}
                     </div>
-                </label>
-                {/* <label>
-                    <p>
-                        Image URL
-                    </p>
-                    <input
-                        id="imageUrl"
-                        type="url"
-                        name="imageUrl"
-                        placeholder="https://www.example.com/image.jpg"
-                        value={imageUrl}
-                        onChange={(e) => setImageUrl(e.target.value)}
-                    />
-                    <div className='validation-errors'>
-                        {errors.filter((error) => error.includes('image')).length > 0 ? errors.filter((error) => error.includes('image'))[0].split(': ')[1] : ''}
-                    </div>
-                </label> */}
+                </div>
                 <button className="create-product-submit-button" type="submit">Submit</button>
-
             </form>
         </div>
     )

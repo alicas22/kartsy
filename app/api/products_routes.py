@@ -26,7 +26,6 @@ def validation_errors_to_error_messages(validation_errors):
 def all_products():
     all_prod = Product.query.all()
     products = [product.to_dict() for product in all_prod]
-    print('>>>>>>>>>>>>>>>>>>>>from all products route')
     prod_res = []
     for product in products:
 
