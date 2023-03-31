@@ -92,6 +92,7 @@ const EditProduct = () => {
                         Category
                     </p>
                     <select
+                        className="select-categories"
                         id="category"
                         name="category"
                         value={category}

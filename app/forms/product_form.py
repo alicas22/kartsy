@@ -24,8 +24,8 @@ def description_length(form, field):
 
 def images_url_valid(form, field):
     imageUrl = field.data
-    if not imageUrl.endswith(('.png', '.jpg', '.gif')):
-        raise ValidationError('URL does not contain an image.')
+    if not imageUrl.endswith(('.png', '.jpg', '.gif', '.pdf', '.jpeg')):
+        raise ValidationError('Upload failed')
 
 class ProductForm(FlaskForm):
     name= StringField('name', validators=[DataRequired(),name_length])

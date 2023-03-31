@@ -23,13 +23,14 @@ def validation_errors_to_error_messages(validation_errors):
 def upload_image():
     form = AWSForm()
     form["csrf_token"].data = request.cookies["csrf_token"]
-
+    print('>>>>>>>>', form.validate_on_submit())
 
     if form.validate_on_submit():
         image = form.data["imageUrl"]
+        print('>>>>image', image)
         image.filename = get_unique_filename(image.filename)
         upload = upload_file_to_s3(image)
-
+        print('>>>>>upload', upload)
         if "url" not in upload:
         # if the dictionary doesn't have a url key
         # it means that there was an error when we tried to upload
