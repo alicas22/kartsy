@@ -21,7 +21,6 @@ const CreateProduct = () => {
     const [imageLoading, setImageLoading] = useState(false);
 
     const user = useSelector(state => state.session.user)
-    console.log('url', imageUrl)
 
     const handleSubmit = async (e) => {
         e.preventDefault()
@@ -39,7 +38,6 @@ const CreateProduct = () => {
             });
             if (res.ok) {
                 image = await res.json();
-                console.log('response from image fetch', image)
             }
             else {
                 setErrors(["Failed to upload image"]);

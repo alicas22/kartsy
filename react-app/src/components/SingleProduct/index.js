@@ -31,7 +31,6 @@ const SingleProduct = () => {
 
     const reviewsArr = Object.values(reviewsObj)
     const likesArr = Object.values(likes)
-    console.log('likes ', likesArr)
     if (!reviewsArr) return null
 
     // essentially keying into state.reviews.productReviews in a non-intuitive way
