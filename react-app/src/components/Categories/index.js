@@ -29,7 +29,6 @@ const Categories = () => {
     // if (!user) return <h1 className='search-title'>You shouldn't be on this page unless you sign in</h1>
     const productsCategoryArr = Object.values(productsObj).filter((product) => product.categoryId === +categoryId);
     if (!productsCategoryArr) return null
-    console.log(Object.values(productsCategoryArr))
     if (!productsCategoryArr.length) return <h1 className='search-title'>No products in this category</h1>
 
 
