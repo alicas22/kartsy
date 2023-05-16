@@ -83,6 +83,21 @@ Karsy is a clone of Etsy. You can post products to sell, giving them a name, pri
    ```bash
    flask run
    ```
+  
+7. In a new terminal, navigate to the /frontend directory
+
+
+8. Install NPM packages
+   ```sh
+   npm install
+   ```
+   
+9. Start the frontend server
+   ```sh
+   npm start
+   ```
+   
+8. Navigate to http://localhost:3000/ to begin using the application.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
