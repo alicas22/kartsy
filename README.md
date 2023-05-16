@@ -84,7 +84,7 @@ Karsy is a clone of Etsy. You can post products to sell, giving them a name, pri
    flask run
    ```
   
-7. In a new terminal, navigate to the /frontend directory
+7. In a new terminal, navigate to the /react-app directory
 
 
 8. Install NPM packages
